@@ -17,11 +17,13 @@ public class gameManager : MonoBehaviour
     public GameObject playerFlashDamage;
 
 
-    [Header("----- Collectables -----")]
+    [Header("----- Collectibles -----")]
     public int jumpCost;
     public int coins;
     public int enemyCount;
 
+    [Header("----- Enemy -----")]
+    public GameObject enemy;
 
     public bool isPaused;
     float timeScaleOrig;

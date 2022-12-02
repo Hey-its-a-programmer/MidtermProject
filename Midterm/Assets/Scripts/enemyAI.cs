@@ -31,7 +31,6 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         HPOrg = HP;
-        gameManager.instance.updateEnemyCount(+1);
     }
 
     // Update is called once per frame
@@ -40,9 +39,6 @@ public class enemyAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             canSeePlayer();
-
-          
-
         }
 
     }
