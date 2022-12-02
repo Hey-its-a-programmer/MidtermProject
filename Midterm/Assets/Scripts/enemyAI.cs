@@ -96,6 +96,16 @@ public class enemyAI : MonoBehaviour, IDamage
         
     }
 
+    public int getEnemyHealth()
+    {
+        return HP;
+    }
+
+    public void setEnemyHealth(int setHealth)
+    {
+        HP = setHealth;
+    }
+
     public void takeDamage(int dmg)
     {
         agent.SetDestination(gameManager.instance.player.transform.position);
@@ -104,7 +114,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.addCoins(HPOrg);
             gameManager.instance.updateEnemyCount(-1);
             Destroy(gameObject);
 
