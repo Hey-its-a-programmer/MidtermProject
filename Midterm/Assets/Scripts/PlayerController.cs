@@ -30,12 +30,13 @@ public class PlayerController : MonoBehaviour
     int HPOrig;
     private void Start()
     {
-        HPOrig = HP;
         setPlayerPos();
+        HPOrig = HP;
     }
 
     void Update()
     {
+        controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
             movement();
@@ -51,8 +52,8 @@ public class PlayerController : MonoBehaviour
             timesJumped = 0;
         }
 
-        move = transform.right * Input.GetAxis("Horizontal") +
-               transform.forward * Input.GetAxis("Vertical");
+        move = (transform.right * Input.GetAxis("Horizontal")) +
+               (transform.forward * Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * playerSpeed);
 
 
