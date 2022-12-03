@@ -25,6 +25,8 @@ public class gameManager : MonoBehaviour
     [Header("----- Enemy -----")]
     public GameObject enemy;
 
+
+    [Header("----- Other Functions -----")]
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
@@ -44,6 +46,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -54,8 +57,8 @@ public class gameManager : MonoBehaviour
                 pause();
             }
             else
-            { 
-                unPause(); 
+            {
+                unPause();
             }
         }
     }
