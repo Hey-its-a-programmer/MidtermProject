@@ -25,6 +25,8 @@ public class gameManager : MonoBehaviour
     [Header("----- Enemy -----")]
     public GameObject enemy;
 
+
+    [Header("----- Other Functions -----")]
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
