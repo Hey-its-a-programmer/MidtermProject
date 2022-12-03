@@ -47,11 +47,11 @@ public class camera : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            Camera.main.fieldOfView = startingFOV / 2;
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV / 2, 250.0f * Time.deltaTime);
         }
         else
         {
-            Camera.main.fieldOfView = startingFOV;
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV, 250.0f * Time.deltaTime);
         }
     }
 }
