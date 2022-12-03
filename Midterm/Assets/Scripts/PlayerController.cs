@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
+
         controller.enabled = true;
     }
 

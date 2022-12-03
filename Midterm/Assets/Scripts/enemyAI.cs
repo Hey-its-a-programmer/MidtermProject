@@ -39,6 +39,8 @@ public class enemyAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             canSeePlayer();
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
         }
 
     }
