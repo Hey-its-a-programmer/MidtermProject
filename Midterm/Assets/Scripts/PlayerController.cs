@@ -21,9 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDist;
     [SerializeField] GameObject cube;
 
-    
-
-
 
     bool isShooting;
 
@@ -45,7 +42,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(shoot());
 
         }
-
     }
     void movement()
     {
