@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class gameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject playerFlashDamage;
+    public Text waveOne;
 
 
     [Header("----- Enemy Waves-----")]
@@ -59,6 +61,8 @@ public class gameManager : MonoBehaviour
                 unPause();
             }
         }
+
+        
     }
 
     public void pause()
@@ -101,6 +105,14 @@ public class gameManager : MonoBehaviour
     public int getTotalEnemyCount()
     {
         return enemyTotalCount;
+    }
+
+    public void wave1()
+    {
+        waveOne = GetComponent<Text>();
+        waveOne.text = waves[currentWaveNum].waveName;
+        
+        
     }
 }
 

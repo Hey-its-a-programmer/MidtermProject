@@ -46,7 +46,10 @@ public class enemySpawner : MonoBehaviour
             gameManager.instance.currentWaveNum++;
             canSpawn = true;
         }
+
     }
+
+
 
     public void SpawnWave()
     {
