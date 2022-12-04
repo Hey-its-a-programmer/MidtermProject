@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5684327520420459673, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.65
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 5684327520420459673, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5684327520420459673, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.88
+      value: 7.67
       objectReference: {fileID: 0}
     - target: {fileID: 5684327520420459673, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -190,9 +190,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5684327520420459679, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684327520420459679, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684327520420459679, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.99
+      objectReference: {fileID: 0}
     - target: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_Name
       value: Enemy 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5684327520420555007, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_IsActive
@@ -211,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 6646209691046950171, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6646209691046950172, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -221,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6646209691046950175, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.96
+      value: -4.41
       objectReference: {fileID: 0}
     - target: {fileID: 6646209691046950175, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
       propertyPath: m_LocalPosition.y
@@ -229,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6646209691046950175, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.98
+      value: 12.37
       objectReference: {fileID: 0}
     - target: {fileID: 6646209691046950175, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
       propertyPath: m_LocalRotation.w
@@ -489,6 +509,54 @@ PrefabInstance:
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 397131636}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[0].Enemy
+      value: 
+      objectReference: {fileID: 1031781475}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[1].Enemy
+      value: 
+      objectReference: {fileID: 1031781475}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: enemySpawnPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[0].waveName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[1].waveName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: enemySpawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 2098035263}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: enemySpawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 2098035263}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[0].numberOfEnemies
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[1].numberOfEnemies
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[0].spawnRateInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.data[1].spawnRateInterval
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
 --- !u!1 &1331018204
@@ -701,6 +769,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: zoomDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: thirdPersonCam
       value: 0
       objectReference: {fileID: 0}
@@ -736,8 +808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28031642c8c8bf4c86385564db6177d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves: []
-  spawnPoints: []
 --- !u!4 &2098035263
 Transform:
   m_ObjectHideFlags: 0
