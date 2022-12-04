@@ -17,14 +17,12 @@ public class gameManager : MonoBehaviour
     public GameObject playerFlashDamage;
 
 
-    [Header("----- Collectibles -----")]
-    public int jumpCost;
-    public int coins;
-
-    [Header("----- Enemy -----")]
-    public GameObject enemy;
+    [Header("----- Enemy Waves-----")]
+    public Wave[] waves;
     private int enemyTotalCount;
     private int enemiesInWaveCount;
+    public Transform[] enemySpawnPoints;
+    public int currentWaveNum;
 
     [Header("----- Other Functions -----")]
     public bool isPaused;
@@ -78,11 +76,6 @@ public class gameManager : MonoBehaviour
         activeMenu.SetActive(false);
         activeMenu = null;
     }
-    public void addCoins(int amount)
-    {
-        coins += amount;
-        
-    }
 
     public void updateTotalEnemyCount(int amount)
     {
@@ -111,11 +104,3 @@ public class gameManager : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class Wave
-{
-    public string waveName;
-    public int numberOfEnemies;
-    public float spawnRateInterval;
-    public GameObject Enemy;
-}

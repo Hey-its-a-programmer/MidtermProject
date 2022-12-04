@@ -22,13 +22,6 @@ public class buttonFunctions : MonoBehaviour
         Application.Quit();
     }
 
-    public void addJump(int amount)
-    {
-        if (gameManager.instance.coins >= gameManager.instance.jumpCost)
-        {
-            gameManager.instance.playerScript.addJump(amount);
-        }
-    }
 
     public void respawnPlayer()
     {

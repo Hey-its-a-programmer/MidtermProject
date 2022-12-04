@@ -111,12 +111,6 @@ public class PlayerController : MonoBehaviour
         gameManager.instance.playerFlashDamage.SetActive(false);
 
     }
-
-    public void addJump(int amount)
-    {
-        jumpMax += amount;
-        gameManager.instance.coins -= gameManager.instance.jumpCost;
-    }
     
     public void setPlayerPos()
     {
