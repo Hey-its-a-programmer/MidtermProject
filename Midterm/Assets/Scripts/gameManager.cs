@@ -20,11 +20,11 @@ public class gameManager : MonoBehaviour
     [Header("----- Collectibles -----")]
     public int jumpCost;
     public int coins;
-    public int enemyCount;
 
     [Header("----- Enemy -----")]
     public GameObject enemy;
-
+    private int enemyTotalCount;
+    private int enemiesInWaveCount;
 
     [Header("----- Other Functions -----")]
     public bool isPaused;
@@ -84,14 +84,24 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void updateEnemyCount(int amount)
+    public void updateTotalEnemyCount(int amount)
     {
-        enemyCount += amount;
-        if (enemyCount <= 0)
+        enemyTotalCount += amount;
+        if (enemyTotalCount <= 0)
         {
             winMenu.SetActive(true);
             pause();
             activeMenu = winMenu;
         }
+    }
+
+    public void setEnemyWaveCounter(int amount)
+    {
+        enemiesInWaveCount += amount;
+    }
+
+    public int getEnemyWaveCount()
+    {
+        return enemiesInWaveCount;
     }
 }
