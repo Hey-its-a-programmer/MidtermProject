@@ -523,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 1031781475}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: enemySpawnPoints.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: waves.Array.data[0].waveName
@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 2098035263}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: waves.Array.data[0].numberOfEnemies
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: waves.Array.data[1].numberOfEnemies
@@ -762,7 +762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: lockVertMax
-      value: 75
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: lockVertMin
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: startingFOV
@@ -770,7 +774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: zoomDistance
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: thirdPersonCam

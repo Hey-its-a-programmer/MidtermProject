@@ -41,7 +41,7 @@ public class camera : MonoBehaviour
 
         Zoom();
 
-        // clamp rotaion
+        // clamp rotation
         xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
 
         //rotate the camera on the x axis
