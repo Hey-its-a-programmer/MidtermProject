@@ -2,21 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Wave
-{
-    public string waveName;
-    public int numberOfEnemies;
-    public float spawnRateInterval;
-    public GameObject Enemy;
-}
+
 
 public class enemySpawner : MonoBehaviour
 {
     [SerializeField] Wave[] waves;
     public Transform[] spawnPoints;
-
+    private bool canSpawn = true;
+    private float nextSpawnTime;
     private Wave currentWave;
+    private int currentWaveNum;
 
     private void Start()
     {
@@ -25,28 +20,39 @@ public class enemySpawner : MonoBehaviour
         {
             gameManager.instance.updateTotalEnemyCount(waves[i].numberOfEnemies);
         }
-
-        StartCoroutine(SpawnWave());
     }
 
 
 
-    IEnumerator SpawnWave()
+    private void Update()
     {
-        //This for loop is for the current wave
-        for (int currentWaveNum = 0; currentWaveNum < waves.Length; currentWaveNum++)
+        currentWave = waves[currentWaveNum];
+        SpawnWave();
+
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (totalEnemies.Length == 0 && !canSpawn && currentWaveNum + 1 != waves.Length && gameManager.instance.getTotalEnemyCount() > 0 && gameManager.instance.isPaused == false)
         {
-            currentWave = waves[currentWaveNum];
-            gameManager.instance.setEnemyWaveCounter(currentWave.numberOfEnemies);
-            //This for loop is to spawn in the enemies
-            for (int i = 0; i < currentWave.numberOfEnemies; i++)
-            {      
-                Transform randomPosition = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                Instantiate(currentWave.Enemy, randomPosition.position, transform.rotation);
-                yield return new WaitForSeconds(currentWave.spawnRateInterval);
+            currentWaveNum++;
+            canSpawn = true;
+        }
+    }
+
+    public void SpawnWave()
+    {
+        if (canSpawn && nextSpawnTime < Time.time)
+        {
+            Transform randomPosition = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Instantiate(currentWave.Enemy, randomPosition.position, transform.rotation);
+
+            currentWave.numberOfEnemies--;
+            nextSpawnTime = Time.time + currentWave.spawnRateInterval;
+
+            if (currentWave.numberOfEnemies == 0)
+            {
+                canSpawn = false;
             }
         }
-    
-    
+
     }
 }
+

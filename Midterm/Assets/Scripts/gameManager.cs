@@ -81,7 +81,7 @@ public class gameManager : MonoBehaviour
     public void addCoins(int amount)
     {
         coins += amount;
-
+        
     }
 
     public void updateTotalEnemyCount(int amount)
@@ -104,4 +104,18 @@ public class gameManager : MonoBehaviour
     {
         return enemiesInWaveCount;
     }
+
+    public int getTotalEnemyCount()
+    {
+        return enemyTotalCount;
+    }
+}
+
+[System.Serializable]
+public class Wave
+{
+    public string waveName;
+    public int numberOfEnemies;
+    public float spawnRateInterval;
+    public GameObject Enemy;
 }

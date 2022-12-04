@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -879,7 +879,35 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
     - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[2].Enemy
+      value: 
+      objectReference: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[3].Enemy
+      value: 
+      objectReference: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[4].Enemy
+      value: 
+      objectReference: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[0].waveName
+      value: Wave 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
       propertyPath: waves.Array.data[1].waveName
+      value: Wave 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[2].waveName
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[3].waveName
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[4].waveName
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
@@ -891,12 +919,36 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[2].numberOfEnemies
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[3].numberOfEnemies
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[4].numberOfEnemies
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
       propertyPath: waves.Array.data[0].spawnRateInterval
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
       propertyPath: waves.Array.data[1].spawnRateInterval
-      value: 10
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[2].spawnRateInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[3].spawnRateInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666683736914622291, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
+      propertyPath: waves.Array.data[4].spawnRateInterval
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f0dd7f681096542a5ddc3f6baa6712, type: 3}
