@@ -16,12 +16,15 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject playerFlashDamage;
 
-
-    [Header("----- Collectibles -----")]
-    public int enemyCount;
-
     [Header("----- Enemy -----")]
     public GameObject enemy;
+
+    [Header("----- Enemy Waves-----")]
+    public Wave[] waves;
+    private int enemyTotalCount;
+    private int enemiesInWaveCount;
+    public Transform[] enemySpawnPoints;
+    public int currentWaveNum;
 
 
     [Header("----- Other Functions -----")]
@@ -76,14 +79,29 @@ public class gameManager : MonoBehaviour
         activeMenu = null;
     }
 
-    public void updateEnemyCount(int amount)
+    public void updateTotalEnemyCount(int amount)
     {
-        enemyCount += amount;
-        if (enemyCount <= 0)
+        enemyTotalCount += amount;
+        if (enemyTotalCount <= 0)
         {
             winMenu.SetActive(true);
             pause();
             activeMenu = winMenu;
         }
+    }
+
+    public void setEnemyWaveCounter(int amount)
+    {
+        enemiesInWaveCount += amount;
+    }
+
+    public int getEnemyWaveCount()
+    {
+        return enemiesInWaveCount;
+    }
+
+    public int getTotalEnemyCount()
+    {
+        return enemyTotalCount;
     }
 }
