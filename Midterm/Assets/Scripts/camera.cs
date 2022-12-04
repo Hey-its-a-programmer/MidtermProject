@@ -37,7 +37,7 @@ public class camera : MonoBehaviour
             xRotation -= mouseY;
         }
 
-        ZoomIn();
+        Zoom();
 
         // clamp rotaion
         xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
@@ -49,7 +49,7 @@ public class camera : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
     }
 
-    void ZoomIn()
+    void Zoom()
     {
         if (Input.GetMouseButton(1))
         {
