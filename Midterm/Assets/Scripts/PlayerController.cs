@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int HP;
 
     [Range(3, 8)] [SerializeField] float playerSpeed;
+    [Range(1, 5)] [SerializeField] float sprintSpeed;
     [Range(10, 15)] [SerializeField] int jumpHeight;
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
 
     bool isShooting;
+    bool isSprinting;
+    float speedOrig;
+
 
     int timesJumped;
     private Vector3 playerVelocity;
@@ -30,6 +34,7 @@ public class PlayerController : MonoBehaviour
     int HPOrig;
     private void Start()
     {
+        speedOrig = playerSpeed;
         HPOrig = HP;
         setPlayerPos();
     }
@@ -40,6 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             movement();
             StartCoroutine(shoot());
+            playerSprint();
 
         }
     }
@@ -116,12 +122,28 @@ public class PlayerController : MonoBehaviour
     {
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
-
         controller.enabled = true;
     }
 
     public void resetPlayerHP()
     {
         HP = HPOrig;
+    }
+
+    public void playerSprint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift)) 
+        {
+            if (!isSprinting) 
+            {   
+                playerSpeed = playerSpeed + sprintSpeed;
+                isSprinting = true; 
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift)) 
+        {
+            playerSpeed = speedOrig;
+            isSprinting = false;
+        }
     }
 }
