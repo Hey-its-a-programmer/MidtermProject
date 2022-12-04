@@ -668,6 +668,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: startingFOV
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6314567623037541292, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0a81daadd933d6e489b57794924b2606, type: 3}

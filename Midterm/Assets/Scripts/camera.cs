@@ -11,13 +11,13 @@ public class camera : MonoBehaviour
     [SerializeField] bool invert;
 
     float xRotation;
-    float startingFOV;
+    [SerializeField] float startingFOV;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        startingFOV = 60.0f;
+        Camera.main.fieldOfView = startingFOV;
     }
 
     // Update is called once per frame
