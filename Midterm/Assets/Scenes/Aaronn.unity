@@ -669,8 +669,40 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: invert
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: invertX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: invertY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: zoomSpeed
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: lockHoriMax
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: lockHoriMin
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: lockVertMax
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: startingFOV
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: thirdPersonCam
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6314567623037541292, guid: 0a81daadd933d6e489b57794924b2606, type: 3}

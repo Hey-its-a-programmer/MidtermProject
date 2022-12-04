@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
@@ -111,12 +110,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerFlashDamage.SetActive(false);
 
-    }
-
-    public void addJump(int amount)
-    {
-        jumpMax += amount;
-        gameManager.instance.coins -= gameManager.instance.jumpCost;
     }
     
     public void setPlayerPos()

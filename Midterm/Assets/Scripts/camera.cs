@@ -11,8 +11,10 @@ public class camera : MonoBehaviour
     [SerializeField] bool invertY;
 
     [Range(30, 90)] [SerializeField] float startingFOV;
+    [Range(125, 500)] [SerializeField] float zoomSpeed;
 
     float xRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,6 @@ public class camera : MonoBehaviour
     {
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensHori;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensVert;
-
 
         if (invertY)
         {
@@ -53,11 +54,11 @@ public class camera : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV / 2, 250.0f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV / 2, zoomSpeed * Time.deltaTime);
         }
         else
         {
-            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV, 250.0f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV, zoomSpeed * Time.deltaTime);
         }
     }
 }

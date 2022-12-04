@@ -18,8 +18,6 @@ public class gameManager : MonoBehaviour
 
 
     [Header("----- Collectibles -----")]
-    public int jumpCost;
-    public int coins;
     public int enemyCount;
 
     [Header("----- Enemy -----")]
@@ -46,7 +44,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -77,11 +74,6 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         activeMenu.SetActive(false);
         activeMenu = null;
-    }
-    public void addCoins(int amount)
-    {
-        coins += amount;
-
     }
 
     public void updateEnemyCount(int amount)
