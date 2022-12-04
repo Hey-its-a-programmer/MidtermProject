@@ -6,18 +6,21 @@ public class camera : MonoBehaviour
     [SerializeField] int sensVert;
 
     [SerializeField] int lockVertMin;
-    [SerializeField] int LockVertMax;
+    [SerializeField] int lockVertMax;
 
-    [SerializeField] bool invert;
+    [SerializeField] bool invertY;
+
+    [Range(30, 90)] [SerializeField] float startingFOV;
+    [Range(125, 500)] [SerializeField] float zoomSpeed;
 
     float xRotation;
-    float startingFOV;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        startingFOV = 60.0f;
+        Camera.main.fieldOfView = startingFOV;
     }
 
     // Update is called once per frame
@@ -26,8 +29,7 @@ public class camera : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensHori;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensVert;
 
-
-        if (invert)
+        if (invertY)
         {
             xRotation += mouseY;
         }
@@ -36,22 +38,27 @@ public class camera : MonoBehaviour
             xRotation -= mouseY;
         }
 
+        Zoom();
+
         // clamp rotaion
-        xRotation = Mathf.Clamp(xRotation, lockVertMin, LockVertMax);
+        xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
 
         //rotate the camera on the x axis
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
         //rotate the player
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
 
+    void Zoom()
+    {
         if (Input.GetMouseButton(1))
         {
-            Camera.main.fieldOfView = startingFOV / 2;
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV / 2, zoomSpeed * Time.deltaTime);
         }
         else
         {
-            Camera.main.fieldOfView = startingFOV;
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV, zoomSpeed * Time.deltaTime);
         }
     }
 }
