@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6314567623037541291}
   - component: {fileID: 6314567623037541288}
+  - component: {fileID: 4822596442380394302}
   - component: {fileID: 6314567623037541289}
   - component: {fileID: 6314567623037541294}
   - component: {fileID: 6314567623037541295}
@@ -52,6 +53,7 @@ MonoBehaviour:
   controller: {fileID: 6314567623037541289}
   HP: 1
   playerSpeed: 4
+  sprintSpeed: 0
   jumpHeight: 12
   gravityValue: 25
   jumpMax: 1
@@ -59,6 +61,24 @@ MonoBehaviour:
   shootDamage: 1
   shootDist: 50
   cube: {fileID: 6646209691046950171, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
+--- !u!114 &4822596442380394302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314567623037541293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7a0d0cd94d3c24aac2f401952e4e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionPoint: {fileID: 0}
+  _interactionPointRadius: 0.5
+  _interactableMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _numfound: 0
 --- !u!143 &6314567623037541289
 CharacterController:
   m_ObjectHideFlags: 0
@@ -190,8 +210,10 @@ MonoBehaviour:
   sensHori: 300
   sensVert: 300
   lockVertMin: -75
-  LockVertMax: 75
-  invert: 0
+  lockVertMax: 0
+  invertY: 0
+  startingFOV: 0
+  zoomSpeed: 0
 --- !u!20 &6314567623979518046
 Camera:
   m_ObjectHideFlags: 0
