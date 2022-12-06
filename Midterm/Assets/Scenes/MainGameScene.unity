@@ -1628,6 +1628,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: zoomDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
 --- !u!1001 &3021960208681019973
@@ -120542,9 +120546,9 @@ Transform:
   - {fileID: 1843443029}
   - {fileID: 1556272415}
   - {fileID: 1898227789}
-  - {fileID: 300584072}
-  - {fileID: 257395215}
   - {fileID: 1978312116}
+  - {fileID: 257395215}
+  - {fileID: 300584072}
   m_Father: {fileID: 5969499074670667224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
