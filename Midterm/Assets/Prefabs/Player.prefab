@@ -195,6 +195,7 @@ MonoBehaviour:
   invertY: 0
   startingFOV: 60
   zoomSpeed: 300
+  zoomDistance: 2
 --- !u!20 &6314567623979518046
 Camera:
   m_ObjectHideFlags: 0

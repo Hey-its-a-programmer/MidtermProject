@@ -3289,25 +3289,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerScript: {fileID: 0}
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 8799309933630551337}
   activeMenu: {fileID: 0}
   winMenu: {fileID: 1871408964814732884}
   loseMenu: {fileID: 8072665790323617477}
   playerFlashDamage: {fileID: 4861831035117757210}
   waves:
-  - waveName: 
+  - waveName: Wave 1
     numberOfEnemies: 5
     spawnRateInterval: 0
     Enemy: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-  - waveName: 
+  - waveName: Wave 2
     numberOfEnemies: 10
     spawnRateInterval: 10
     Enemy: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-  - waveName: 
+  - waveName: Wave 3
     numberOfEnemies: 15
     spawnRateInterval: 15
     Enemy: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-  enemySpawnPoints: []
+  enemySpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentWaveNum: 0
   isPaused: 0
   playerSpawnPos: {fileID: 0}
