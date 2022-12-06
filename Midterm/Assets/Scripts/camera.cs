@@ -12,10 +12,10 @@ public class camera : MonoBehaviour
 
     [Range(30, 90)] [SerializeField] float startingFOV;
     [Range(125, 500)] [SerializeField] float zoomSpeed;
+    [Range(2, 6)] [SerializeField] float zoomDistance;
 
     float xRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -23,7 +23,6 @@ public class camera : MonoBehaviour
         Camera.main.fieldOfView = startingFOV;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensHori;
@@ -40,7 +39,7 @@ public class camera : MonoBehaviour
 
         Zoom();
 
-        // clamp rotaion
+        // clamp rotation
         xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
 
         //rotate the camera on the x axis
@@ -54,7 +53,7 @@ public class camera : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV / 2, zoomSpeed * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, startingFOV / zoomDistance, zoomSpeed * Time.deltaTime);
         }
         else
         {

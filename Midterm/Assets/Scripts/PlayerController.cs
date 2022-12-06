@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
             movement();
