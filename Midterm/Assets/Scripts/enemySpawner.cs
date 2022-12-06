@@ -24,7 +24,7 @@ public class enemySpawner : MonoBehaviour
 
     private void Start()
     {
-        //Updates Number of Enemies in Game Manager
+        //Updates Number of Total Enemies in Game Manager
         for (int i = 0; i < gameManager.instance.waves.Length; i++)
         {
             gameManager.instance.updateTotalEnemyCount(gameManager.instance.waves[i].numberOfEnemies);
@@ -39,7 +39,6 @@ public class enemySpawner : MonoBehaviour
     {
         currentWave = gameManager.instance.waves[gameManager.instance.currentWaveNum];
         SpawnWave();
-
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (totalEnemies.Length == 0 && !canSpawn && gameManager.instance.currentWaveNum + 1 != gameManager.instance.waves.Length && gameManager.instance.getTotalEnemyCount() > 0 && gameManager.instance.isPaused == false)
         {
@@ -60,6 +59,7 @@ public class enemySpawner : MonoBehaviour
 
             if (currentWave.numberOfEnemies == 0)
             {
+                
                 canSpawn = false;
             }
         }

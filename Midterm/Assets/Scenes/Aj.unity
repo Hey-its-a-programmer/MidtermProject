@@ -3608,6 +3608,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: zoomSpeed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: lockVertMax
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: lockVertMin
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+      propertyPath: startingFOV
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
 --- !u!1001 &2113728307
