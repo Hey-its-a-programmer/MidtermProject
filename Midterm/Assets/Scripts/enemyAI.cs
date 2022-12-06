@@ -83,7 +83,7 @@ public class enemyAI : MonoBehaviour, IDamage
             {
                 
 
-                if (!isShooting)
+                if (!isShooting && angleToPlayer <= 15)
                 {
                     StartCoroutine(shoot());
 
