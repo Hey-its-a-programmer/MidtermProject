@@ -78,6 +78,7 @@ MonoBehaviour:
   _interactableMask:
     serializedVersion: 2
     m_Bits: 0
+  _interactionPromptUI: {fileID: 0}
   _numfound: 0
 --- !u!143 &6314567623037541289
 CharacterController:
@@ -210,10 +211,11 @@ MonoBehaviour:
   sensHori: 300
   sensVert: 300
   lockVertMin: -75
-  lockVertMax: 0
+  lockVertMax: 75
   invertY: 0
-  startingFOV: 0
-  zoomSpeed: 0
+  startingFOV: 60
+  zoomSpeed: 250
+  zoomDistance: 2
 --- !u!20 &6314567623979518046
 Camera:
   m_ObjectHideFlags: 0
