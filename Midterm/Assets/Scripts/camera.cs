@@ -16,7 +16,6 @@ public class camera : MonoBehaviour
 
     float xRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,7 +23,6 @@ public class camera : MonoBehaviour
         Camera.main.fieldOfView = startingFOV;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensHori;
