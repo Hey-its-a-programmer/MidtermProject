@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
@@ -15,7 +15,8 @@ public class gameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject playerFlashDamage;
-
+    public TextMeshProUGUI waveNameText;
+    //public TextMeshProUGUI waveNumEnemyText;
 
     [Header("----- Enemy Waves-----")]
     public Wave[] waves;
@@ -44,7 +45,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        waveInfo();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -57,8 +58,10 @@ public class gameManager : MonoBehaviour
             else
             {
                 unPause();
+
             }
         }
+
     }
 
     public void pause()
@@ -88,9 +91,13 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void setEnemyWaveCounter(int amount)
+    public void setEnemyWaveCount(int amount)
     {
-        enemiesInWaveCount += amount;
+        if (waves[currentWaveNum].numberOfEnemies >= enemiesInWaveCount)
+        {
+            enemiesInWaveCount += amount;
+        }
+
     }
 
     public int getEnemyWaveCount()
@@ -101,6 +108,11 @@ public class gameManager : MonoBehaviour
     public int getTotalEnemyCount()
     {
         return enemyTotalCount;
+    }
+
+    public void waveInfo()
+    {
+        waveNameText.text = waves[currentWaveNum].waveName;
     }
 }
 
