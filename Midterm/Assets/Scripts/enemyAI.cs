@@ -122,15 +122,16 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int dmg)
     {
+        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
         agent.SetDestination(gameManager.instance.player.transform.position);
         HP -= dmg;
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
+            enemyAud.PlayOneShot(enemyDeathAudio[Random.Range(0, enemyDeathAudio.Length - 1)], enemyDeathVolume);
             gameManager.instance.updateTotalEnemyCount(-1);
             Destroy(gameObject);
-
         }
     }
 
@@ -146,6 +147,8 @@ public class enemyAI : MonoBehaviour, IDamage
         isShooting = true;
 
         Instantiate(bullet, shootPos.position, transform.rotation);
+
+        enemyAud.PlayOneShot(gunShotClip, gunShotVolume);
 
         yield return new WaitForSeconds(shootRate);
 
