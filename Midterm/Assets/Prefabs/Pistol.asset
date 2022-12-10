@@ -15,4 +15,4 @@ MonoBehaviour:
   shootRate: 0.5
   shootDamage: 1
   shootDist: 25
-  gunModel: {fileID: 0}
+  gunModel: {fileID: 919132149155446097, guid: 726e329e1719c8f42949342e6a5b42e3, type: 3}

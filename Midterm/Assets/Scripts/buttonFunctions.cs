@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+ 
+
     public void resume()
     {
         gameManager.instance.unPause();
@@ -33,11 +35,4 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
-    public void UpgradeGun()
-    {
-        List<gunStats> playerGunList = gameManager.instance.playerScript.getGunList();
-
-        playerGunList[0].shootDamage += 1;
-
-    }
 }
