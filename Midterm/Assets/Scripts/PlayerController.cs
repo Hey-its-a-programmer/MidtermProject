@@ -17,10 +17,11 @@ public class PlayerController : MonoBehaviour
     [Range(0, 3)] [SerializeField] int jumpMax;
 
     [Header("-----Gun Stats-----")]
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
-    [SerializeField] GameObject cube;
+    
 
 
     bool isShooting;
@@ -148,8 +149,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void addDamage(int damageNum = 1)
+    public void gunPickup(gunStats gunStat)
     {
-        shootDamage += damageNum;
-    }
+        shootRate = gunStat.shootRate;
+        shootDamage = gunStat.shootDamage;
+        shootDist = gunStat.shootDist;
+
+        gunList.Add(gunStat);
+    }    
+
+
+
 }
