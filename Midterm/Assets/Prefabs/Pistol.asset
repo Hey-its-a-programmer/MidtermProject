@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f98e132bec75e64582b5c402750f8cf, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  shootRate: 0
-  shootDamage: 0
-  shootDist: 0
+  shootRate: 0.5
+  shootDamage: 1
+  shootDist: 25
   gunModel: {fileID: 0}
