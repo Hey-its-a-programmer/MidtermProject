@@ -35,7 +35,9 @@ public class buttonFunctions : MonoBehaviour
 
     public void UpgradeGun()
     {
-        gameManager.instance.playerScript.addDamage();
-        
+        List<gunStats> playerGunList = gameManager.instance.playerScript.getGunList();
+
+        playerGunList[0].shootDamage += 1;
+
     }
 }

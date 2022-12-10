@@ -158,6 +158,9 @@ public class PlayerController : MonoBehaviour
         gunList.Add(gunStat);
     }    
 
-
+    public List<gunStats> getGunList()
+    {
+        return gunList;
+    }
 
 }
