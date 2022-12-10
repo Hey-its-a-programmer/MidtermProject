@@ -21,6 +21,18 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
 
+    [Header("-------Enemy Audio-------")]
+    [SerializeField] AudioSource enemyAud;
+    [SerializeField] AudioClip gunShotClip;
+    [Range(0, 1)] [SerializeField] float gunShotVolume;
+    [SerializeField] AudioClip[] enemyHurtAudio;
+    [Range(0, 1)] [SerializeField] float enemyHurtVolume;
+    [SerializeField] AudioClip[] enemyStepAudio;
+    [Range(0, 1)] [SerializeField] float enemyStepVolume;
+    [SerializeField] AudioClip[] enemyDeathAudio;
+    [Range(0, 1)] [SerializeField] float enemyDeathVolume;
+    
+
     int HPOrg;
     bool isShooting;
     bool playerInRange;

@@ -22,11 +22,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDist;
     [SerializeField] GameObject cube;
 
+    [Header("-------Player Audio-------")]
+    [SerializeField] AudioSource playerAud;
+    [SerializeField] AudioClip gunShotClip;
+    [Range(0, 1)] [SerializeField] float gunShotVolume;
+    [SerializeField] AudioClip[] playerHurtAudio;
+    [Range(0, 1)] [SerializeField] float playerDamagedVolume;
+    [SerializeField] AudioClip[] playerJumpAudio;
+    [Range(0, 1)] [SerializeField] float playerJumpVolume;
+    [SerializeField] AudioClip[] playerStepAudio;
+    [Range(0, 1)] [SerializeField] float playerStepVolume;
+    [SerializeField] AudioClip[] playerDeathAudio;
+    [Range(0, 1)] [SerializeField] float playerDeathVolume;
 
     bool isShooting;
     bool isSprinting;
     float speedOrig;
-
+    bool isMoving;
 
     int timesJumped;
     private Vector3 playerVelocity;
@@ -45,9 +57,12 @@ public class PlayerController : MonoBehaviour
         if (!gameManager.instance.isPaused)
         {
             movement();
+            if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
+            {
+                StartCoroutine(PlayerSteps());
+            }
             StartCoroutine(shoot());
             playerSprint();
-
         }
     }
     void movement()
@@ -81,6 +96,8 @@ public class PlayerController : MonoBehaviour
         {
             isShooting = true;
 
+            playerAud.PlayOneShot(gunShotClip, gunShotVolume);
+
             //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
@@ -104,10 +121,10 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
+            playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length - 1)], playerDeathVolume);
             gameManager.instance.pause();
             gameManager.instance.loseMenu.SetActive(true);
             gameManager.instance.activeMenu = gameManager.instance.loseMenu;
-
         }
     }
 
@@ -146,5 +163,23 @@ public class PlayerController : MonoBehaviour
             playerSpeed = speedOrig;
             isSprinting = false;
         }
+    }
+
+    IEnumerator PlayerSteps()
+    {
+        isMoving = true;
+
+        playerAud.PlayOneShot(playerStepAudio[Random.Range(0, playerStepAudio.Length - 1)], playerStepVolume);
+
+        if (isSprinting)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.4f);
+        }
+
+        isMoving = false;
     }
 }

@@ -290,11 +290,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6646209691046950171, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
   m_PrefabInstance: {fileID: 211921792}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &397131640 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6646209691046950175, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
-  m_PrefabInstance: {fileID: 211921792}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,29 +684,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4822596442380394302, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: _interactionPoint
-      value: 
-      objectReference: {fileID: 397131640}
     - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: HP
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: playerSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: sprintSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541289, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541289, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: m_StepOffset
-      value: 0.1
+      propertyPath: announceDeathVolume
+      value: 0.503
       objectReference: {fileID: 0}
     - target: {fileID: 6314567623037541291, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: m_RootOrder
@@ -761,60 +736,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541293, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541293, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: invert
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: invertX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: invertY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: zoomSpeed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: lockHoriMax
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: lockHoriMin
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: lockVertMax
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: lockVertMin
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: startingFOV
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: zoomDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623979518040, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: thirdPersonCam
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6314567623037541292, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
 --- !u!1 &2098035261
 GameObject:
