@@ -86,12 +86,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74da2ec383718224aaffb0b45f5c4b38, type: 3}
   - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
-  playerStepVolume: 0.502
+  playerStepVolume: 0
   playerDeathAudio:
   - {fileID: 8300000, guid: a0ee5fdd120dbab45ace708a1ad73ad4, type: 3}
   playerDeathVolume: 0.374
-  announceDeath: {fileID: 8300000, guid: f017665fc3f740246ae9d5f215b91ec5, type: 3}
-  announceDeathVolume: 0.503
 --- !u!143 &6314567623037541289
 CharacterController:
   m_ObjectHideFlags: 0

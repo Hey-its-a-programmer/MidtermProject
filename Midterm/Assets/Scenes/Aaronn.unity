@@ -130,30 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5684327520413260625, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684327520413260626, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-      propertyPath: gunShotClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 918be8c31a0fb204e9f4528862cc5d9a, type: 3}
-    - target: {fileID: 5684327520413260626, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-      propertyPath: gunShotVolume
-      value: 0.491
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684327520413260626, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-      propertyPath: enemyHurtVolume
-      value: 0.529
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684327520413260626, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-      propertyPath: enemyHurtAudio.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684327520413260626, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-      propertyPath: enemyHurtAudio.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 00b702252ab18a440a243eb61376dc13, type: 3}
     - target: {fileID: 5684327520420459673, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -464,6 +440,10 @@ PrefabInstance:
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 397131636}
+    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: waves.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: waves.Array.data[0].Enemy
       value: 

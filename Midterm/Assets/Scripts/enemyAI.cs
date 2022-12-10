@@ -38,6 +38,7 @@ public class enemyAI : MonoBehaviour, IDamage
     bool playerInRange;
     Vector3 playerDir;
     float angleToPlayer;
+    bool isMoving;
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +54,11 @@ public class enemyAI : MonoBehaviour, IDamage
             canSeePlayer();
             agent.SetDestination(gameManager.instance.player.transform.position);
 
+            if (!isMoving)
+            {
+                StartCoroutine(EnemySteps());
+            }
         }
-
     }
 
     void facePlayer()
@@ -153,5 +157,16 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
 
         isShooting = false;
+    }
+
+    IEnumerator EnemySteps()
+    {
+        isMoving = true;
+
+        enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
+
+        yield return new WaitForSeconds(0.3f);
+
+        isMoving = false;
     }
 }
