@@ -31,5 +31,11 @@ public class buttonFunctions : MonoBehaviour
 
         gameManager.instance.playerScript.setPlayerPos();
 
-    }  
+    }
+
+    public void UpgradeGun()
+    {
+        gameManager.instance.playerScript.addDamage();
+        
+    }
 }

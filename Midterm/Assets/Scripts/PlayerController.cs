@@ -147,4 +147,9 @@ public class PlayerController : MonoBehaviour
             isSprinting = false;
         }
     }
+
+    public void addDamage(int damageNum = 1)
+    {
+        shootDamage += damageNum;
+    }
 }
