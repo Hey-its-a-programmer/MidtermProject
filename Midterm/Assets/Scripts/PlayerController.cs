@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     Vector3 move;
     int HPOrig;
+
     private void Start()
     {
         speedOrig = playerSpeed;
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
         if (HP <= 0)
         {
             playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length - 1)], playerDeathVolume);
+            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
             gameManager.instance.pause();
             gameManager.instance.loseMenu.SetActive(true);
             gameManager.instance.activeMenu = gameManager.instance.loseMenu;

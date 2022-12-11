@@ -336,11 +336,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1031781475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-  m_PrefabInstance: {fileID: 88833217}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1069730324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -440,14 +435,6 @@ PrefabInstance:
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 397131636}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: waves.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: waves.Array.data[0].Enemy
-      value: 
-      objectReference: {fileID: 1031781475}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: enemySpawnPoints.Array.data[0]
       value: 

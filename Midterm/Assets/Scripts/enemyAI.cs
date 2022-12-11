@@ -54,7 +54,7 @@ public class enemyAI : MonoBehaviour, IDamage
             canSeePlayer();
             agent.SetDestination(gameManager.instance.player.transform.position);
 
-            if (!isMoving)
+            if (agent.velocity.x > 0 && agent.velocity.z > 0)
             {
                 StartCoroutine(EnemySteps());
             }
@@ -97,8 +97,6 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
-                
-
                 if (!isShooting)
                 {
                     StartCoroutine(shoot());
@@ -110,8 +108,6 @@ public class enemyAI : MonoBehaviour, IDamage
                 }
             }
         }
-
-        
     }
 
     public int getEnemyHealth()
@@ -161,12 +157,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator EnemySteps()
     {
-        isMoving = true;
-
         enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
         yield return new WaitForSeconds(0.3f);
-
-        isMoving = false;
     }
 }

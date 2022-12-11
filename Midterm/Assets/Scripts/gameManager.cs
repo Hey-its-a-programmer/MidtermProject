@@ -28,6 +28,11 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
+    [SerializeField] public AudioSource gameManagerAud;
+    [SerializeField] AudioClip winMusic;
+    [Range(0, 1)] [SerializeField] float winMusicVolume;
+    [SerializeField] public AudioClip loseMusic;
+    [Range(0, 1)] [SerializeField] public float loseMusicVolume;
 
 
     // Start is called before the first frame update
@@ -82,6 +87,7 @@ public class gameManager : MonoBehaviour
         enemyTotalCount += amount;
         if (enemyTotalCount <= 0)
         {
+            gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
             winMenu.SetActive(true);
             pause();
             activeMenu = winMenu;
