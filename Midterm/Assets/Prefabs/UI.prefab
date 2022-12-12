@@ -3299,13 +3299,17 @@ MonoBehaviour:
   enemySpawnPoints:
   - {fileID: 0}
   currentWaveNum: 0
-  isPaused: 0
-  playerSpawnPos: {fileID: 0}
   gameManagerAud: {fileID: 7949343224914869358}
   winMusic: {fileID: 8300000, guid: b13e8438b1ab99d4990a327e6850652f, type: 3}
-  winMusicVolume: 0.502
+  winMusicVolume: 0
   loseMusic: {fileID: 8300000, guid: 8e52dc40ee263f343a4551ac04d53a1f, type: 3}
   loseMusicVolume: 0.534
+  pauseSound: {fileID: 8300000, guid: 503e7654b0e79b34c8c88b954515cda5, type: 3}
+  pauseSoundVolume: 0.557
+  unpauseSound: {fileID: 8300000, guid: 8b986407c04ffa24c8fa9036418f2812, type: 3}
+  unpauseSoundVolume: 0.566
+  isPaused: 0
+  playerSpawnPos: {fileID: 0}
 --- !u!82 &7949343224914869358
 AudioSource:
   m_ObjectHideFlags: 0

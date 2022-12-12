@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length - 1)], playerDamagedVolume);
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {

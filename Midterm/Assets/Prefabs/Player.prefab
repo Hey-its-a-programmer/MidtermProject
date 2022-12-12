@@ -89,6 +89,8 @@ MonoBehaviour:
   playerStepVolume: 0
   playerDeathAudio:
   - {fileID: 8300000, guid: a0ee5fdd120dbab45ace708a1ad73ad4, type: 3}
+  - {fileID: 8300000, guid: b68aae1b9b05f004f8671b113f93a238, type: 3}
+  - {fileID: 8300000, guid: bbcaa96cc338d0d4f963bc9f2dd08ff7, type: 3}
   playerDeathVolume: 0.374
 --- !u!143 &6314567623037541289
 CharacterController:

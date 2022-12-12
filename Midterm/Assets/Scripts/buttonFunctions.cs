@@ -7,6 +7,7 @@ public class buttonFunctions : MonoBehaviour
 {
     public void resume()
     {
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.unpauseSound, gameManager.instance.unpauseSoundVolume);
         gameManager.instance.unPause();
         gameManager.instance.isPaused = !gameManager.instance.isPaused;
     }

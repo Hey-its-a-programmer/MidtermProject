@@ -862,7 +862,8 @@ MonoBehaviour:
   gunShotVolume: 0
   enemyHurtAudio:
   - {fileID: 8300000, guid: 00b702252ab18a440a243eb61376dc13, type: 3}
-  enemyHurtVolume: 0
+  - {fileID: 8300000, guid: de5a1ceb9544c154c8258af1401a0d02, type: 3}
+  enemyHurtVolume: 0.619
   enemyStepAudio:
   - {fileID: 8300000, guid: c0998453d2278f34c9cace9337a67534, type: 3}
   - {fileID: 8300000, guid: a825af4b7253b954f99efccc40c244d3, type: 3}
@@ -873,9 +874,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74da2ec383718224aaffb0b45f5c4b38, type: 3}
   - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
-  enemyStepVolume: 0
+  enemyStepVolume: 0.619
   enemyDeathAudio:
   - {fileID: 8300000, guid: dd64817f21045e5478de607d71362e4a, type: 3}
+  - {fileID: 8300000, guid: 4efe688eab7554b42b78672792e3ea6b, type: 3}
   enemyDeathVolume: 0.497
 --- !u!135 &5684327520413260625
 SphereCollider:
@@ -1002,7 +1004,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

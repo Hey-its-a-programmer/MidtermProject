@@ -53,8 +53,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             canSeePlayer();
             agent.SetDestination(gameManager.instance.player.transform.position);
-
-            if (agent.velocity.x > 0 && agent.velocity.z > 0)
+            if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
             {
                 StartCoroutine(EnemySteps());
             }
@@ -122,14 +121,13 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int dmg)
     {
-        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
-        agent.SetDestination(gameManager.instance.player.transform.position);
         HP -= dmg;
+        agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
-            enemyAud.PlayOneShot(enemyDeathAudio[Random.Range(0, enemyDeathAudio.Length - 1)], enemyDeathVolume);
+            StartCoroutine(EnemyDied());
             gameManager.instance.updateTotalEnemyCount(-1);
             Destroy(gameObject);
         }
@@ -137,6 +135,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator flashDamage()
     {
+        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         model.material.color = Color.white;
@@ -157,8 +156,18 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator EnemySteps()
     {
+        isMoving = true;
+
         enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
+
+        isMoving = false;
+    }
+
+    IEnumerator EnemyDied()
+    {
+        enemyAud.PlayOneShot(enemyDeathAudio[Random.Range(0, enemyDeathAudio.Length - 1)], enemyDeathVolume);
+        yield return null;
     }
 }

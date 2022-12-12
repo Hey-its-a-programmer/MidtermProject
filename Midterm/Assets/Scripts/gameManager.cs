@@ -24,15 +24,21 @@ public class gameManager : MonoBehaviour
     public Transform[] enemySpawnPoints;
     public int currentWaveNum;
 
-    [Header("----- Other Functions -----")]
-    public bool isPaused;
-    float timeScaleOrig;
-    public GameObject playerSpawnPos;
+    [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
     [SerializeField] AudioClip winMusic;
     [Range(0, 1)] [SerializeField] float winMusicVolume;
     [SerializeField] public AudioClip loseMusic;
     [Range(0, 1)] [SerializeField] public float loseMusicVolume;
+    [SerializeField] public AudioClip pauseSound;
+    [Range(0, 1)] [SerializeField] public float pauseSoundVolume;  
+    [SerializeField] public AudioClip unpauseSound;
+    [Range(0, 1)] [SerializeField] public float unpauseSoundVolume;
+
+    [Header("----- Other Functions -----")]
+    public bool isPaused;
+    float timeScaleOrig;
+    public GameObject playerSpawnPos;
 
 
     // Start is called before the first frame update
@@ -49,18 +55,22 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
             activeMenu = pauseMenu;
             activeMenu.SetActive(isPaused);
+            winMusicVolume /= 2;
+            loseMusicVolume /= 2;
+
             if (isPaused)
             {
+                gameManagerAud.PlayOneShot(pauseSound, pauseSoundVolume);
                 pause();
             }
             else
             {
+                gameManagerAud.PlayOneShot(unpauseSound, unpauseSoundVolume);
                 unPause();
             }
         }
