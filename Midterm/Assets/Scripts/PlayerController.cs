@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
-    
+    [SerializeField] GameObject gunModel;
 
 
     bool isShooting;
@@ -155,6 +155,8 @@ public class PlayerController : MonoBehaviour
         shootDamage = gunStat.shootDamage;
         shootDist = gunStat.shootDist;
 
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         gunList.Add(gunStat);
     }    
 
