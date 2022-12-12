@@ -23,7 +23,8 @@ public class gameManager : MonoBehaviour
     private int enemiesInWaveCount;
     public Transform[] enemySpawnPoints;
     public int currentWaveNum;
-
+    public enemyAI enemyScript;
+    public GameObject enemy;
     [Header("----- Other Functions -----")]
     public bool isPaused;
     float timeScaleOrig;
@@ -36,6 +37,8 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemyScript = enemy.GetComponent<enemyAI>();
         timeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
 

@@ -2,69 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class shopUI : MonoBehaviour
 {
     [SerializeField] private GameObject shopInterface;
+    [SerializeField] TextMeshProUGUI shopGunSelected;
+    [SerializeField] private GameObject pressE;
     private bool triggerActive = false;
-    private int shopSelectedGun;
+
     private void OnTriggerEnter(Collider other)
     {
 
         if(other.CompareTag("Player"))
         {
             triggerActive = true;
+            pressE.SetActive(true);
         }
         
     }
 
     private void Update()
     {
-        if (triggerActive && Input.GetKeyDown("Enter"))
+        if (triggerActive && Input.GetKey(KeyCode.E))
         {
             shopActions();
+            pressE.SetActive(false);
         }
- 
+
+        if (Input.GetButtonDown("Cancel") && gameManager.instance.activeMenu == shopInterface)
+        {
+            gameManager.instance.activeMenu.SetActive(false);
+            gameManager.instance.activeMenu = null;
+            pressE.SetActive(true);
+        }
     }
 
     private void shopActions()
     {
-
         gameManager.instance.activeMenu = shopInterface;
-        shopInterface.SetActive(gameManager.instance.activeMenu);
+        gameManager.instance.activeMenu.SetActive(true);
     }
 
-    public void upgradeDamageOnGun()
-    {
-        gameManager.instance.playerScript.getGunList()[shopSelectedGun].shootDamage += 1;
-    }
 
-    public void upgradeShootRateOnGun()
-    {
-        gameManager.instance.playerScript.getGunList()[shopSelectedGun].shootRate += 1;
-    }
-
-    public void selectNextGun()
-    {
-        if (shopSelectedGun < gameManager.instance.playerScript.getGunList().Count - 1)
-        {
-            shopSelectedGun++;
-        }
-    }
-
-    public void selectPrevGun()
-    {
-        if (shopSelectedGun > 0)
-        {
-            shopSelectedGun--;
-        }
-    }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.instance.activeMenu.SetActive(false);
-            gameManager.instance.activeMenu = null;
+            if (gameManager.instance.activeMenu != null)
+            {
+                gameManager.instance.activeMenu.SetActive(false);
+                gameManager.instance.activeMenu = null;
+            }
+
+            pressE.SetActive(false);
         }
     }
 

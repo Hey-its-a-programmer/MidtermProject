@@ -15,7 +15,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
-
+    [SerializeField] int pushBackTime;
+    [SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
@@ -26,7 +27,8 @@ public class enemyAI : MonoBehaviour, IDamage
     bool playerInRange;
     Vector3 playerDir;
     float angleToPlayer;
-
+    Vector3 pushBack;
+    Vector3 enemyMovement;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +42,15 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             canSeePlayer();
             agent.SetDestination(gameManager.instance.player.transform.position);
-
+            enemyVelocity.y = 0.0f;
+            agent.Move((enemyVelocity + pushBack) * Time.deltaTime);
         }
 
+        if (!gameManager.instance.isPaused)
+        {
+            pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
+        }
     }
-
     void facePlayer()
     {
         playerDir.y = 0;
@@ -138,5 +144,10 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
 
         isShooting = false;
+    }
+
+    public void pushBackInput(Vector3 direction)
+    {
+        pushBack = direction;
     }
 }

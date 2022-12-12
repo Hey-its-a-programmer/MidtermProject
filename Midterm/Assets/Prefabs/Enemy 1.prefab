@@ -853,6 +853,7 @@ MonoBehaviour:
   playerFaceSpeed: 6
   sightAngle: 45
   headPos: {fileID: 5684327520420459691}
+  pushBackTime: 3
   shootRate: 0.5
   bullet: {fileID: 1314157197975682883, guid: 9d743180cde45d241b1b7ebb68f284b2, type: 3}
   shootPos: {fileID: 4254271613273178818}
