@@ -29,7 +29,7 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
-
+    public bool turnCameraOn;
 
     // Start is called before the first frame update
     void Awake()

@@ -170,9 +170,10 @@ public class PlayerController : MonoBehaviour
         selectedGun = gunList.Count - 1;
     }
 
-    public List<gunStats> getGunList()
+    public List<gunStats> GunList
     {
-        return gunList;
+        get { return gunList; }
+        set { gunList = value; }
     }
 
     void gunSelect()
@@ -205,5 +206,15 @@ public class PlayerController : MonoBehaviour
     public void pushBackInput(Vector3 direction)
     {
         pushBack = direction;
+    }
+
+    public Mesh getGunSharedMesh()
+    {
+        return gunModel.GetComponent<MeshFilter>().sharedMesh;
+    }
+
+    public Material getGunSharedMaterial()
+    {
+        return gunModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }

@@ -4,42 +4,54 @@ using UnityEngine;
 
 public class shopButtonFunctions : MonoBehaviour
 {
-    private int shopSelectedGun = 0;
-    private List<gunStats> shopGunList;
+
+
+
     public void upgradeDamageOnGun()
     {
-        gameManager.instance.playerScript.getGunList()[shopSelectedGun].shootDamage += 1;
+        gameManager.instance.playerScript.GunList[shopUI.instance.shopSelectedGun].shootDamage += 1;
 
     }
 
     public void upgradeShootRateOnGun()
     {
-        gameManager.instance.playerScript.getGunList()[shopSelectedGun].shootRate += 1;
+        gameManager.instance.playerScript.GunList[shopUI.instance.shopSelectedGun].shootRate += 1;
     }
 
     public void selectNextGun()
     {
-        if (shopSelectedGun < gameManager.instance.playerScript.getGunList().Count - 1)
+        if (shopUI.instance.shopSelectedGun < gameManager.instance.playerScript.GunList.Count - 1)
         {
-            shopSelectedGun++;
+            shopUI.instance.shopSelectedGun++;
+ 
         }
 
-        else if (shopSelectedGun >= gameManager.instance.playerScript.getGunList().Count - 1)
+        else if (shopUI.instance.shopSelectedGun >= gameManager.instance.playerScript.GunList.Count - 1)
         {
-            shopSelectedGun = 0;
+            shopUI.instance.shopSelectedGun = 0;
         }
+        Debug.Log(shopUI.instance.shopSelectedGun);
+        shopUI.instance.gunShopModel = gameManager.instance.playerScript.GunList[shopUI.instance.shopSelectedGun].gunModel;
+        shopUI.instance.setShopGunMeshAndMaterial();
+
     }
 
     public void selectPrevGun()
     {
-        if (shopSelectedGun > 0)
+        if (shopUI.instance.shopSelectedGun > 0)
         {
-            shopSelectedGun--;
+            shopUI.instance.shopSelectedGun--;
+            
         }
 
-        else if (shopSelectedGun < 0)
+        else if (shopUI.instance.shopSelectedGun <= 0)
         {
-            shopSelectedGun = gameManager.instance.playerScript.getGunList().Count - 1;
+            shopUI.instance.shopSelectedGun = gameManager.instance.playerScript.GunList.Count - 1;
         }
+        Debug.Log(shopUI.instance.shopSelectedGun);
+        shopUI.instance.gunShopModel = gameManager.instance.playerScript.GunList[shopUI.instance.shopSelectedGun].gunModel;
+        shopUI.instance.setShopGunMeshAndMaterial();
+
     }
+
 }
