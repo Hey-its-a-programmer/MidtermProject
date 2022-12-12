@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 6470904487763393365}
   - component: {fileID: 7954919745607735923}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Lose(Text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1083,7 +1083,7 @@ RectTransform:
   m_Children:
   - {fileID: 4777178480670557453}
   m_Father: {fileID: 9154290105494366369}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1355,7 +1355,7 @@ GameObject:
   - component: {fileID: 2839577516348809840}
   - component: {fileID: 4306954179504509379}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: Player Flash Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,7 +1374,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9192062975716121860}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2181,7 +2181,7 @@ GameObject:
   - component: {fileID: 1187938782397752664}
   - component: {fileID: 5041928424122413891}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Win(text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2451,7 +2451,7 @@ GameObject:
   - component: {fileID: 9122839575800930395}
   - component: {fileID: 8139067158862806701}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Pause(text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2470,7 +2470,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9154290105494366369}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2586,7 +2586,7 @@ GameObject:
   - component: {fileID: 8966485842222599123}
   - component: {fileID: 875325245166464080}
   m_Layer: 0
-  m_Name: Dead
+  m_Name: Lose Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2684,8 +2684,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2299483807503447986}
   - {fileID: 7417022143312368244}
+  - {fileID: 2299483807503447986}
   - {fileID: 1785714694888034927}
   - {fileID: 5623799567713748902}
   m_Father: {fileID: 9192062975716121860}
@@ -3085,7 +3085,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9192062975716121860}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3161,10 +3161,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9192062975621192348}
-  - {fileID: 9192062976239082863}
   - {fileID: 9192062977110672580}
+  - {fileID: 9192062975621192348}
   - {fileID: 8089512132394806575}
+  - {fileID: 9192062976239082863}
   - {fileID: 5171832252964083070}
   - {fileID: 3218588470306957826}
   - {fileID: 9154290105494366369}
@@ -3268,7 +3268,7 @@ RectTransform:
   m_Children:
   - {fileID: 7501084402730988189}
   m_Father: {fileID: 9192062975716121860}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3347,7 +3347,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9192062975716121860}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9192062977110672581
 MonoBehaviour:
