@@ -2680,6 +2680,7 @@ MonoBehaviour:
   gunShopModel: {fileID: 723001370}
   gunSelection:
   - {fileID: 11400000, guid: 12eda9e56c7ce4c48b2487abf3a3de18, type: 2}
+  - {fileID: 11400000, guid: fccc4a52ed57f7847a4baa5b9539f208, type: 2}
 --- !u!65 &2100557138
 BoxCollider:
   m_ObjectHideFlags: 0

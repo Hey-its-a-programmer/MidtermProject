@@ -28,6 +28,7 @@ public class shopUI : MonoBehaviour
         if (triggerActive && Input.GetKey(KeyCode.E))
         {
             turnOnShopUI();
+            instance = this;
         }
 
         if (Input.GetButtonDown("Cancel") && gameManager.instance.activeMenu == shopInterface)
