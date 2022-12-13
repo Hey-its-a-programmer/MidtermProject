@@ -47,11 +47,16 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
-            movement();
-            StartCoroutine(shoot());
-            playerSprint();
+           movement();
+           playerSprint();
            if(gunList.Count > 0)
-            gunSelect();
+           {
+              StartCoroutine(shoot());
+              gunSelect();
+
+           }
+ 
+           
 
         }
     }
