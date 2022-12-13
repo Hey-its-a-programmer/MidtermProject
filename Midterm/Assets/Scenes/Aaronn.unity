@@ -529,45 +529,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallVolume
-      value: 0.493
-      objectReference: {fileID: 0}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 397131636}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: restartSoundVolume
-      value: 0.566
-      objectReference: {fileID: 0}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: f064246e99150b8498cace3a8fb62ab0, type: 3}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: e7535529a53fff94f96f11131ec46680, type: 3}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 086b09da08ca98b46891596ce985e922, type: 3}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: f064246e99150b8498cace3a8fb62ab0, type: 3}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: e7535529a53fff94f96f11131ec46680, type: 3}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: hitWallAudio.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 086b09da08ca98b46891596ce985e922, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
 --- !u!1 &1331018204

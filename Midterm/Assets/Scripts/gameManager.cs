@@ -9,7 +9,7 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public enemyAI enemyScript;
-   
+
     [Header("----- UI Stuff -----")]
     public GameObject pauseMenu;
     public GameObject activeMenu;
@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
 
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
+    [Range(0, 1)] [SerializeField] float masterVolume = AudioListener.volume;
 
     // fanfare for when player wins, game over for when player loses
     [SerializeField] AudioClip winMusic;
@@ -36,7 +37,7 @@ public class gameManager : MonoBehaviour
 
     // sounds for when the game is paused or unpaused
     [SerializeField] public AudioClip pauseSound;
-    [Range(0, 1)] [SerializeField] public float pauseSoundVolume;  
+    [Range(0, 1)] [SerializeField] public float pauseSoundVolume;
     [SerializeField] public AudioClip unpauseSound;
     [Range(0, 1)] [SerializeField] public float unpauseSoundVolume;
 
@@ -46,11 +47,11 @@ public class gameManager : MonoBehaviour
     [SerializeField] public AudioClip hitEnemyAudio;
     [Range(0, 1)] [SerializeField] public float hitEnemyVolume;
 
+
     [Header("----- Other Functions -----")]
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
-
 
     // Start is called before the first frame update
     void Awake()
@@ -60,12 +61,12 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         timeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateAudio();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -130,6 +131,11 @@ public class gameManager : MonoBehaviour
     public int getTotalEnemyCount()
     {
         return enemyTotalCount;
+    }
+
+    void UpdateAudio()
+    {
+        AudioListener.volume = masterVolume;
     }
 }
 

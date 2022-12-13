@@ -3300,20 +3300,22 @@ MonoBehaviour:
   enemySpawnPoints: []
   currentWaveNum: 0
   gameManagerAud: {fileID: 7949343224914869358}
+  masterVolume: 1
   winMusic: {fileID: 8300000, guid: b13e8438b1ab99d4990a327e6850652f, type: 3}
-  winMusicVolume: 0
+  winMusicVolume: 0.5
   loseMusic: {fileID: 8300000, guid: 8e52dc40ee263f343a4551ac04d53a1f, type: 3}
-  loseMusicVolume: 0
+  loseMusicVolume: 0.5
   pauseSound: {fileID: 8300000, guid: 503e7654b0e79b34c8c88b954515cda5, type: 3}
-  pauseSoundVolume: 0
+  pauseSoundVolume: 0.5
   unpauseSound: {fileID: 8300000, guid: 8b986407c04ffa24c8fa9036418f2812, type: 3}
-  unpauseSoundVolume: 0
-  restartSound: {fileID: 8300000, guid: 1d94b9f5c1e989c44906a5f29f826bdd, type: 3}
-  restartSoundVolume: 0
-  hitWallAudio: {fileID: 8300000, guid: c8021134641064149a5dbd1dd4f2d791, type: 3}
-  hitWallVolume: 0
+  unpauseSoundVolume: 0.5
+  hitWallAudio:
+  - {fileID: 8300000, guid: f064246e99150b8498cace3a8fb62ab0, type: 3}
+  - {fileID: 8300000, guid: e7535529a53fff94f96f11131ec46680, type: 3}
+  - {fileID: 8300000, guid: 086b09da08ca98b46891596ce985e922, type: 3}
+  hitWallVolume: 0.5
   hitEnemyAudio: {fileID: 8300000, guid: c08b8d5666750f14da21d33b9e3880ab, type: 3}
-  hitEnemyVolume: 0
+  hitEnemyVolume: 0.5
   isPaused: 0
   playerSpawnPos: {fileID: 0}
 --- !u!82 &7949343224914869358
@@ -3325,7 +3327,7 @@ AudioSource:
   m_GameObject: {fileID: 9192062976239082862}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 0bb716aaa0075ee47a1c4d3651b7516b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
