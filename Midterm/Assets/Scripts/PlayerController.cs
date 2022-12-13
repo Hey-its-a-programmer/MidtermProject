@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
+    [SerializeField] GameObject hitEffect;
 
     int selectedGun;
     [Header("-------Player Audio-------")]
@@ -56,8 +57,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     Vector3 move;
     int HPOrig;
+    int selectedGun;
     Vector3 pushBack;
-
     private void Start()
     {
         speedOrig = playerSpeed;
@@ -70,20 +71,23 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
+
+
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
                 StartCoroutine(PlayerSteps());
-            }
-            StartCoroutine(shoot());
-            playerSprint();
-            if (gunList.Count > 0)
+            }            if (gunList.Count > 0)
             {
                 StartCoroutine(shoot());
                 gunSelect();
             }
+
+           }
+ 
+           
 
         }
     }
@@ -131,11 +135,11 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
+				Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 else
                 {
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
-                }
-            }
+                }            }
 
 
             yield return new WaitForSeconds(shootRate);
@@ -180,14 +184,18 @@ public class PlayerController : MonoBehaviour
 
     public void playerSprint()
     {
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
+
             if (!isSprinting)
             {
                 playerSpeed = playerSpeed + sprintSpeed;
+
                 isSprinting = true;
             }
         }
+
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             playerSpeed = speedOrig;
@@ -221,17 +229,18 @@ public class PlayerController : MonoBehaviour
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
-    }
+    }    
+ 
+    }i
 
-    public List<gunStats> GunList
+
+   public List<gunStats> GunList
     {
         get { return gunList; }
         set { gunList = value; }
     }
-
     void gunSelect()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
