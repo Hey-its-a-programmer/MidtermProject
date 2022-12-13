@@ -31,6 +31,5 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.unPause();
 
         gameManager.instance.playerScript.setPlayerPos();
-
     }  
 }

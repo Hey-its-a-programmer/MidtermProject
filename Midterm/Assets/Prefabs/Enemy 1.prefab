@@ -863,6 +863,10 @@ MonoBehaviour:
   enemyHurtAudio:
   - {fileID: 8300000, guid: 00b702252ab18a440a243eb61376dc13, type: 3}
   - {fileID: 8300000, guid: de5a1ceb9544c154c8258af1401a0d02, type: 3}
+  - {fileID: 8300000, guid: 993810e2e8a6de549b03ab218bdc4125, type: 3}
+  - {fileID: 8300000, guid: b0485e94a31b1d048aff18c3fd5c9350, type: 3}
+  - {fileID: 8300000, guid: 412838263fb50344282217cf519e67f8, type: 3}
+  - {fileID: 8300000, guid: 61e7b371e02e23d4aac3dc3846b96e3b, type: 3}
   enemyHurtVolume: 0
   enemyStepAudio:
   - {fileID: 8300000, guid: c0998453d2278f34c9cace9337a67534, type: 3}
@@ -875,8 +879,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
   enemyStepVolume: 0
-  enemySpawnSound: {fileID: 0}
-  enemySpawnVolume: 0
 --- !u!135 &5684327520413260625
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     //code from class
     [SerializeField] AudioSource playerAud;
-    [SerializeField] AudioClip gunShotClip;
+    [SerializeField] AudioClip[] gunShotClip;
     [Range(0, 1)] [SerializeField] public float gunShotVolume;
     [SerializeField] AudioClip[] playerJumpAudio;
     [Range(0, 1)] [SerializeField] public float playerJumpVolume;
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             isShooting = true;
 
-            playerAud.PlayOneShot(gunShotClip, gunShotVolume);
+            playerAud.PlayOneShot(gunShotClip[0], gunShotVolume);
 
             //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;

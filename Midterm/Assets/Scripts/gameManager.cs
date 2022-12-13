@@ -27,7 +27,7 @@ public class gameManager : MonoBehaviour
 
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
-    [Range(0, 1)] [SerializeField] float masterVolume = AudioListener.volume;
+    [Range(0, 1)] [SerializeField] public float masterVolume = AudioListener.volume;
 
     // fanfare for when player wins, game over for when player loses
     [SerializeField] AudioClip winMusic;
@@ -66,7 +66,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAudio();
+        UpdateVolume();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -133,7 +133,7 @@ public class gameManager : MonoBehaviour
         return enemyTotalCount;
     }
 
-    void UpdateAudio()
+    void UpdateVolume()
     {
         AudioListener.volume = masterVolume;
     }
