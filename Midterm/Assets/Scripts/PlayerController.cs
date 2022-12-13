@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
+
     bool isShooting;
     bool isSprinting;
     float speedOrig;
@@ -108,6 +109,10 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
+                }
+                else
+                {
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio, gameManager.instance.hitWallVolume);
                 }
             }
 

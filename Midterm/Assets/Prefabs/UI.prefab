@@ -3310,6 +3310,8 @@ MonoBehaviour:
   unpauseSoundVolume: 0.523
   restartSound: {fileID: 8300000, guid: 1d94b9f5c1e989c44906a5f29f826bdd, type: 3}
   restartSoundVolume: 0.497
+  hitWallAudio: {fileID: 8300000, guid: c8021134641064149a5dbd1dd4f2d791, type: 3}
+  hitWallVolume: 0.47
   isPaused: 0
   playerSpawnPos: {fileID: 0}
 --- !u!82 &7949343224914869358
@@ -3368,7 +3370,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

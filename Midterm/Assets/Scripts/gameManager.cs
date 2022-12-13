@@ -37,6 +37,8 @@ public class gameManager : MonoBehaviour
     [Range(0, 1)] [SerializeField] public float unpauseSoundVolume;
     [SerializeField] public AudioClip restartSound;
     [Range(0, 1)] [SerializeField] public float restartSoundVolume;
+    [SerializeField] public AudioClip hitWallAudio;
+    [Range(0, 1)] [SerializeField] public float hitWallVolume;
 
     [Header("----- Other Functions -----")]
     public bool isPaused;
