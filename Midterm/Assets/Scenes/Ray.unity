@@ -507,6 +507,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5690218410291963429, guid: ed1dc83771314a9499dcdcdce410e656, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690218410291963429, guid: ed1dc83771314a9499dcdcdce410e656, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.1
       objectReference: {fileID: 0}
@@ -621,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 726e329e1719c8f42949342e6a5b42e3, type: 3}
       propertyPath: m_Name
-      value: gunModel
+      value: gun model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726e329e1719c8f42949342e6a5b42e3, type: 3}
@@ -816,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6448670945492687728, guid: 0792958e88488fd469c22985dbfced8d, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6448670945492687728, guid: 0792958e88488fd469c22985dbfced8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -957,7 +961,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1838859610
 BoxCollider:
@@ -989,7 +993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7952113689115433220, guid: 1d1379b372810454c93c3949a4ad092d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7952113689115433220, guid: 1d1379b372810454c93c3949a4ad092d, type: 3}
       propertyPath: m_LocalScale.y
@@ -997,7 +1001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7952113689115433220, guid: 1d1379b372810454c93c3949a4ad092d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7952113689115433220, guid: 1d1379b372810454c93c3949a4ad092d, type: 3}
       propertyPath: m_LocalPosition.x
