@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
-        controller.Move((playerVelocity + pushBack)* Time.deltaTime);
+        controller.Move((playerVelocity + pushBack) * Time.deltaTime);
     }
 
     IEnumerator shoot()
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
 
         isMoving = false;
     }
-   public void gunPickup(gunStats gunStat)
+    public void gunPickup(gunStats gunStat)
     {
         shootRate = gunStat.shootRate;
         shootDamage = gunStat.shootDamage;
@@ -263,4 +263,4 @@ public class PlayerController : MonoBehaviour
     {
         pushBack = direction;
     }
-}}
+}
