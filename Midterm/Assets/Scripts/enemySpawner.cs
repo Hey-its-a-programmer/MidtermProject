@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 [System.Serializable]
 public class Wave
 {
@@ -15,19 +14,26 @@ public class Wave
 
 public class enemySpawner : MonoBehaviour
 {
-    
-    
+    public Wave[] waves;
+    public Transform[] enemySpawnPoints;
+    public int currentWaveNum;
+
     private bool canSpawn = true;
+    private bool canSpawnWave = true;
     private float nextSpawnTime;
     private Wave currentWave;
- 
+
 
     private void Start()
     {
         //Updates Number of Enemies in Game Manager
-        for (int i = 0; i < gameManager.instance.waves.Length; i++)
+        if (waves.Length > 0)
         {
-            gameManager.instance.updateTotalEnemyCount(gameManager.instance.waves[i].numberOfEnemies);
+            for (int i = 0; i < waves.Length; i++)
+            {
+                gameManager.instance.updateTotalEnemyCount(waves[i].numberOfEnemies);
+            }
+
         }
 
     }
@@ -37,17 +43,22 @@ public class enemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.instance.waves.Length > 0)
+        if (waves.Length == 0)
         {
-            currentWave = gameManager.instance.waves[gameManager.instance.currentWaveNum];
+            canSpawnWave = false;
+        }
+
+        else if (waves.Length > 0 && canSpawnWave)
+        {
+            currentWave = waves[currentWaveNum];
             SpawnWave();
         }
 
 
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (totalEnemies.Length == 0 && !canSpawn && gameManager.instance.currentWaveNum + 1 != gameManager.instance.waves.Length && gameManager.instance.getTotalEnemyCount() > 0 && gameManager.instance.isPaused == false)
+
+        if (gameManager.instance.EnemiesInWaveCount == 0 && !canSpawn && currentWaveNum + 1 != waves.Length && gameManager.instance.TotalEnemyCount > 0 && !gameManager.instance.isPaused && canSpawnWave)
         {
-            gameManager.instance.currentWaveNum++;
+            currentWaveNum++;
             canSpawn = true;
         }
     }
@@ -56,10 +67,11 @@ public class enemySpawner : MonoBehaviour
     {
         if (canSpawn && nextSpawnTime < Time.time)
         {
-            Transform randomPosition = gameManager.instance.enemySpawnPoints[Random.Range(0, gameManager.instance.enemySpawnPoints.Length)];
+            Transform randomPosition = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)];
             Instantiate(currentWave.Enemy, randomPosition.position, transform.rotation);
 
             currentWave.numberOfEnemies--;
+            gameManager.instance.EnemiesInWaveCount++;
             nextSpawnTime = Time.time + currentWave.spawnRateInterval;
 
             if (currentWave.numberOfEnemies == 0)

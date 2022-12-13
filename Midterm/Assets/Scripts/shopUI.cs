@@ -7,11 +7,13 @@ public class shopUI : MonoBehaviour
 {
     public static shopUI instance;
     [SerializeField] private GameObject shopInterface;
-    [SerializeField] TextMeshProUGUI shopGunName;
+    public TextMeshProUGUI shopGunName;
     [SerializeField] private GameObject pressE;
     private bool triggerActive = false;
     public GameObject gunShopModel;
     public gunStats[] gunSelection;
+    public int shopIterator;
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -60,7 +62,7 @@ public class shopUI : MonoBehaviour
         }
     }
 
-    public void setGunModel(int iterator = 0)
+    public void setGunModel(int iterator)
     {
         gunShopModel.GetComponent<MeshFilter>().sharedMesh = gunSelection[iterator].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunShopModel.GetComponent<MeshRenderer>().sharedMaterial = gunSelection[iterator].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -74,8 +76,8 @@ public class shopUI : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         gameManager.instance.turnCameraOn = false;
-        setGunModel();
-        shopGunName.text = gunSelection[0].gunName.ToString();
+        setGunModel(shopIterator);
+        shopGunName.text = gunSelection[shopIterator].gunName.ToString();
     }
 
     private void turnOffShopUI()
@@ -88,4 +90,30 @@ public class shopUI : MonoBehaviour
         gameManager.instance.turnCameraOn = true;
     }
 
+
+    public void next()
+    {
+        if (shopIterator < gunSelection.Length - 1)
+        {
+            shopIterator++;
+            setGunModel(shopIterator);
+            shopGunName.text = gunSelection[shopIterator].gunName.ToString();
+        }
+
+    }
+
+    public void prev()
+    {
+        if (shopIterator > 0)
+        {
+            shopIterator--;
+            setGunModel(shopIterator);
+        }
+
+    }
+
+    public void buy()
+    {
+        gameManager.instance.playerScript.gunPickup(gunSelection[shopIterator]);
+    }
 }

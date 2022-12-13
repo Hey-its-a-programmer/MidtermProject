@@ -24,7 +24,7 @@ public class explosion : MonoBehaviour
 
         if (effectEnemy)
         {
-            gameManager.instance.enemyScript.pushBackInput((other.transform.position - transform.position) * pushBackAmount);
+            //gameManager.instance.enemyScript.pushBackInput((other.transform.position - transform.position) * pushBackAmount);
         }
     }
 }

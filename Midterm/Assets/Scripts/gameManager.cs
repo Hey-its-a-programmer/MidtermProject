@@ -18,13 +18,12 @@ public class gameManager : MonoBehaviour
 
 
     [Header("----- Enemy Waves-----")]
-    public Wave[] waves;
-    private int enemyTotalCount;
+
+    private int totalEnemyCount;
     private int enemiesInWaveCount;
-    public Transform[] enemySpawnPoints;
-    public int currentWaveNum;
-    public enemyAI enemyScript;
-    public GameObject enemy;
+
+    //public enemyAI enemyScript;
+    //public GameObject enemy;
     [Header("----- Other Functions -----")]
     public bool isPaused;
     float timeScaleOrig;
@@ -37,7 +36,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        //enemy = GameObject.FindGameObjectWithTag("Enemy");
         //enemyScript = enemy.GetComponent<enemyAI>();
         timeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
@@ -82,8 +81,8 @@ public class gameManager : MonoBehaviour
 
     public void updateTotalEnemyCount(int amount)
     {
-        enemyTotalCount += amount;
-        if (enemyTotalCount <= 0)
+        TotalEnemyCount += amount;
+        if (TotalEnemyCount <= 0)
         {
             winMenu.SetActive(true);
             pause();
@@ -91,19 +90,18 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void setEnemyWaveCounter(int amount)
+    public int EnemiesInWaveCount
     {
-        enemiesInWaveCount += amount;
+        get { return enemiesInWaveCount; }
+        set { enemiesInWaveCount = value; }
     }
 
-    public int getEnemyWaveCount()
-    {
-        return enemiesInWaveCount;
-    }
 
-    public int getTotalEnemyCount()
+    public int TotalEnemyCount
     {
-        return enemyTotalCount;
+        get {return totalEnemyCount;}
+        set {totalEnemyCount = value;}
+
     }
 }
 
