@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
+    [SerializeField] GameObject hitEffect;
 
 
     bool isShooting;
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                 }
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+
             }
 
             
