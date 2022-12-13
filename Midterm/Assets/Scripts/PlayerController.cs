@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
             movement();
             StartCoroutine(shoot());
             playerSprint();
+           if(gunList.Count > 0)
             gunSelect();
 
         }
