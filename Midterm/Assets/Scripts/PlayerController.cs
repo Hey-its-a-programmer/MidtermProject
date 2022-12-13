@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio, gameManager.instance.hitWallVolume);
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
                 }
             }
 

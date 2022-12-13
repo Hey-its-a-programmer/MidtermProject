@@ -62,7 +62,7 @@ MonoBehaviour:
   cube: {fileID: 6646209691046950171, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
   playerAud: {fileID: 338797492}
   gunShotClip: {fileID: 8300000, guid: 918be8c31a0fb204e9f4528862cc5d9a, type: 3}
-  gunShotVolume: 0.5
+  gunShotVolume: 0
   playerHurtAudio:
   - {fileID: 8300000, guid: 7f748cc66e968134b89da968c5458d20, type: 3}
   - {fileID: 8300000, guid: a4bd4670773df8046a0adffbb49d09c6, type: 3}
@@ -70,12 +70,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 372749f2071ed1e4ea8ab5a390133438, type: 3}
   - {fileID: 8300000, guid: 3576519c504575d48a838087075317ca, type: 3}
   - {fileID: 8300000, guid: 6d97040dd9a70ef4fa29216b033ed21e, type: 3}
-  playerHurtVolume: 0.5
+  playerHurtVolume: 0
   playerJumpAudio:
   - {fileID: 8300000, guid: fe33c87988156be489176d127f39381e, type: 3}
   - {fileID: 8300000, guid: 2be23cc25af8fbe428abf9729aff1919, type: 3}
   - {fileID: 8300000, guid: cdb6f3a245c853c448b4ece7a094798e, type: 3}
-  playerJumpVolume: 0.5
+  playerJumpVolume: 0
   playerStepAudio:
   - {fileID: 8300000, guid: c0998453d2278f34c9cace9337a67534, type: 3}
   - {fileID: 8300000, guid: a825af4b7253b954f99efccc40c244d3, type: 3}
@@ -86,13 +86,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74da2ec383718224aaffb0b45f5c4b38, type: 3}
   - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
-  playerStepVolume: 0.3
+  playerStepVolume: 0
   playerDeathAudio:
   - {fileID: 8300000, guid: a0ee5fdd120dbab45ace708a1ad73ad4, type: 3}
   - {fileID: 8300000, guid: b68aae1b9b05f004f8671b113f93a238, type: 3}
   - {fileID: 8300000, guid: bbcaa96cc338d0d4f963bc9f2dd08ff7, type: 3}
   - {fileID: 8300000, guid: d4ff369052683c34f9bfc20992c0151b, type: 3}
-  playerDeathVolume: 0.5
+  playerDeathVolume: 0
 --- !u!143 &6314567623037541289
 CharacterController:
   m_ObjectHideFlags: 0
