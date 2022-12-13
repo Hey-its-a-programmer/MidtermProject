@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemyScript = enemy.GetComponent<enemyAI>();
+        //enemyScript = enemy.GetComponent<enemyAI>();
         timeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
 

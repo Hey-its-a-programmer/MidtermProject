@@ -4,62 +4,39 @@ using UnityEngine;
 
 public class shopButtonFunctions : MonoBehaviour
 {
-
-    private int shopSelectedGun = 0;
-    private shopUI shop;
-    public void upgradeDamageOnGun()
-    {
-        gameManager.instance.playerScript.GunList[shopSelectedGun].shootDamage += 1;
-
-    }
-
-    public void upgradeShootRateOnGun()
-    {
-        gameManager.instance.playerScript.GunList[shopSelectedGun].shootRate += 1;
-    }
-
+    int shopIterator = 0;
     public void selectNextGun()
     {
-
-        if (shopSelectedGun == 0 && gameManager.instance.playerScript.GunList.Count - 1 == 0)
+        if (shopIterator == 0 && shopUI.instance.gunSelection.Length == 1)
         {
-
+            shopUI.instance.setGunModel();
         }
-
-        else if (shopSelectedGun >= gameManager.instance.playerScript.GunList.Count - 1)
+        else if (shopIterator < shopUI.instance.gunSelection.Length)
         {
-            shopSelectedGun = 0;
-            shop.setShopGunMeshAndMaterial(shopSelectedGun);
-        }
-
-        else if (shopSelectedGun < gameManager.instance.playerScript.GunList.Count - 1)
-        {
-            shopSelectedGun++;
-            shop.setShopGunMeshAndMaterial(shopSelectedGun);
+            shopIterator++;
+            shopUI.instance.setGunModel(shopIterator);
         }
 
     }
 
     public void selectPrevGun()
     {
-        if (shopSelectedGun > 0)
+        if (shopIterator == 0 && shopUI.instance.gunSelection.Length == 1)
         {
-            shopSelectedGun--;
-            shop.setShopGunMeshAndMaterial(shopSelectedGun);
-
+            shopUI.instance.setGunModel();
         }
 
-        else if (shopSelectedGun <= 0)
+        if (shopIterator > shopUI.instance.gunSelection.Length)
         {
-            shopSelectedGun = gameManager.instance.playerScript.GunList.Count - 1;
-            shop.setShopGunMeshAndMaterial(shopSelectedGun);
+            shopIterator--;
+            shopUI.instance.setGunModel(shopIterator);
         }
 
-        else
-        {
-            shop.setShopGunMeshAndMaterial(shopSelectedGun);
-        }
+    }
 
+    public void buyGun()
+    {
+        gameManager.instance.playerScript.gunPickup(shopUI.instance.gunSelection[shopIterator]);
     }
 
 }
