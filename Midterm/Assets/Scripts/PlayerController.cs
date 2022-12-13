@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
                 else
                 {
