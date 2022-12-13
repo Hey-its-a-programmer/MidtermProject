@@ -23,10 +23,16 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [Header("-------Enemy Audio-------")]
     [SerializeField] AudioSource enemyAud;
+
+    //sound for when enemy shoots
     [SerializeField] AudioClip gunShotClip;
     [Range(0, 1)] [SerializeField] public float gunShotVolume;
+
+    // sounds for when enemy is damaged
     [SerializeField] AudioClip[] enemyHurtAudio;
     [Range(0, 1)] [SerializeField] public float enemyHurtVolume;
+
+    //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
     [Range(0, 1)] [SerializeField] public float enemyStepVolume;
 
@@ -53,6 +59,7 @@ public class enemyAI : MonoBehaviour, IDamage
             agent.SetDestination(gameManager.instance.player.transform.position);
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
             {
+                // if the enemy is standing still, this sound won't play
                 StartCoroutine(EnemySteps());
             }
         }
@@ -132,6 +139,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator flashDamage()
     {
+        // plays grunt noise to signal that the enemy took damage
         enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
@@ -144,6 +152,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         Instantiate(bullet, shootPos.position, transform.rotation);
 
+        // same gunshot noise as player for now
         enemyAud.PlayOneShot(gunShotClip, gunShotVolume);
 
         yield return new WaitForSeconds(shootRate);
@@ -155,6 +164,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         isMoving = true;
 
+        //plays footsteps of enemy
         enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
         yield return new WaitForSeconds(0.5f);

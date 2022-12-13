@@ -16,7 +16,6 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.unPause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.restartSound, gameManager.instance.restartSoundVolume);
     }
 
     public void quit()

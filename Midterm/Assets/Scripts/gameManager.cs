@@ -27,16 +27,20 @@ public class gameManager : MonoBehaviour
 
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
+
+    // fanfare for when player wins, game over for when player loses
     [SerializeField] AudioClip winMusic;
     [Range(0, 1)] [SerializeField] float winMusicVolume;
     [SerializeField] public AudioClip loseMusic;
     [Range(0, 1)] [SerializeField] public float loseMusicVolume;
+
+    // sounds for when the game is paused or unpaused
     [SerializeField] public AudioClip pauseSound;
     [Range(0, 1)] [SerializeField] public float pauseSoundVolume;  
     [SerializeField] public AudioClip unpauseSound;
     [Range(0, 1)] [SerializeField] public float unpauseSoundVolume;
-    [SerializeField] public AudioClip restartSound;
-    [Range(0, 1)] [SerializeField] public float restartSoundVolume;
+
+    // sounds for hitting wall or enemies
     [SerializeField] public AudioClip[] hitWallAudio;
     [Range(0, 1)] [SerializeField] public float hitWallVolume;
     [SerializeField] public AudioClip hitEnemyAudio;
@@ -70,11 +74,13 @@ public class gameManager : MonoBehaviour
 
             if (isPaused)
             {
+                // plays pause sound
                 gameManagerAud.PlayOneShot(pauseSound, pauseSoundVolume);
                 pause();
             }
             else
             {
+                // plays unpause sound
                 gameManagerAud.PlayOneShot(unpauseSound, unpauseSoundVolume);
                 unPause();
             }
@@ -102,7 +108,9 @@ public class gameManager : MonoBehaviour
         enemyTotalCount += amount;
         if (enemyTotalCount <= 0)
         {
+            //plays fanfare for winning
             gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
+
             winMenu.SetActive(true);
             pause();
             activeMenu = winMenu;

@@ -23,15 +23,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject cube;
 
     [Header("-------Player Audio-------")]
+
+    //code from class
     [SerializeField] AudioSource playerAud;
     [SerializeField] AudioClip gunShotClip;
     [Range(0, 1)] [SerializeField] public float gunShotVolume;
-    [SerializeField] AudioClip[] playerHurtAudio;
-    [Range(0, 1)] [SerializeField] public float playerHurtVolume;
     [SerializeField] AudioClip[] playerJumpAudio;
     [Range(0, 1)] [SerializeField] public float playerJumpVolume;
+
+    // code from class
     [SerializeField] AudioClip[] playerStepAudio;
     [Range(0, 1)] [SerializeField] public float playerStepVolume;
+
+    // sounds for when player is damaged
+    [SerializeField] AudioClip[] playerHurtAudio;
+    [Range(0, 1)] [SerializeField] public float playerHurtVolume;
+
+    // sounds for when player dies
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
@@ -117,7 +125,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
@@ -179,6 +186,7 @@ public class PlayerController : MonoBehaviour
     {
         isMoving = true;
 
+        //code from class
         playerAud.PlayOneShot(playerStepAudio[Random.Range(0, playerStepAudio.Length)], playerStepVolume);
 
         if (isSprinting)
