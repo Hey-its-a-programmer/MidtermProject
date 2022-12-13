@@ -24,14 +24,12 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("-------Enemy Audio-------")]
     [SerializeField] AudioSource enemyAud;
     [SerializeField] AudioClip gunShotClip;
-    [Range(0, 1)] [SerializeField] float gunShotVolume;
+    [Range(0, 1)] [SerializeField] public float gunShotVolume;
     [SerializeField] AudioClip[] enemyHurtAudio;
-    [Range(0, 1)] [SerializeField] float enemyHurtVolume;
+    [Range(0, 1)] [SerializeField] public float enemyHurtVolume;
     [SerializeField] AudioClip[] enemyStepAudio;
-    [Range(0, 1)] [SerializeField] float enemyStepVolume;
-    [SerializeField] AudioClip[] enemyDeathAudio;
-    [Range(0, 1)] [SerializeField] float enemyDeathVolume;
-    
+    [Range(0, 1)] [SerializeField] public float enemyStepVolume;
+
 
     int HPOrg;
     bool isShooting;
@@ -127,7 +125,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            StartCoroutine(EnemyDied());
             gameManager.instance.updateTotalEnemyCount(-1);
             Destroy(gameObject);
         }
@@ -163,11 +160,5 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.5f);
 
         isMoving = false;
-    }
-
-    IEnumerator EnemyDied()
-    {
-        enemyAud.PlayOneShot(enemyDeathAudio[Random.Range(0, enemyDeathAudio.Length - 1)], enemyDeathVolume);
-        yield return null;
     }
 }

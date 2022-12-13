@@ -25,15 +25,15 @@ public class PlayerController : MonoBehaviour
     [Header("-------Player Audio-------")]
     [SerializeField] AudioSource playerAud;
     [SerializeField] AudioClip gunShotClip;
-    [Range(0, 1)] [SerializeField] float gunShotVolume;
+    [Range(0, 1)] [SerializeField] public float gunShotVolume;
     [SerializeField] AudioClip[] playerHurtAudio;
-    [Range(0, 1)] [SerializeField] float playerDamagedVolume;
+    [Range(0, 1)] [SerializeField] public float playerHurtVolume;
     [SerializeField] AudioClip[] playerJumpAudio;
-    [Range(0, 1)] [SerializeField] float playerJumpVolume;
+    [Range(0, 1)] [SerializeField] public float playerJumpVolume;
     [SerializeField] AudioClip[] playerStepAudio;
-    [Range(0, 1)] [SerializeField] float playerStepVolume;
+    [Range(0, 1)] [SerializeField] public float playerStepVolume;
     [SerializeField] AudioClip[] playerDeathAudio;
-    [Range(0, 1)] [SerializeField] float playerDeathVolume;
+    [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
     bool isShooting;
     bool isSprinting;
@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = jumpHeight;
             timesJumped++;
+            playerAud.PlayOneShot(playerJumpAudio[Random.Range(0, playerJumpAudio.Length)], playerJumpVolume);
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
@@ -119,11 +120,11 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length - 1)], playerDamagedVolume);
+        playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length)], playerHurtVolume);
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
-            playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length - 1)], playerDeathVolume);
+            playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
             gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
             gameManager.instance.pause();
             gameManager.instance.loseMenu.SetActive(true);
@@ -172,7 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         isMoving = true;
 
-        playerAud.PlayOneShot(playerStepAudio[Random.Range(0, playerStepAudio.Length - 1)], playerStepVolume);
+        playerAud.PlayOneShot(playerStepAudio[Random.Range(0, playerStepAudio.Length)], playerStepVolume);
 
         if (isSprinting)
         {

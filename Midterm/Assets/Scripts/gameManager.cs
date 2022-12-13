@@ -8,6 +8,7 @@ public class gameManager : MonoBehaviour
     [Header("----- Player Stuff -----")]
     public GameObject player;
     public PlayerController playerScript;
+    public enemyAI enemyScript;
    
     [Header("----- UI Stuff -----")]
     public GameObject pauseMenu;
@@ -34,6 +35,8 @@ public class gameManager : MonoBehaviour
     [Range(0, 1)] [SerializeField] public float pauseSoundVolume;  
     [SerializeField] public AudioClip unpauseSound;
     [Range(0, 1)] [SerializeField] public float unpauseSoundVolume;
+    [SerializeField] public AudioClip restartSound;
+    [Range(0, 1)] [SerializeField] public float restartSoundVolume;
 
     [Header("----- Other Functions -----")]
     public bool isPaused;
@@ -60,8 +63,6 @@ public class gameManager : MonoBehaviour
             isPaused = !isPaused;
             activeMenu = pauseMenu;
             activeMenu.SetActive(isPaused);
-            winMusicVolume /= 2;
-            loseMusicVolume /= 2;
 
             if (isPaused)
             {

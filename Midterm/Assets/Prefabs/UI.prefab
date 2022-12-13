@@ -3290,24 +3290,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerScript: {fileID: 0}
+  enemyScript: {fileID: 0}
   pauseMenu: {fileID: 8799309933630551337}
   activeMenu: {fileID: 0}
   winMenu: {fileID: 1871408964814732884}
   loseMenu: {fileID: 8072665790323617477}
   playerFlashDamage: {fileID: 4861831035117757210}
   waves: []
-  enemySpawnPoints:
-  - {fileID: 0}
+  enemySpawnPoints: []
   currentWaveNum: 0
   gameManagerAud: {fileID: 7949343224914869358}
   winMusic: {fileID: 8300000, guid: b13e8438b1ab99d4990a327e6850652f, type: 3}
-  winMusicVolume: 0
+  winMusicVolume: 0.5
   loseMusic: {fileID: 8300000, guid: 8e52dc40ee263f343a4551ac04d53a1f, type: 3}
-  loseMusicVolume: 0.534
+  loseMusicVolume: 0.5
   pauseSound: {fileID: 8300000, guid: 503e7654b0e79b34c8c88b954515cda5, type: 3}
-  pauseSoundVolume: 0.557
+  pauseSoundVolume: 0.523
   unpauseSound: {fileID: 8300000, guid: 8b986407c04ffa24c8fa9036418f2812, type: 3}
-  unpauseSoundVolume: 0.566
+  unpauseSoundVolume: 0.523
+  restartSound: {fileID: 8300000, guid: 1d94b9f5c1e989c44906a5f29f826bdd, type: 3}
+  restartSoundVolume: 0.497
   isPaused: 0
   playerSpawnPos: {fileID: 0}
 --- !u!82 &7949343224914869358
@@ -3366,7 +3368,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
