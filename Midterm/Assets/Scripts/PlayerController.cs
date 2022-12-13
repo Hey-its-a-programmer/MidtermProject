@@ -15,15 +15,16 @@ public class PlayerController : MonoBehaviour
     [Range(0, 15)] [SerializeField] int jumpHeight;
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
+    [SerializeField] int pushBackTime;
 
     [Header("-----Gun Stats-----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
-    
+    [SerializeField] GameObject gunModel;
 
-
+    int selectedGun;
     bool isShooting;
     bool isSprinting;
     float speedOrig;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     Vector3 move;
     int HPOrig;
+    Vector3 pushBack;
     private void Start()
     {
         speedOrig = playerSpeed;
@@ -45,9 +47,15 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
+            pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
-            StartCoroutine(shoot());
+
             playerSprint();
+            if (gunList.Count > 0)
+            {
+                StartCoroutine(shoot());
+                gunSelect();
+            }
 
         }
     }
@@ -73,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move((playerVelocity + pushBack)* Time.deltaTime);
     }
 
     IEnumerator shoot()
@@ -93,7 +101,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            
+
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
@@ -119,7 +127,7 @@ public class PlayerController : MonoBehaviour
         gameManager.instance.playerFlashDamage.SetActive(false);
 
     }
-    
+
     public void setPlayerPos()
     {
         controller.enabled = false;
@@ -134,15 +142,15 @@ public class PlayerController : MonoBehaviour
 
     public void playerSprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift)) 
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (!isSprinting) 
-            {   
+            if (!isSprinting)
+            {
                 playerSpeed = playerSpeed + sprintSpeed;
-                isSprinting = true; 
+                isSprinting = true;
             }
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift)) 
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             playerSpeed = speedOrig;
             isSprinting = false;
@@ -155,9 +163,49 @@ public class PlayerController : MonoBehaviour
         shootDamage = gunStat.shootDamage;
         shootDist = gunStat.shootDist;
 
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
         gunList.Add(gunStat);
-    }    
+        selectedGun = gunList.Count - 1;
+    }
+
+    public List<gunStats> GunList
+    {
+        get { return gunList; }
+        set { gunList = value; }
+    }
+
+    void gunSelect()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
 
 
+
+    void changeGun()
+    {
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootRate = gunList[selectedGun].shootRate;
+        shootDist = gunList[selectedGun].shootDist;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    public void pushBackInput(Vector3 direction)
+    {
+        pushBack = direction;
+    }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+<<<<<<< HEAD
     //GAME RES
     public int resWidth;
     public int resHeight;
@@ -28,6 +29,10 @@ public class buttonFunctions : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+=======
+ 
+
+>>>>>>> 63f2536df7f7f232164ee22e71d262bc26746e79
     public void resume()
     {
         gameManager.instance.unPause();
@@ -54,5 +59,6 @@ public class buttonFunctions : MonoBehaviour
 
         gameManager.instance.playerScript.setPlayerPos();
 
-    }  
+    }
+
 }

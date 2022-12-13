@@ -15,9 +15,10 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
-    [SerializeField] int sightAngle;
+    //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
-
+    [SerializeField] int pushBackTime;
+    [SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
@@ -31,8 +32,9 @@ public class enemyAI : MonoBehaviour, IDamage
     bool isShooting;
     bool playerInRange;
     Vector3 playerDir;
-    float angleToPlayer;
-
+    //float angleToPlayer;
+    Vector3 pushBack;
+    Vector3 enemyMovement;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,11 +48,15 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             canSeePlayer();
             agent.SetDestination(gameManager.instance.player.transform.position);
-
+            enemyVelocity.y = 0.0f;
+            agent.Move((enemyVelocity + pushBack) * Time.deltaTime);
         }
 
+        if (!gameManager.instance.isPaused)
+        {
+            pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
+        }
     }
-
     void facePlayer()
     {
         playerDir.y = 0;
@@ -77,15 +83,15 @@ public class enemyAI : MonoBehaviour, IDamage
     void canSeePlayer()
     {
         playerDir = (gameManager.instance.player.transform.position - headPos.position);
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        //angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-        Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
+        //Debug.Log(angleToPlayer);
+        //Debug.DrawRay(headPos.position, playerDir);
 
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
+            if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
             {
                 
 
@@ -122,6 +128,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
             Destroy(gameObject);
 
@@ -145,8 +152,15 @@ public class enemyAI : MonoBehaviour, IDamage
 
         isShooting = false;
     }
+<<<<<<< HEAD
     public void enemyHP()
     {
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
+=======
+    }
+    public void pushBackInput(Vector3 direction)
+    {
+        pushBack = direction;
+>>>>>>> 63f2536df7f7f232164ee22e71d262bc26746e79
     }
 }
