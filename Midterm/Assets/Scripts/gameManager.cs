@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class gameManager : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class gameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject playerFlashDamage;
+    public Image playerHPBar;
+    [SerializeField] TextMeshProUGUI enemyRemaining;
 
 
     [Header("----- Enemy Waves-----")]
@@ -101,6 +105,17 @@ public class gameManager : MonoBehaviour
     public int getTotalEnemyCount()
     {
         return enemyTotalCount;
+    }
+    public void updateEnemyCount(int amount)
+    {
+        enemiesInWaveCount += amount;
+        enemyRemaining.text = enemiesInWaveCount.ToString("F0");
+        if (enemiesInWaveCount <= 0)
+        {
+            winMenu.SetActive(true);
+            pause();
+            activeMenu = winMenu;
+        }
     }
 }
 

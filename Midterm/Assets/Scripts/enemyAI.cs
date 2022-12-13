@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -20,6 +22,10 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
+
+    [Header("----- Enemy ui-----")]
+    [SerializeField] Image enemyHPbar;
+    [SerializeField] GameObject UI;
 
     int HPOrg;
     bool isShooting;
@@ -138,5 +144,9 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
 
         isShooting = false;
+    }
+    public void enemyHP()
+    {
+        enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
     }
 }

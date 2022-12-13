@@ -5,6 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+    //GAME RES
+    public int resWidth;
+    public int resHeight;
+
+    public void setWidth(int newWidth)
+    {
+        resWidth = newWidth;
+    }
+
+    public void setHeight(int newHeight)
+    {
+        resHeight = newHeight;
+    }
+
+    public void setRes()
+    {
+        Screen.SetResolution(resWidth, resHeight, false);
+    }
+    //MENUS
+    public void playGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     public void resume()
     {
         gameManager.instance.unPause();
