@@ -208,13 +208,4 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
-    public Mesh getGunSharedMesh()
-    {
-        return gunModel.GetComponent<MeshFilter>().sharedMesh;
-    }
-
-    public Material getGunSharedMaterial()
-    {
-        return gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-    }
 }

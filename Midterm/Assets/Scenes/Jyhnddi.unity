@@ -2822,10 +2822,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopInterface: {fileID: 1251938938}
-  shopGunSelected: {fileID: 0}
+  shopGunName: {fileID: 0}
   pressE: {fileID: 286874190}
   gunShopModel: {fileID: 723001370}
-  shopSelectedGun: 0
 --- !u!65 &2100557138
 BoxCollider:
   m_ObjectHideFlags: 0

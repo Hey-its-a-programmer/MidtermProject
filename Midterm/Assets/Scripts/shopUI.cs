@@ -5,13 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 public class shopUI : MonoBehaviour
 {
-    public static shopUI instance;
     [SerializeField] private GameObject shopInterface;
-    [SerializeField] TextMeshProUGUI shopGunSelected;
+    [SerializeField] TextMeshProUGUI shopGunName;
     [SerializeField] private GameObject pressE;
     private bool triggerActive = false;
     public GameObject gunShopModel;
-    public int shopSelectedGun = 0;
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -34,6 +33,7 @@ public class shopUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             gameManager.instance.turnCameraOn = false;
             setShopGunMeshAndMaterial();
+
         }
 
         if (Input.GetButtonDown("Cancel") && gameManager.instance.activeMenu == shopInterface)
@@ -44,6 +44,7 @@ public class shopUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             pressE.SetActive(true);
             gameManager.instance.turnCameraOn = true;
+
         }
     }
 
@@ -70,10 +71,10 @@ public class shopUI : MonoBehaviour
         }
     }
 
-    public void setShopGunMeshAndMaterial()
+    public void setShopGunMeshAndMaterial(int gunListIterator = 0)
     {
-        gunShopModel.GetComponent<MeshFilter>().sharedMesh = gameManager.instance.playerScript.getGunSharedMesh();
-        gunShopModel.GetComponent<MeshRenderer>().sharedMaterial = gameManager.instance.playerScript.getGunSharedMaterial();
+        gunShopModel.GetComponent<MeshFilter>().sharedMesh = gameManager.instance.playerScript.GunList[gunListIterator].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunShopModel.GetComponent<MeshRenderer>().sharedMaterial = gameManager.instance.playerScript.GunList[gunListIterator].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
 
