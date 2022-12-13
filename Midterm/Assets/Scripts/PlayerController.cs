@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     Vector3 move;
     int HPOrig;
+    int selectedGun;
+
     private void Start()
     {
         speedOrig = playerSpeed;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
             movement();
             StartCoroutine(shoot());
             playerSprint();
+            gunSelect();
 
         }
     }
@@ -158,8 +161,30 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         gunList.Add(gunStat);
-    }    
+    }
+    void gunSelect()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
+    void changeGun()
+    {
+        shootRate = gunList[selectedGun].shootRate;
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootDist = gunList[selectedGun].shootDist;
 
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+       
+    }
 
 
 }
