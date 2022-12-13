@@ -35,6 +35,7 @@ public class buttonFunctions : MonoBehaviour
 >>>>>>> 63f2536df7f7f232164ee22e71d262bc26746e79
     public void resume()
     {
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.unpauseSound, gameManager.instance.unpauseSoundVolume);
         gameManager.instance.unPause();
         gameManager.instance.isPaused = !gameManager.instance.isPaused;
     }
@@ -58,7 +59,6 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.unPause();
 
         gameManager.instance.playerScript.setPlayerPos();
-
     }
 
 }

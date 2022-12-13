@@ -25,16 +25,39 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gunModel;
 
     int selectedGun;
+    [Header("-------Player Audio-------")]
+
+    //code from class
+    [SerializeField] AudioSource playerAud;
+    [SerializeField] AudioClip[] gunShotClip;
+    [Range(0, 1)] [SerializeField] public float gunShotVolume;
+    [SerializeField] AudioClip[] playerJumpAudio;
+    [Range(0, 1)] [SerializeField] public float playerJumpVolume;
+
+    // code from class
+    [SerializeField] AudioClip[] playerStepAudio;
+    [Range(0, 1)] [SerializeField] public float playerStepVolume;
+
+    // sounds for when player is damaged
+    [SerializeField] AudioClip[] playerHurtAudio;
+    [Range(0, 1)] [SerializeField] public float playerHurtVolume;
+
+    // sounds for when player dies
+    [SerializeField] AudioClip[] playerDeathAudio;
+    [Range(0, 1)] [SerializeField] public float playerDeathVolume;
+
+
     bool isShooting;
     bool isSprinting;
     float speedOrig;
-
+    bool isMoving;
 
     int timesJumped;
     private Vector3 playerVelocity;
     Vector3 move;
     int HPOrig;
     Vector3 pushBack;
+
     private void Start()
     {
         speedOrig = playerSpeed;
@@ -50,6 +73,11 @@ public class PlayerController : MonoBehaviour
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
 
+            if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
+            {
+                StartCoroutine(PlayerSteps());
+            }
+            StartCoroutine(shoot());
             playerSprint();
             if (gunList.Count > 0)
             {
@@ -78,6 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = jumpHeight;
             timesJumped++;
+            playerAud.PlayOneShot(playerJumpAudio[Random.Range(0, playerJumpAudio.Length)], playerJumpVolume);
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
@@ -90,6 +119,8 @@ public class PlayerController : MonoBehaviour
         {
             isShooting = true;
 
+            playerAud.PlayOneShot(gunShotClip[0], gunShotVolume);
+
             //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
@@ -98,6 +129,11 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
+                }
+                else
+                {
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
                 }
             }
 
@@ -110,13 +146,15 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length)], playerHurtVolume);
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
+            playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
+            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
             gameManager.instance.pause();
             gameManager.instance.loseMenu.SetActive(true);
             gameManager.instance.activeMenu = gameManager.instance.loseMenu;
-
         }
     }
 
@@ -157,7 +195,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void gunPickup(gunStats gunStat)
+    IEnumerator PlayerSteps()
+    {
+        isMoving = true;
+
+        //code from class
+        playerAud.PlayOneShot(playerStepAudio[Random.Range(0, playerStepAudio.Length)], playerStepVolume);
+
+        if (isSprinting)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.4f);
+        }
+
+        isMoving = false;
+    }
+   public void gunPickup(gunStats gunStat)
     {
         shootRate = gunStat.shootRate;
         shootDamage = gunStat.shootDamage;
@@ -207,5 +263,4 @@ public class PlayerController : MonoBehaviour
     {
         pushBack = direction;
     }
-
-}
+}}
