@@ -32,6 +32,8 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
+    public int enemyCount;
+
 
 
     // Start is called before the first frame update
@@ -108,9 +110,9 @@ public class gameManager : MonoBehaviour
     }
     public void updateEnemyCount(int amount)
     {
-        enemiesInWaveCount += amount;
-        enemyRemaining.text = enemiesInWaveCount.ToString("F0");
-        if (enemiesInWaveCount <= 0)
+        enemyCount += amount;
+        enemyRemaining.text = enemyCount.ToString("F0");
+        if (enemyCount <= 0)
         {
             winMenu.SetActive(true);
             pause();
