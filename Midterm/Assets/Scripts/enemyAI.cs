@@ -11,6 +11,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
@@ -37,11 +38,15 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         HPOrg = HP;
+        updateEnemyHPBar();
+        gameManager.instance.updateEnemyCount(1);
     }
 
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+
         if (playerInRange)
         {
             canSeePlayer();
@@ -89,7 +94,7 @@ public class enemyAI : MonoBehaviour, IDamage
             {
                 
 
-                if (!isShooting)
+                if (!isShooting && angleToPlayer <= 15)
                 {
                     StartCoroutine(shoot());
 
@@ -116,8 +121,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int dmg)
     {
-        agent.SetDestination(gameManager.instance.player.transform.position);
         HP -= dmg;
+        updateEnemyHPBar();
+        UI.SetActive(true);
+
+        agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
@@ -138,14 +146,14 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
-
+        anim.SetTrigger("Shoot");
         Instantiate(bullet, shootPos.position, transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
 
         isShooting = false;
     }
-    public void enemyHP()
+    public void updateEnemyHPBar()
     {
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
     }

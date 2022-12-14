@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
         speedOrig = playerSpeed;
         HPOrig = HP;
         setPlayerPos();
+        updatePlayerHPbar();
+
     }
 
     void Update()
@@ -102,6 +104,8 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        updatePlayerHPbar();
+
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
@@ -130,6 +134,7 @@ public class PlayerController : MonoBehaviour
     public void resetPlayerHP()
     {
         HP = HPOrig;
+        updatePlayerHPbar();
     }
 
     public void playerSprint()
@@ -147,6 +152,11 @@ public class PlayerController : MonoBehaviour
             playerSpeed = speedOrig;
             isSprinting = false;
         }
+    }
+
+    public void updatePlayerHPbar()
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
 
     public void gunPickup(gunStats gunStat)

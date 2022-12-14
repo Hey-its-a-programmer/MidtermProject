@@ -50,16 +50,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6314567623037541289}
-  HP: 20
+  HP: 100
   playerSpeed: 4
   sprintSpeed: 2
   jumpHeight: 8
   gravityValue: 25
   jumpMax: 1
+  gunList: []
   shootRate: 0.5
   shootDamage: 1
   shootDist: 50
-  cube: {fileID: 6646209691046950171, guid: d1dc012ec6a1c154da3bfa3406af6834, type: 3}
 --- !u!143 &6314567623037541289
 CharacterController:
   m_ObjectHideFlags: 0
