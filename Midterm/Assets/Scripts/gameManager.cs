@@ -33,7 +33,7 @@ public class gameManager : MonoBehaviour
 
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
-    [Range(0, 1)] [SerializeField] public float masterVolume = AudioListener.volume;
+    [Range(0, 1)] [SerializeField] public float masterVolume;
 
     // fanfare for when player wins, game over for when player loses
     [SerializeField] AudioClip winMusic;
@@ -66,6 +66,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        masterVolume = AudioListener.volume;
         //enemy = GameObject.FindGameObjectWithTag("Enemy");
         //enemyScript = enemy.GetComponent<enemyAI>();
         timeScaleOrig = Time.timeScale;

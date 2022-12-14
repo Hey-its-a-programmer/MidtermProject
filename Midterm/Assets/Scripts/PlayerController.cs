@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
-
-    int selectedGun;
     [Header("-------Player Audio-------")]
 
     //code from class
@@ -89,7 +87,7 @@ public class PlayerController : MonoBehaviour
  
            
 
-        }
+        
     }
     void movement()
     {
@@ -135,15 +133,16 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
-				Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+
                 else
                 {
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
-                }            }
+                }
 
-
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                yield return new WaitForSeconds(shootRate);
+                isShooting = false;
+            }
         }
     }
 
@@ -233,7 +232,7 @@ public class PlayerController : MonoBehaviour
         selectedGun = gunList.Count - 1;
     }    
  
-    }i
+    
 
 
    public List<gunStats> GunList
@@ -241,6 +240,7 @@ public class PlayerController : MonoBehaviour
         get { return gunList; }
         set { gunList = value; }
     }
+
     void gunSelect()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
