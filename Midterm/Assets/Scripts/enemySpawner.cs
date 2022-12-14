@@ -16,14 +16,15 @@ public class enemySpawner : MonoBehaviour
 {
     public Wave[] waves;
     public Transform[] enemySpawnPoints;
-    public int currentWaveNum;
+    private int currentWaveNum;
 
     private bool canSpawn = true;
     private bool canSpawnWave = true;
     private float nextSpawnTime;
     private Wave currentWave;
-
-
+    [SerializeField] bool turnOnTimer;
+    [SerializeField] float waveTime;
+    [SerializeField] float waveTimeMax;
     private void Start()
     {
         //Updates Number of Enemies in Game Manager
@@ -38,34 +39,33 @@ public class enemySpawner : MonoBehaviour
 
     }
 
-    
-
-
     private void Update()
     {
+        //If Set Waves are Zero, Don't Spawn
         if (waves.Length == 0)
         {
             canSpawnWave = false;
         }
 
+        //Else Spawn
         else if (waves.Length > 0 && canSpawnWave)
         {
             currentWave = waves[currentWaveNum];
             SpawnWave();
         }
 
-
-
-        if (gameManager.instance.EnemiesInWaveCount == 0 && !canSpawn && currentWaveNum + 1 != waves.Length && gameManager.instance.TotalEnemyCount > 0 && !gameManager.instance.isPaused && canSpawnWave)
+        //If All Enemies in Wave are Killed, Spawn Next Wave
+        if (gameManager.instance.EnemiesInWaveCount == 0 && !canSpawn && currentWaveNum + 1 != waves.Length && gameManager.instance.TotalEnemyCount > 0  && canSpawnWave)
         {
-            currentWaveNum++;
-            canSpawn = true;
+            Debug.Log("Spawning Next Wave");
+            waveTimer();
+
         }
     }
 
     public void SpawnWave()
     {
-        if (canSpawn && nextSpawnTime < Time.time)
+        if (canSpawn && nextSpawnTime < Time.time && !gameManager.instance.isPaused)
         {
             Transform randomPosition = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)];
             Instantiate(currentWave.Enemy, randomPosition.position, transform.rotation);
@@ -81,5 +81,23 @@ public class enemySpawner : MonoBehaviour
         }
 
     }
+
+    private void waveTimer()
+    {
+        if (turnOnTimer)
+        {
+            gameManager.instance.Timer = waveTime;
+            waveTime -= Time.deltaTime;
+            Debug.Log(waveTime);
+            if (waveTime < 0f)
+            {
+                currentWaveNum++;
+                canSpawn = true;
+                waveTime = waveTimeMax;
+                turnOnTimer = false;
+            }
+        }
+    }
 }
+
 

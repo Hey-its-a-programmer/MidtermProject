@@ -5,14 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 public class shopUI : MonoBehaviour
 {
+    //Made Into Singlton
+    //Couldn't get reference of object in Shop UI without it.
+    //Probably should be in Game Manager
     public static shopUI instance;
     [SerializeField] private GameObject shopInterface;
-    public TextMeshProUGUI shopGunName;
+    [SerializeField] TextMeshProUGUI shopGunName;
     [SerializeField] private GameObject pressE;
     private bool triggerActive = false;
-    public GameObject gunShopModel;
-    public gunStats[] gunSelection;
-    public int shopIterator;
+    [SerializeField] GameObject gunShopModel;
+    [SerializeField] gunStats[] gunSelection;
+    private int shopIterator;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,7 +38,11 @@ public class shopUI : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel") && gameManager.instance.activeMenu == shopInterface)
         {
-            turnOffShopUI();
+            
+            gameManager.instance.activeMenu.SetActive(false);
+            Cursor.visible = false;
+            gameManager.instance.turnCameraOn = true;
+            pressE.SetActive(true);
         }
     }
 
@@ -46,16 +53,13 @@ public class shopUI : MonoBehaviour
 
     }
 
-
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             if (gameManager.instance.activeMenu != null)
             {
-                gameManager.instance.activeMenu.SetActive(false);
-                gameManager.instance.activeMenu = null;
+                turnOffShopUI();
             }
             triggerActive = false;
             pressE.SetActive(false);
@@ -85,8 +89,6 @@ public class shopUI : MonoBehaviour
         gameManager.instance.activeMenu.SetActive(false);
         gameManager.instance.activeMenu = null;
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        pressE.SetActive(true);
         gameManager.instance.turnCameraOn = true;
     }
 
@@ -114,6 +116,11 @@ public class shopUI : MonoBehaviour
 
     public void buy()
     {
-        gameManager.instance.playerScript.gunPickup(gunSelection[shopIterator]);
+        if (gunSelection[shopIterator].gunPrice <= gameManager.instance.playerScript.coins && 0 <= gameManager.instance.playerScript.coins - gunSelection[shopIterator].gunPrice )
+        {
+            gameManager.instance.playerScript.coins -= gunSelection[shopIterator].gunPrice;
+            gameManager.instance.playerScript.gunPickup(gunSelection[shopIterator]);
+        }
+
     }
 }

@@ -15,7 +15,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
-
+    [SerializeField] int coinValueMin;
+    [SerializeField] int coinValueMax;
     //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
     [SerializeField] int pushBackTime;
@@ -25,10 +26,11 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
 
-    [Header("----- Enemy ui-----")]
+    [Header("----- Enemy UI-----")]
     [SerializeField] Image enemyHPbar;
     [SerializeField] GameObject UI;
-[Header("-------Enemy Audio-------")]
+
+    [Header("-------Enemy Audio-------")]
     [SerializeField] AudioSource enemyAud;
 
     //sound for when enemy shoots
@@ -46,8 +48,9 @@ public class enemyAI : MonoBehaviour, IDamage
     bool playerInRange;
     Vector3 playerDir;
     bool isMoving;
-    Vector3 pushBack;
-    Vector3 enemyMovement;    // Start is called before the first frame update
+    //Vector3 pushBack;
+    //Vector3 enemyMovement;    
+    // Start is called before the first frame update
     void Start()
     {
         HPOrg = HP;
@@ -65,12 +68,14 @@ public class enemyAI : MonoBehaviour, IDamage
                 // if the enemy is standing still, this sound won't play
                 StartCoroutine(EnemySteps());
             }
-            enemyVelocity.y = 0.0f;
-            agent.Move((enemyVelocity + pushBack) * Time.deltaTime);
-        }        if (!gameManager.instance.isPaused)
-        {
-            pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
+            //enemyVelocity.y = 0.0f;
+           // agent.Move((enemyVelocity + pushBack) * Time.deltaTime);
         }
+        
+        //if (!gameManager.instance.isPaused)
+        //{
+        //    pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
+        //}
     }
     void facePlayer()
     {
@@ -123,26 +128,15 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    public int getEnemyHealth()
-    {
-        return HP;
-    }
-
-    public void setEnemyHealth(int setHealth)
-    {
-        HP = setHealth;
-    }
-
     public void takeDamage(int dmg)
     {
-
-        agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
-
+        HP -= dmg;
         if (HP <= 0)
         {
             gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
+            gameManager.instance.playerScript.coins = Random.Range(coinValueMin, coinValueMax);
             Destroy(gameObject);
         }
     }
@@ -186,9 +180,9 @@ public class enemyAI : MonoBehaviour, IDamage
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
 
     }
-    public void pushBackInput(Vector3 direction)
-    {
-        pushBack = direction;
+    //public void pushBackInput(Vector3 direction)
+    //{
+    //    pushBack = direction;
 
-    }
+    //}
 }

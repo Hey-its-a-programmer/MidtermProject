@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
     [SerializeField] int pushBackTime;
-
+    public int coins;
     [Header("-----Gun Stats-----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] float shootRate;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
+
     [Header("-------Player Audio-------")]
 
     //code from class
@@ -46,21 +47,23 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
 
-    bool isShooting;
-    bool isSprinting;
-    float speedOrig;
-    bool isMoving;
+    private bool isShooting;
+    private bool isSprinting;
+    private float speedOrig;
+    private bool isMoving;
 
-    int timesJumped;
+    private int timesJumped;
     private Vector3 playerVelocity;
-    Vector3 move;
-    int HPOrig;
-    int selectedGun;
-    Vector3 pushBack;
+    private Vector3 move;
+    private int HPOrig;
+    private int selectedGun;
+    private Vector3 pushBack;
+    private int coinsOriginal;
     private void Start()
     {
         speedOrig = playerSpeed;
         HPOrig = HP;
+        coinsOriginal = coins;
         setPlayerPos();
     }
 
@@ -69,26 +72,23 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
-
-
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
                 StartCoroutine(PlayerSteps());
-            }            if (gunList.Count > 0)
+            }
+
+            if (gunList.Count > 0)
             {
                 StartCoroutine(shoot());
                 gunSelect();
             }
 
-           }
- 
-           
-
-        
+        }
     }
+
     void movement()
     {
         if (controller.isGrounded && playerVelocity.y < 0)
@@ -134,10 +134,7 @@ public class PlayerController : MonoBehaviour
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
 
-                else
-                {
-                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
-                }
+                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
 
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
@@ -179,6 +176,11 @@ public class PlayerController : MonoBehaviour
     public void resetPlayerHP()
     {
         HP = HPOrig;
+    }
+
+    public void resetPlayerCoins()
+    {
+        coins = coinsOriginal;
     }
 
     public void playerSprint()
@@ -232,9 +234,6 @@ public class PlayerController : MonoBehaviour
         selectedGun = gunList.Count - 1;
     }    
  
-    
-
-
    public List<gunStats> GunList
     {
         get { return gunList; }
@@ -255,8 +254,6 @@ public class PlayerController : MonoBehaviour
             changeGun();
         }
     }
-
-
 
     void changeGun()
     {
