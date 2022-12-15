@@ -53,6 +53,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] public AudioClip hitEnemyAudio;
     [Range(0, 1)] [SerializeField] public float hitEnemyVolume;
 
+    //shop theme
+    [SerializeField] public AudioClip shopMusic;
+    [Range(0, 1)] [SerializeField] public float shopMusicVolume;
+
 
     [Header("----- Other Functions -----")]
     public bool isPaused;
