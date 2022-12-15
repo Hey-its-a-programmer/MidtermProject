@@ -138,8 +138,8 @@ public class PlayerController : MonoBehaviour
 
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
-                isShooting = false;
             }
+            isShooting = false;
         }
     }
 
