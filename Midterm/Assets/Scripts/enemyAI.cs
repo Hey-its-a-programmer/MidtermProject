@@ -19,8 +19,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int coinValueMax;
     //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
-    [SerializeField] int pushBackTime;
-    [SerializeField] Vector3 enemyVelocity;
+    //[SerializeField] int pushBackTime;
+    //[SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
@@ -130,8 +130,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int dmg)
     {
-        StartCoroutine(flashDamage());
+
         HP -= dmg;
+        StartCoroutine(flashDamage());
         if (HP <= 0)
         {
             gameManager.instance.EnemiesInWaveCount--;
