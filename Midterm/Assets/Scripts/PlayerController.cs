@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     private int coinsOriginal;
     private void Start()
     {
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;

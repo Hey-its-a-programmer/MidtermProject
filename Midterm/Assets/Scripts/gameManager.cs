@@ -21,7 +21,8 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
-
+    [SerializeField] TextMeshProUGUI playerMoney;
+    public TextMeshProUGUI waveNameText;
 
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
@@ -74,11 +75,14 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        waveTimerText.text = BetweenWaveTimer.ToString("F0");
+        playerMoney.text = playerScript.coins.ToString("F0");
         //AJ changes
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
         //
         UpdateVolume();
-        waveTimerText.text = BetweenWaveTimer.ToString("F0");
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -99,6 +103,7 @@ public class gameManager : MonoBehaviour
                 unPause();
             }
         }
+
     }
 
     public void pause()
@@ -106,6 +111,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+       
     }
 
     public void unPause()

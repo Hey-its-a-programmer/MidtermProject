@@ -153,7 +153,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
-            gameManager.instance.playerScript.coins = Random.Range(coinValueMin, coinValueMax);
+            gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
             Destroy(gameObject);
         }
     }

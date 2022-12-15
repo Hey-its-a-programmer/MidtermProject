@@ -53,6 +53,7 @@ public class enemySpawner : MonoBehaviour
         else if (waves.Length > 0 && canSpawnWave)
         {
             currentWave = waves[currentWaveNum];
+            gameManager.instance.waveNameText.text = currentWave.waveName.ToString();
             if (countWave)
             {
                 gameManager.instance.EnemiesInWaveCount = currentWave.numberOfEnemies;

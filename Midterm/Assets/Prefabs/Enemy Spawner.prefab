@@ -44,3 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28031642c8c8bf4c86385564db6177d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - waveName: 1
+    numberOfEnemies: 3
+    spawnRateInterval: 0
+    typeOfEnemies:
+    - {fileID: 5684327520420555001, guid: 5ba5bda24f3af214ba197cb9cdaf0e85, type: 3}
+    - {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+    - {fileID: 5684327520420555001, guid: 13685189c5461bf4fbb5eec8e9513e1b, type: 3}
+  - waveName: 2
+    numberOfEnemies: 3
+    spawnRateInterval: 0
+    typeOfEnemies:
+    - {fileID: 5684327520420555001, guid: 5ba5bda24f3af214ba197cb9cdaf0e85, type: 3}
+    - {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
+    - {fileID: 5684327520420555001, guid: 13685189c5461bf4fbb5eec8e9513e1b, type: 3}
+  enemySpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  turnOnTimer: 1
+  waveTime: 10

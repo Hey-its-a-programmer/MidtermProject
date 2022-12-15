@@ -813,7 +813,7 @@ GameObject:
   - component: {fileID: 5684327520413260627}
   - component: {fileID: 1031781482}
   m_Layer: 6
-  m_Name: Enemy 1
+  m_Name: Enemy norm
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,12 +851,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5684327520417375629}
   agent: {fileID: 5684327520413260624}
-  HP: 3
+  HP: 6
   playerFaceSpeed: 6
-  coinValueMin: 0
-  coinValueMax: 0
+  coinValueMin: 5
+  coinValueMax: 25
   headPos: {fileID: 5684327520420459691}
-  shootRate: 0.5
+  shootRate: 1
   bullet: {fileID: 1314157197975682883, guid: 9d743180cde45d241b1b7ebb68f284b2, type: 3}
   shootPos: {fileID: 4254271613273178818}
   enemyHPbar: {fileID: 1152841530157722430}
@@ -906,7 +906,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -928,7 +928,7 @@ Animator:
   m_GameObject: {fileID: 5684327520420555001}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f4209d51d1ad0434299f2d498ee076ba, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b76edc5301427042a3eb7a98339ec76, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

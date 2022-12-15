@@ -136,14 +136,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6314567623037541289}
   HP: 100
-  playerSpeed: 8
-  sprintSpeed: 5
+  playerSpeed: 5
+  sprintSpeed: 2
   jumpHeight: 8
   gravityValue: 25
   jumpMax: 1
   pushBackTime: 3
   coins: 0
-  gunList: []
+  gunList:
+  - {fileID: 11400000, guid: 12eda9e56c7ce4c48b2487abf3a3de18, type: 2}
   shootRate: 0.5
   shootDamage: 1
   shootDist: 50
@@ -429,8 +430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f42d5572553e5645af30295fb8a7c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensHori: 300
-  sensVert: 300
+  sensHori: 200
+  sensVert: 200
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
