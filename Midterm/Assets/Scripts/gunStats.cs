@@ -9,6 +9,7 @@ public class gunStats : ScriptableObject
     public float shootRate;
     public int shootDamage;
     public int shootDist;
+    public int gunPrice;
     public GameObject gunModel;
 
 }

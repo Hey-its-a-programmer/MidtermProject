@@ -16,15 +16,15 @@ public class PlayerController : MonoBehaviour
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
     [SerializeField] int pushBackTime;
-
+    public int coins;
     [Header("-----Gun Stats-----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
+    [SerializeField] GameObject hitEffect;
 
-    int selectedGun;
     [Header("-------Player Audio-------")]
 
     //code from class
@@ -47,21 +47,23 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
 
-    bool isShooting;
-    bool isSprinting;
-    float speedOrig;
-    bool isMoving;
+    private bool isShooting;
+    private bool isSprinting;
+    private float speedOrig;
+    private bool isMoving;
 
-    int timesJumped;
+    private int timesJumped;
     private Vector3 playerVelocity;
-    Vector3 move;
-    int HPOrig;
-    Vector3 pushBack;
-
+    private Vector3 move;
+    private int HPOrig;
+    private int selectedGun;
+    private Vector3 pushBack;
+    private int coinsOriginal;
     private void Start()
     {
         speedOrig = playerSpeed;
         HPOrig = HP;
+        coinsOriginal = coins;
         setPlayerPos();
     }
 
@@ -77,8 +79,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(PlayerSteps());
             }
-            StartCoroutine(shoot());
-            playerSprint();
+
             if (gunList.Count > 0)
             {
                 StartCoroutine(shoot());
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+
     void movement()
     {
         if (controller.isGrounded && playerVelocity.y < 0)
@@ -131,15 +133,13 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
-                else
-                {
-                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
-                }
+
+                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
+
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                yield return new WaitForSeconds(shootRate);
+                isShooting = false;
             }
-
-
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
         }
     }
 
@@ -178,16 +178,25 @@ public class PlayerController : MonoBehaviour
         HP = HPOrig;
     }
 
+    public void resetPlayerCoins()
+    {
+        coins = coinsOriginal;
+    }
+
     public void playerSprint()
     {
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
+
             if (!isSprinting)
             {
                 playerSpeed = playerSpeed + sprintSpeed;
+
                 isSprinting = true;
             }
         }
+
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             playerSpeed = speedOrig;
@@ -221,12 +230,11 @@ public class PlayerController : MonoBehaviour
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
-    }
-
-    public List<gunStats> GunList
+    }    
+ 
+   public List<gunStats> GunList
     {
         get { return gunList; }
         set { gunList = value; }
@@ -246,8 +254,6 @@ public class PlayerController : MonoBehaviour
             changeGun();
         }
     }
-
-
 
     void changeGun()
     {

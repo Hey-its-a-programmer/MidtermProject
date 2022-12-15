@@ -19,21 +19,13 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject playerFlashDamage;
     public Image playerHPBar;
+    [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
 
 
-    [Header("----- Enemy Waves-----")]
-
-
-
-    private int totalEnemyCount;
-    private int enemiesInWaveCount;
-
- 
-
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
-    [Range(0, 1)] [SerializeField] public float masterVolume = AudioListener.volume;
+    [Range(0, 1)] [SerializeField] public float masterVolume;
 
     // fanfare for when player wins, game over for when player loses
     [SerializeField] AudioClip winMusic;
@@ -64,12 +56,16 @@ public class gameManager : MonoBehaviour
     public GameObject playerSpawnPos;
     public bool turnCameraOn;
 
+    private int totalEnemyCount;
+    private int enemiesInWaveCount;
+    private float timer;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        masterVolume = AudioListener.volume;
         //enemy = GameObject.FindGameObjectWithTag("Enemy");
         //enemyScript = enemy.GetComponent<enemyAI>();
         timeScaleOrig = Time.timeScale;
@@ -80,6 +76,7 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         UpdateVolume();
+        //waveTimerText.text = Timer.ToString();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -96,6 +93,7 @@ public class gameManager : MonoBehaviour
             {
                 // plays unpause sound
                 gameManagerAud.PlayOneShot(unpauseSound, unpauseSoundVolume);
+
                 unPause();
             }
         }
@@ -135,19 +133,20 @@ public class gameManager : MonoBehaviour
 
     public int EnemiesInWaveCount
     {
- 
+
         get { return enemiesInWaveCount; }
         set { enemiesInWaveCount = value; }
     }
 
-
-
+    public float Timer
+    {
+        get { return timer; }
+        set { timer = value; }
+    }
     public int TotalEnemyCount
     {
-
         get {return totalEnemyCount;}
         set {totalEnemyCount = value;}
-
     }
 
     public void updateEnemyCount(int amount)
