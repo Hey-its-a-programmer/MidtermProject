@@ -74,7 +74,6 @@ public class shopUI : MonoBehaviour
 
     private void turnOnShopUI()
     {
-
         shopActions();
         pressE.SetActive(false);
         Cursor.visible = true;
@@ -82,10 +81,14 @@ public class shopUI : MonoBehaviour
         gameManager.instance.turnCameraOn = false;
         setGunModel(shopIterator);
         shopGunName.text = gunSelection[shopIterator].gunName.ToString();
+        gameManager.instance.gameManagerAud.loop = true;
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.shopMusic, gameManager.instance.shopMusicVolume);
     }
 
     private void turnOffShopUI()
     {
+        gameManager.instance.gameManagerAud.loop = false;
+        gameManager.instance.gameManagerAud.Stop();
         gameManager.instance.activeMenu.SetActive(false);
         gameManager.instance.activeMenu = null;
         Cursor.visible = false;

@@ -3317,13 +3317,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerScript: {fileID: 0}
-  enemyScript: {fileID: 0}
   pauseMenu: {fileID: 8799309933630551337}
   activeMenu: {fileID: 0}
   winMenu: {fileID: 1871408964814732884}
   loseMenu: {fileID: 8072665790323617477}
   playerFlashDamage: {fileID: 4861831035117757210}
   playerHPBar: {fileID: 0}
+  waveTimerText: {fileID: 0}
   enemyRemaining: {fileID: 0}
   gameManagerAud: {fileID: 7949343224914869358}
   masterVolume: 1
@@ -3342,9 +3342,11 @@ MonoBehaviour:
   hitWallVolume: 0.5
   hitEnemyAudio: {fileID: 8300000, guid: c08b8d5666750f14da21d33b9e3880ab, type: 3}
   hitEnemyVolume: 0.5
+  shopMusic: {fileID: 8300000, guid: 1dab3c9cbefb7f94797513a19d1977d8, type: 3}
+  shopMusicVolume: 0.493
   isPaused: 0
   playerSpawnPos: {fileID: 0}
-  turnCameraOn: 0
+  turnCameraOn: 1
 --- !u!82 &7949343224914869358
 AudioSource:
   m_ObjectHideFlags: 0
