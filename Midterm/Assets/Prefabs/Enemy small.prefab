@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4254271613273178813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.08, y: 0.12, z: 0.202}
+  m_LocalPosition: {x: -1.501, y: -0.192, z: 0.202}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -828,7 +828,7 @@ Transform:
   m_GameObject: {fileID: 5684327520420555001}
   m_LocalRotation: {x: 0, y: 0.99933255, z: -0, w: -0.036530275}
   m_LocalPosition: {x: 38, y: 0, z: 46.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.63761, y: 0.63761, z: 0.63761}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5684327520420459693}
@@ -851,6 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5684327520417375629}
   agent: {fileID: 5684327520413260624}
+  anim: {fileID: 5684327520413260621}
   HP: 3
   playerFaceSpeed: 6
   coinValueMin: 5
@@ -928,7 +929,7 @@ Animator:
   m_GameObject: {fileID: 5684327520420555001}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f4209d51d1ad0434299f2d498ee076ba, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c9ace1da67c344340af7f6202dc901e9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
