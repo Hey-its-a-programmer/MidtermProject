@@ -192,11 +192,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
         isMoving = false;
     }
-    public void enemyHP()
+    /*public void enemyHP()
     {
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
 
-    }
+    }*/
 
     //change
     public void updateEnemyHPBar()
