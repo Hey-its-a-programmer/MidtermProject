@@ -10,7 +10,7 @@ public class gameManager : MonoBehaviour
     [Header("----- Player Stuff -----")]
     public GameObject player;
     public PlayerController playerScript;
-    public enemyAI enemyScript;
+    //public enemyAI enemyScript;
 
     [Header("----- UI Stuff -----")]
     public GameObject pauseMenu;
