@@ -11,6 +11,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
@@ -68,6 +69,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
         if (playerInRange)
         {
             canSeePlayer();
