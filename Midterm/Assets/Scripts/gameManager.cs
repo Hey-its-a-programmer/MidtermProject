@@ -56,7 +56,7 @@ public class gameManager : MonoBehaviour
 
     private int totalEnemyCount;
     private int enemiesInWaveCount;
-    private float timer;
+    private float betweenWaveTimer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -75,7 +75,7 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         UpdateVolume();
-        //waveTimerText.text = Timer.ToString();
+        waveTimerText.text = BetweenWaveTimer.ToString("F0");
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -137,10 +137,10 @@ public class gameManager : MonoBehaviour
         set { enemiesInWaveCount = value; }
     }
 
-    public float Timer
+    public float BetweenWaveTimer
     {
-        get { return timer; }
-        set { timer = value; }
+        get { return betweenWaveTimer; }
+        set { betweenWaveTimer = value; }
     }
     public int TotalEnemyCount
     {
