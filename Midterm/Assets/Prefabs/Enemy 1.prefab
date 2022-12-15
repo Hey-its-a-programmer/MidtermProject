@@ -852,15 +852,17 @@ MonoBehaviour:
   agent: {fileID: 5684327520413260624}
   HP: 3
   playerFaceSpeed: 6
-  sightAngle: 45
+  coinValueMin: 0
+  coinValueMax: 0
   headPos: {fileID: 5684327520420459691}
-  pushBackTime: 3
   shootRate: 0.5
   bullet: {fileID: 1314157197975682883, guid: 9d743180cde45d241b1b7ebb68f284b2, type: 3}
   shootPos: {fileID: 4254271613273178818}
+  enemyHPbar: {fileID: 0}
+  UI: {fileID: 0}
   enemyAud: {fileID: 1031781482}
   gunShotClip: {fileID: 8300000, guid: 918be8c31a0fb204e9f4528862cc5d9a, type: 3}
-  gunShotVolume: 0
+  gunShotVolume: 0.477
   enemyHurtAudio:
   - {fileID: 8300000, guid: 00b702252ab18a440a243eb61376dc13, type: 3}
   - {fileID: 8300000, guid: de5a1ceb9544c154c8258af1401a0d02, type: 3}
@@ -868,7 +870,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0485e94a31b1d048aff18c3fd5c9350, type: 3}
   - {fileID: 8300000, guid: 412838263fb50344282217cf519e67f8, type: 3}
   - {fileID: 8300000, guid: 61e7b371e02e23d4aac3dc3846b96e3b, type: 3}
-  enemyHurtVolume: 0
+  enemyHurtVolume: 0.472
   enemyStepAudio:
   - {fileID: 8300000, guid: c0998453d2278f34c9cace9337a67534, type: 3}
   - {fileID: 8300000, guid: a825af4b7253b954f99efccc40c244d3, type: 3}
@@ -879,7 +881,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74da2ec383718224aaffb0b45f5c4b38, type: 3}
   - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
-  enemyStepVolume: 0
+  enemyStepVolume: 0.45
 --- !u!135 &5684327520413260625
 SphereCollider:
   m_ObjectHideFlags: 0
