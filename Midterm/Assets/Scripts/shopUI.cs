@@ -8,6 +8,7 @@ public class shopUI : MonoBehaviour
     //Made Into Singlton
     //Couldn't get reference of object in Shop UI without it.
     //Probably should be in Game Manager
+    [SerializeField] AudioSource shopAud;
     public static shopUI instance;
     [SerializeField] private GameObject shopInterface;
     [SerializeField] TextMeshProUGUI shopGunName;
@@ -17,6 +18,10 @@ public class shopUI : MonoBehaviour
     [SerializeField] GameObject gunShopModel;
     [SerializeField] gunStats[] gunSelection;
     private int shopIterator;
+
+    //shop theme
+    [SerializeField] public AudioClip shopMusic;
+    [Range(0, 1)] [SerializeField] public float shopMusicVolume;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -44,6 +49,7 @@ public class shopUI : MonoBehaviour
             Cursor.visible = false;
             gameManager.instance.turnCameraOn = true;
             pressE.SetActive(true);
+            shopAud.Stop();
         }
     }
 
@@ -82,14 +88,12 @@ public class shopUI : MonoBehaviour
         gameManager.instance.turnCameraOn = false;
         setGunModel(shopIterator);
         setGunText();
-        gameManager.instance.gameManagerAud.loop = true;
-        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.shopMusic, gameManager.instance.shopMusicVolume);
+        shopAud.loop = true;
+        shopAud.PlayOneShot(shopMusic, shopMusicVolume);
     }
 
     private void turnOffShopUI()
     {
-        gameManager.instance.gameManagerAud.loop = false;
-        gameManager.instance.gameManagerAud.Stop();
         gameManager.instance.activeMenu.SetActive(false);
         gameManager.instance.activeMenu = null;
         Cursor.visible = false;
