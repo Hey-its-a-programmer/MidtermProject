@@ -9,7 +9,7 @@ public class Wave
     public string waveName;
     public int numberOfEnemies;
     public float spawnRateInterval;
-    public GameObject Enemy;
+    public GameObject[] typeOfEnemies;
 }
 
 public class enemySpawner : MonoBehaviour
@@ -24,9 +24,11 @@ public class enemySpawner : MonoBehaviour
     private Wave currentWave;
     [SerializeField] bool turnOnTimer;
     [SerializeField] float waveTime;
-    [SerializeField] float waveTimeMax;
+    private float waveTimeMax;
+    private bool countWave = true;
     private void Start()
     {
+        waveTimeMax = waveTime;
         //Updates Number of Enemies in Game Manager
         if (waves.Length > 0)
         {
@@ -51,13 +53,18 @@ public class enemySpawner : MonoBehaviour
         else if (waves.Length > 0 && canSpawnWave)
         {
             currentWave = waves[currentWaveNum];
+            if (countWave)
+            {
+                gameManager.instance.EnemiesInWaveCount = currentWave.numberOfEnemies;
+            }
+            countWave = false;
             SpawnWave();
         }
-
         //If All Enemies in Wave are Killed, Spawn Next Wave
         if (gameManager.instance.EnemiesInWaveCount == 0 && !canSpawn && currentWaveNum + 1 != waves.Length && gameManager.instance.TotalEnemyCount > 0  && canSpawnWave)
         {
             Debug.Log("Spawning Next Wave");
+            countWave = true;
             waveTimer();
 
         }
@@ -67,11 +74,11 @@ public class enemySpawner : MonoBehaviour
     {
         if (canSpawn && nextSpawnTime < Time.time && !gameManager.instance.isPaused)
         {
+            GameObject randomEnemy = currentWave.typeOfEnemies[Random.Range(0, currentWave.typeOfEnemies.Length)];
             Transform randomPosition = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)];
-            Instantiate(currentWave.Enemy, randomPosition.position, transform.rotation);
+            Instantiate(randomEnemy, randomPosition.position, transform.rotation);
 
             currentWave.numberOfEnemies--;
-            gameManager.instance.EnemiesInWaveCount++;
             nextSpawnTime = Time.time + currentWave.spawnRateInterval;
 
             if (currentWave.numberOfEnemies == 0)
@@ -86,7 +93,7 @@ public class enemySpawner : MonoBehaviour
     {
         if (turnOnTimer)
         {
-            gameManager.instance.Timer = waveTime;
+            gameManager.instance.BetweenWaveTimer = waveTime;
             waveTime -= Time.deltaTime;
             Debug.Log(waveTime);
             if (waveTime < 0f)

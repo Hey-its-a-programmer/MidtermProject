@@ -12,6 +12,7 @@ public class shopUI : MonoBehaviour
     public static shopUI instance;
     [SerializeField] private GameObject shopInterface;
     [SerializeField] TextMeshProUGUI shopGunName;
+    [SerializeField] TextMeshProUGUI shopGunPrice;
     [SerializeField] private GameObject pressE;
     private bool triggerActive = false;
     [SerializeField] GameObject gunShopModel;
@@ -43,6 +44,7 @@ public class shopUI : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel") && gameManager.instance.activeMenu == shopInterface)
         {
+            gameManager.instance.gameManagerAud.loop = false;
             gameManager.instance.activeMenu.SetActive(false);
             Cursor.visible = false;
             gameManager.instance.turnCameraOn = true;
@@ -85,9 +87,10 @@ public class shopUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         gameManager.instance.turnCameraOn = false;
         setGunModel(shopIterator);
-        shopGunName.text = gunSelection[shopIterator].gunName.ToString();
+        setGunText();
+        shopAud.clip = shopMusic;
         shopAud.loop = true;
-        shopAud.PlayOneShot(shopMusic, shopMusicVolume);
+        shopAud.Play();
     }
 
     private void turnOffShopUI()
@@ -105,7 +108,7 @@ public class shopUI : MonoBehaviour
         {
             shopIterator++;
             setGunModel(shopIterator);
-            shopGunName.text = gunSelection[shopIterator].gunName.ToString();
+            setGunText();
         }
 
     }
@@ -116,6 +119,7 @@ public class shopUI : MonoBehaviour
         {
             shopIterator--;
             setGunModel(shopIterator);
+            setGunText();
         }
 
     }
@@ -128,5 +132,11 @@ public class shopUI : MonoBehaviour
             gameManager.instance.playerScript.gunPickup(gunSelection[shopIterator]);
         }
 
+    }
+
+    private void setGunText()
+    {
+        shopGunName.text = gunSelection[shopIterator].gunName.ToString();
+        shopGunPrice.text = "Price: " + gunSelection[shopIterator].gunPrice.ToString();
     }
 }
