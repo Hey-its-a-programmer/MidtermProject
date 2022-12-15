@@ -593,6 +593,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5836452254171531438, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: shopMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 1dab3c9cbefb7f94797513a19d1977d8, type: 3}
+    - target: {fileID: 5836452254171531438, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: shopMusicVolume
+      value: 0.459
+      objectReference: {fileID: 0}
     - target: {fileID: 5836452254171531439, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_Name
       value: Shop Collider
