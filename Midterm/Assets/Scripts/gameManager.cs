@@ -63,6 +63,7 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        turnCameraOn = true;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         masterVolume = AudioListener.volume;
