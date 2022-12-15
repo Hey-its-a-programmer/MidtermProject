@@ -88,8 +88,9 @@ public class shopUI : MonoBehaviour
         gameManager.instance.turnCameraOn = false;
         setGunModel(shopIterator);
         setGunText();
+        shopAud.clip = shopMusic;
         shopAud.loop = true;
-        shopAud.PlayOneShot(shopMusic, shopMusicVolume);
+        shopAud.Play();
     }
 
     private void turnOffShopUI()
