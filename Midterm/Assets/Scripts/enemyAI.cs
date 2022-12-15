@@ -43,17 +43,26 @@ public class enemyAI : MonoBehaviour, IDamage
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
-    [Range(0, 1)] [SerializeField] public float enemyStepVolume;    int HPOrg;
+    [Range(0, 1)] [SerializeField] public float enemyStepVolume;   
+    int HPOrg;
     bool isShooting;
     bool playerInRange;
     Vector3 playerDir;
     bool isMoving;
+    //AJ changes
+    float angleToPlayer;
+    //
+
+
     //Vector3 pushBack;
     //Vector3 enemyMovement;    
     // Start is called before the first frame update
     void Start()
     {
         HPOrg = HP;
+        //AJ changes
+        updateEnemyHPBar();
+        //
     }
 
     // Update is called once per frame
@@ -104,7 +113,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         playerDir = (gameManager.instance.player.transform.position - headPos.position);
 
-        //angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         //Debug.Log(angleToPlayer);
         //Debug.DrawRay(headPos.position, playerDir);
@@ -115,7 +124,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
             if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
             {
-                if (!isShooting)
+                //change
+                if (!isShooting && angleToPlayer <= 15)
+                //
                 {
                     StartCoroutine(shoot());
 
@@ -132,7 +143,12 @@ public class enemyAI : MonoBehaviour, IDamage
     {
 
         HP -= dmg;
+        updateEnemyHPBar();
         StartCoroutine(flashDamage());
+        //change
+        UI.gameObject.SetActive(true);
+        //
+
         if (HP <= 0)
         {
             gameManager.instance.EnemiesInWaveCount--;
@@ -181,6 +197,15 @@ public class enemyAI : MonoBehaviour, IDamage
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
 
     }
+
+    //change
+    public void updateEnemyHPBar()
+    {
+        enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
+    }
+    //
+
+
     //public void pushBackInput(Vector3 direction)
     //{
     //    pushBack = direction;

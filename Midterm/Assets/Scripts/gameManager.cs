@@ -74,6 +74,9 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //AJ changes
+        enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
+        //
         UpdateVolume();
         //waveTimerText.text = Timer.ToString();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
