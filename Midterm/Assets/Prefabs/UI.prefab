@@ -4169,7 +4169,7 @@ MonoBehaviour:
   gameManagerAud: {fileID: 7949343224914869358}
   masterVolume: 1
   winMusic: {fileID: 8300000, guid: b13e8438b1ab99d4990a327e6850652f, type: 3}
-  winMusicVolume: 0.5
+  winMusicVolume: 0.49
   loseMusic: {fileID: 8300000, guid: 8e52dc40ee263f343a4551ac04d53a1f, type: 3}
   loseMusicVolume: 0.5
   pauseSound: {fileID: 8300000, guid: 503e7654b0e79b34c8c88b954515cda5, type: 3}
@@ -4183,6 +4183,7 @@ MonoBehaviour:
   hitWallVolume: 0.5
   hitEnemyAudio: {fileID: 8300000, guid: c08b8d5666750f14da21d33b9e3880ab, type: 3}
   hitEnemyVolume: 0.5
+  healthRestoreAudio: {fileID: 8300000, guid: f8f283a0c35fa7e45861397731d27f42, type: 3}
   isPaused: 0
   playerSpawnPos: {fileID: 0}
   turnCameraOn: 0

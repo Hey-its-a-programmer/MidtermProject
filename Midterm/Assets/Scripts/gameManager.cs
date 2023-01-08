@@ -46,7 +46,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] public AudioClip hitEnemyAudio;
     [Range(0, 1)] [SerializeField] public float hitEnemyVolume;
 
-
+    // sound for picking up health kit
+    [SerializeField] public AudioClip healthRestoreAudio;
 
 
     [Header("----- Other Functions -----")]
