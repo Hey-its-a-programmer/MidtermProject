@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
+
+    
+
 
 
     // Start is called before the first frame update
@@ -102,5 +106,7 @@ public class gameManager : MonoBehaviour
     {
         return enemyTotalCount;
     }
+
+
 }
 

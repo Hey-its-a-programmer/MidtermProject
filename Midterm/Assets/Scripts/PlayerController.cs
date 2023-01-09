@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour
     [Header("-----Player Stats-----")]
     [SerializeField] int HP;
 
-    [Range(3, 8)] [SerializeField] float playerSpeed;
-    [Range(1, 5)] [SerializeField] float sprintSpeed;
-    [Range(0, 15)] [SerializeField] int jumpHeight;
-    [Range(15, 35)] [SerializeField] int gravityValue;
-    [Range(0, 3)] [SerializeField] int jumpMax;
+    [Range(3, 8)][SerializeField] float playerSpeed;
+    [Range(1, 5)][SerializeField] float sprintSpeed;
+    [Range(0, 15)][SerializeField] int jumpHeight;
+    [Range(15, 35)][SerializeField] int gravityValue;
+    [Range(0, 3)][SerializeField] int jumpMax;
 
     [Header("-----Gun Stats-----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
@@ -37,37 +37,38 @@ public class PlayerController : MonoBehaviour
     int HPOrig;
     int selectedGun;
 
-    //Ammo Counter
-    public TextMeshProUGUI ammoInfoText;
-    public int currentAmmo;
-    public int maxAmmo = 10;
-    public int magazineSize = 30;
+    
+     [SerializeField] public int currentAmmo;
+     private int maxAmmo = 30;
 
     private void Start()
     {
         speedOrig = playerSpeed;
         HPOrig = HP;
         setPlayerPos();
-
-
+        currentAmmo = 0;
     }
 
     void Update()
     {
-       //gunStats currentGun = FindObjectOfType<gunStats>();
-       // ammoInfoText.text = currentGun.currentAmmo + "/" + currentGun.magazineSize;
         
+
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
+
+             
            movement();
            playerSprint();
            if(gunList.Count > 0)
            {
+              
               StartCoroutine(shoot());
               gunSelect();
 
            }
+
+            
  
            
 
@@ -100,12 +101,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
-        currentAmmo--;//Reduces ammo counter by 1
+        
 
-        if (!isShooting && Input.GetButton("Shoot"))
+        if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
             isShooting = true;
-
+            currentAmmo--;// Brings ammo counter down by -1
             //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                 }
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-
+                
             }
 
             
