@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Doors : MonoBehaviour
 {
-    public GameObject teleportDest;
-    public GameObject player;
-
-    public void OnTriggerEnter(Collider other)
+    public Transform teleportDest;
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Door"))
+        if (other.CompareTag("Player"))
         {
-            player.transform.position = teleportDest.transform.position;
+            gameManager.instance.player.SetActive(false);
+            gameManager.instance.player.transform.position = teleportDest.position;
+            gameManager.instance.player.SetActive(true);
         }
     }
 }

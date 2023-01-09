@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
-    private int restoredHP;
     private void Start()
     {
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
