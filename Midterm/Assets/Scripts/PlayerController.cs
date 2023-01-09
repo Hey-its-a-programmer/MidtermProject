@@ -68,9 +68,7 @@ public class PlayerController : MonoBehaviour
         HPOrig = HP;
         coinsOriginal = coins;
         setPlayerPos();
-        //AJ
         updatePlayerHPbar();
-        //
     }
 
     void Update()
@@ -153,9 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         HP -= dmg;
         playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length)], playerHurtVolume);
-        //AJ
         updatePlayerHPbar();
-        //
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
@@ -185,9 +181,7 @@ public class PlayerController : MonoBehaviour
     public void resetPlayerHP()
     {
         HP = HPOrig;
-        //AJ
         updatePlayerHPbar();
-        //
     }
 
     public void resetPlayerCoins()
@@ -293,10 +287,8 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
-    //AJ changes
     public void updatePlayerHPbar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
-    //
 }
