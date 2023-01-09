@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
         HP += medStat.restoredHP;
+        updatePlayerHPbar();
         if (HP > HPOrig)
         {
             HP = HPOrig;
