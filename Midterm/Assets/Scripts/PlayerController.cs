@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     
      [SerializeField] public int currentAmmo;
-     private int maxAmmo = 30;
+     public int maxAmmo = 30;
 
     private void Start()
     {
