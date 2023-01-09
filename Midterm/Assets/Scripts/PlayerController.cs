@@ -24,6 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] int currentAmmo;
+    [SerializeField] int maxAmmo;
+    
+
+
+
 
     [Header("-------Player Audio-------")]
 
@@ -60,8 +66,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
     private int restoredHP;
+
+   
+
+   
     private void Start()
     {
+        currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
@@ -71,10 +82,16 @@ public class PlayerController : MonoBehaviour
         //AJ
         updatePlayerHPbar();
         //
+      
+        
+        
+        
     }
 
     void Update()
     {
+        
+        
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -93,6 +110,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        
     }
 
     void movement()
@@ -123,19 +141,24 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
-        if (!isShooting && Input.GetButton("Shoot"))
+            
+        
+        if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
+            
             isShooting = true;
-
+            currentAmmo--;//reduces ammo by -1
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
             //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
+                
                 //Instantiate(cube, hit.point, transform.rotation);
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
+                    
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
@@ -145,8 +168,11 @@ public class PlayerController : MonoBehaviour
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
             }
+            
             isShooting = false;
         }
+
+       
     }
 
     public void takeDamage(int dmg)
