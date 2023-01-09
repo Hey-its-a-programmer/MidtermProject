@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
+    private int restoredHP;
     private void Start()
     {
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
@@ -243,7 +244,17 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
-    }    
+    }
+    
+    public void HealthPickup(MedkitStats medStat)
+    {
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
+        HP += medStat.restoredHP;
+        if (HP > HPOrig)
+        {
+            HP = HPOrig;
+        }
+    }
  
    public List<gunStats> GunList
     {
