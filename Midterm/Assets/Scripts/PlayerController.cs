@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [Header("-----Components-----")]
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
 
 
+
     bool isShooting;
     bool isSprinting;
     float speedOrig;
@@ -36,15 +37,26 @@ public class PlayerController : MonoBehaviour
     int HPOrig;
     int selectedGun;
 
+    //Ammo Counter
+    public TextMeshProUGUI ammoInfoText;
+    public int currentAmmo;
+    public int maxAmmo = 10;
+    public int magazineSize = 30;
+
     private void Start()
     {
         speedOrig = playerSpeed;
         HPOrig = HP;
         setPlayerPos();
+
+
     }
 
     void Update()
     {
+       //gunStats currentGun = FindObjectOfType<gunStats>();
+       // ammoInfoText.text = currentGun.currentAmmo + "/" + currentGun.magazineSize;
+        
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -88,6 +100,8 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
+        currentAmmo--;//Reduces ammo counter by 1
+
         if (!isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
@@ -173,6 +187,7 @@ public class PlayerController : MonoBehaviour
     }
     void gunSelect()
     {
+
         if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
             selectedGun++;
@@ -183,6 +198,8 @@ public class PlayerController : MonoBehaviour
             selectedGun--;
             changeGun();
         }
+
+
     }
     void changeGun()
     {
