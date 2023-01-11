@@ -281,7 +281,12 @@ public class PlayerController : MonoBehaviour
             HP = HPOrig;
         }
     }
- 
+
+    public void MoneyPickup(MoneyStats monStat)
+    {
+        coins += monStat.moneyGiven;
+    }
+
    public List<gunStats> GunList
     {
         get { return gunList; }
