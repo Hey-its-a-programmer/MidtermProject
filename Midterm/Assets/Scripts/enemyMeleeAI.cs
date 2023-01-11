@@ -20,19 +20,20 @@ public class enemyMeleeAI : MonoBehaviour
 
     [Header("----- Enemy Melee Stats-----")]
     [SerializeField] float hitRate;
-    [SerializeField] float attackRange;
+    [SerializeField] float attackAngle;
     [SerializeField] GameObject meleeWeapon;
 
     [Header("----- Enemy UI-----")]
+    //UI Needs To Be Fixed For HP Bars To Work
     //[SerializeField] Image enemyHPBar;
     //[SerializeField] GameObject UI;
 
     [Header("-------Enemy Audio-------")]
-    //[SerializeField] AudioSource enemyAud;
+    [SerializeField] AudioSource enemyAud;
 
     //Needs to be changed for melee attack.
-    //[SerializeField] AudioClip gunShotClip;
-    [Range(0, 1)] [SerializeField] public float gunShotVolume;
+    [SerializeField] AudioClip meleeAttackAudtio;
+    [Range(0, 1)] [SerializeField] public float meleeAttackVolume;
 
     // sounds for when enemy is damaged
     [SerializeField] AudioClip[] enemyHurtAudio;
@@ -42,12 +43,11 @@ public class enemyMeleeAI : MonoBehaviour
     [SerializeField] AudioClip[] enemyStepAudio;
     [Range(0, 1)] [SerializeField] public float enemyStepVolume;
 
-
     private int HPOrg;
     private bool isAttacking;
     private Vector3 playerDir;
     private bool isMoving;
-
+    private float distance;
 
     private float angleToPlayer;
     // Start is called before the first frame update
@@ -63,7 +63,6 @@ public class enemyMeleeAI : MonoBehaviour
         anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
         canSeePlayer();
-        agent.SetDestination(gameManager.instance.player.transform.position);
         if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
         {
             StartCoroutine(EnemySteps());
@@ -84,6 +83,7 @@ public class enemyMeleeAI : MonoBehaviour
 
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
+        distance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position);
         //Debug.Log(angleToPlayer);
         Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
@@ -91,15 +91,19 @@ public class enemyMeleeAI : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
             {
-                if (!isAttacking && angleToPlayer <= 15 /*&& distance <= attackRange*/)
+                agent.SetDestination(gameManager.instance.player.transform.position);
+                //transform.LookAt(gameManager.instance.player.transform.position);
+                facePlayer();
+                if (!isAttacking && angleToPlayer <= attackAngle && distance <= agent.stoppingDistance)
                 {
-                    Debug.Log("Attacking");
+                    //Debug.Log("Attacking");
                     StartCoroutine(attack());
-
+                    /*
                     if (agent.remainingDistance <= agent.stoppingDistance)
                     {
                         facePlayer();
                     }
+                    */
                 }
             }
         }
@@ -125,22 +129,31 @@ public class enemyMeleeAI : MonoBehaviour
     IEnumerator flashDamage()
     {
         // plays grunt noise to signal that the enemy took damage
-        //enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
+        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         model.material.color = Color.white;
+    }
+    
+    void attackEntry()
+    {
+        meleeWeapon.GetComponent<BoxCollider>().isTrigger = true;
+        // Needs Melee sounds instead
+        enemyAud.PlayOneShot(meleeAttackAudtio, meleeAttackVolume);
+    }
+
+    void attackExit()
+    {
+        meleeWeapon.GetComponent<BoxCollider>().isTrigger = false;
     }
 
     IEnumerator attack()
     {
         isAttacking = true;
         anim.SetTrigger("Swing");
-        
-        // Needs Melee sounds instead
-        //enemyAud.PlayOneShot(gunShotClip, gunShotVolume);
-
+        attackEntry();
         yield return new WaitForSeconds(hitRate);
-
+        attackExit();
         isAttacking = false;
     }
 
@@ -148,7 +161,7 @@ public class enemyMeleeAI : MonoBehaviour
     {
         isMoving = true;
         //plays footsteps of enemy
-        //enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
+        enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -161,10 +174,4 @@ public class enemyMeleeAI : MonoBehaviour
         enemyHPBar.fillAmount = (float)HP / (float)HPOrg;
     }
     */
-
-    //public void pushBackInput(Vector3 direction)
-    //{
-    //    pushBack = direction;
-
-    //}
 }

@@ -80,18 +80,11 @@ public class PlayerController : MonoBehaviour
         coinsOriginal = coins;
         setPlayerPos();
 
-        updatePlayerHPbar();
-
-      
-        
-        
-        
+        updatePlayerHPbar(); 
     }
 
     void Update()
     {
-        
-        
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -142,8 +135,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator shoot()
     {
 
-            
-        
         if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
             
