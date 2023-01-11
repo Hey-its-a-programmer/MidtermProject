@@ -23,6 +23,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI enemyRemaining;
     [SerializeField] TextMeshProUGUI playerMoney;
     public TextMeshProUGUI waveNameText;
+    [SerializeField] TextMeshProUGUI ammoText;
+  
+
+
+
+
 
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
@@ -59,6 +65,10 @@ public class gameManager : MonoBehaviour
     private int totalEnemyCount;
     private int enemiesInWaveCount;
     private float betweenWaveTimer;
+   
+
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -76,8 +86,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        ammoText.text = playerScript.CurrentAmmo.ToString("F0");
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
         playerMoney.text = playerScript.coins.ToString("F0");
         //AJ changes
@@ -104,6 +113,7 @@ public class gameManager : MonoBehaviour
                 unPause();
             }
         }
+        
 
     }
 
@@ -175,5 +185,8 @@ public class gameManager : MonoBehaviour
     {
         AudioListener.volume = masterVolume;
     }
+   
+  
+   
 }
 

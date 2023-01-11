@@ -12,8 +12,8 @@ public class gunStats : ScriptableObject
     public int gunPrice;
     public GameObject gunModel;
     public AudioClip gunshot;
-    public int currentAmmo;
     public int maxAmmo;
+    
 }
    
 
