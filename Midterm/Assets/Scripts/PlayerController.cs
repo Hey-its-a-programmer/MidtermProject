@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     private bool isSprinting;
     private float speedOrig;
     private bool isMoving;
-
+    private int maxAmmo;
     private int currentAmmo;
     private int timesJumped;
     private Vector3 playerVelocity;
