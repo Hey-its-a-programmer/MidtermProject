@@ -20,7 +20,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int coinValueMax;
     //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
-    [SerializeField] Transform moneySpawnPos;
+    [SerializeField] Transform dropSpawnPos;
     //[SerializeField] int pushBackTime;
     //[SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
@@ -49,6 +49,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [Header("-------Drops-------")]
     [SerializeField] GameObject money;
+    [SerializeField] GameObject ammo;
     int HPOrg;
     bool isShooting;
     bool playerInRange;
@@ -141,20 +142,30 @@ public class enemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             Destroy(gameObject);
-            DropMoney();
+            Drop();
             gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
         }
     }
 
-    void DropMoney()
+    void Drop()
     {
-        if (Random.Range(0.0f, 100.0f) == 50.0f)
+        // 50% chance to drop money
+        if (Random.Range(0.0f, 100.0f) >= 50.0f)
         {
-            Vector3 dropPos = moneySpawnPos.position;
-            GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), moneySpawnPos.rotation);
+            Vector3 dropPos = dropSpawnPos.position;
+            GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
             cash.SetActive(true);
             Destroy(cash, 5.0f);
+        }
+
+        // 80% chance to drop ammo
+        if (Random.Range(0.0f, 100.0f) <= 80.0f)
+        {
+            Vector3 dropPos = dropSpawnPos.position;
+            GameObject ammunition = Instantiate(ammo, dropPos + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            ammunition.SetActive(true);
+            Destroy(ammunition, 5.0f);
         }
     }
 

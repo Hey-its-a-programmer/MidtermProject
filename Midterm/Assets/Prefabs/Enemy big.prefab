@@ -858,7 +858,7 @@ MonoBehaviour:
   coinValueMin: 5
   coinValueMax: 25
   headPos: {fileID: 5684327520420459691}
-  moneySpawnPos: {fileID: 6596929588218208052}
+  dropSpawnPos: {fileID: 6596929588218208052}
   shootRate: 2
   bullet: {fileID: 7518777034221808561, guid: 32c67e549c980aa4dafb689cad2fde00, type: 3}
   shootPos: {fileID: 4254271613273178818}
@@ -887,6 +887,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
   enemyStepVolume: 0
   money: {fileID: 5569831550653876981, guid: b6d2f35fa13912745ad536f7ec0d110b, type: 3}
+  ammo: {fileID: 1900789991929956317, guid: 0cb4ae77d4d8710458ceaa8dc0887f2d, type: 3}
 --- !u!135 &5684327520413260625
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1201,7 +1202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6596929588218208052}
   m_Layer: 6
-  m_Name: Money Spawn
+  m_Name: Drops Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

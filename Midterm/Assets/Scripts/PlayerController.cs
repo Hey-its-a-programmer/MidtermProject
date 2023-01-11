@@ -286,6 +286,10 @@ public class PlayerController : MonoBehaviour
             }
             updatePlayerHPbar();
         }
+        else
+        {
+            gameObject.GetComponent<SphereCollider>().isTrigger = false;
+        }
     }
 
     public void MoneyPickup(MoneyStats monStat)
@@ -296,12 +300,19 @@ public class PlayerController : MonoBehaviour
 
     public void AmmoPickup(AmmoStats ammoStat)
     {
-        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.ammoRestoreAudio);
-        currentAmmo += ammoStat.restoredAmmo;
-
-        if (currentAmmo > maxAmmo)
+        if (currentAmmo < maxAmmo)
         {
-            currentAmmo = maxAmmo;
+            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.ammoRestoreAudio);
+            currentAmmo += ammoStat.restoredAmmo;
+
+            if (currentAmmo > maxAmmo)
+            {
+                currentAmmo = maxAmmo;
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<BoxCollider>().isTrigger = false;
         }
     }
    public List<gunStats> GunList
