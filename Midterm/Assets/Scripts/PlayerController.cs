@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     [Header("-----Components-----")]
@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     [Range(0, 15)] [SerializeField] int jumpHeight;
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
+    [SerializeField] float crouchHeight;
+    [SerializeField] float crouchTime;
     [SerializeField] int pushBackTime;
     public int coins;
+
     [Header("-----Gun Stats-----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] float shootRate;
@@ -25,11 +28,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
-
-    
-
-
-
 
     [Header("-------Player Audio-------")]
 
@@ -67,13 +65,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
     private int restoredHP;
-    
-
-   
-
+    private bool isCrouching;
+    private float originalPlayerHeight;
    
     private void Start()
     {
+        originalPlayerHeight = controller.height;
         maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
@@ -92,6 +89,8 @@ public class PlayerController : MonoBehaviour
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
+            playerSprint();
+            playerCrouch();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
@@ -121,7 +120,6 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * Time.deltaTime * playerSpeed);
 
 
-
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && timesJumped < jumpMax)
         {
@@ -129,7 +127,6 @@ public class PlayerController : MonoBehaviour
             timesJumped++;
             playerAud.PlayOneShot(playerJumpAudio[Random.Range(0, playerJumpAudio.Length)], playerJumpVolume);
         }
-
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move((playerVelocity + pushBack) * Time.deltaTime);
     }
@@ -316,17 +313,28 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
-
     public void updatePlayerHPbar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
-
-    
-
     public int CurrentAmmo
     {
         get { return currentAmmo; }
         set { currentAmmo = value; }
+    }
+
+    void playerCrouch()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && !isCrouching && controller.isGrounded)
+        {
+            isCrouching = true;
+            controller.height = Mathf.Lerp(controller.height, crouchHeight, crouchTime);
+        }
+
+        else if(!Input.GetKey(KeyCode.LeftControl) && isCrouching && controller.isGrounded)
+        {
+            controller.height = Mathf.Lerp(controller.height, originalPlayerHeight, crouchTime);
+            isCrouching = false;
+        }
     }
 }

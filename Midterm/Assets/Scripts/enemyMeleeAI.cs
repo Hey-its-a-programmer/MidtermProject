@@ -68,7 +68,6 @@ public class enemyMeleeAI : MonoBehaviour
             StartCoroutine(EnemySteps());
         }
 
-        
     }
     void facePlayer()
     {
@@ -84,26 +83,17 @@ public class enemyMeleeAI : MonoBehaviour
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         distance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position);
-        //Debug.Log(angleToPlayer);
         Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
+            if (hit.collider.CompareTag("Player"))
             {
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                //transform.LookAt(gameManager.instance.player.transform.position);
                 facePlayer();
                 if (!isAttacking && angleToPlayer <= attackAngle && distance <= agent.stoppingDistance)
                 {
-                    //Debug.Log("Attacking");
                     StartCoroutine(attack());
-                    /*
-                    if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
-                        facePlayer();
-                    }
-                    */
                 }
             }
         }

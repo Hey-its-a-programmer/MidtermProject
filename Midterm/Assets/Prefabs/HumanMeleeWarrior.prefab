@@ -425,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 6775913925345761080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.99, y: 0.016, z: 8.531933}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6775913925345856318}
@@ -449,15 +449,17 @@ MonoBehaviour:
   agent: {fileID: 6775913925345761081}
   anim: {fileID: 6775913925336245572}
   HP: 10
-  playerFaceSpeed: 4
+  playerFaceSpeed: 8
   coinValueMin: 1
   coinValueMax: 1
   sightAngle: 3
   headPos: {fileID: 6775913925345856154}
   hitRate: 1
-  attackRange: 2
+  attackAngle: 90
   meleeWeapon: {fileID: 8570726855775773001}
-  gunShotVolume: 0
+  enemyAud: {fileID: 0}
+  meleeAttackAudtio: {fileID: 0}
+  meleeAttackVolume: 0
   enemyHurtAudio: []
   enemyHurtVolume: 0
   enemyStepAudio: []
@@ -496,7 +498,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 135
-  m_StoppingDistance: 2
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -514,7 +516,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -2288,6 +2290,7 @@ GameObject:
   - component: {fileID: 8570726855774682441}
   - component: {fileID: 8570726855773585289}
   - component: {fileID: 8570726855773585290}
+  - component: {fileID: 946061973}
   m_Layer: 0
   m_Name: MeleeWarriorSword
   m_TagString: Untagged
@@ -2368,8 +2371,21 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8570726855775773001}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.18, y: 0.89, z: 0.06}
   m_Center: {x: -0.00022604506, y: 0.65, z: 0.0000004856391}
+--- !u!114 &946061973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570726855775773001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50df0ef2786196b41b364e5033ff4335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
