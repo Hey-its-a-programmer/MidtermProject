@@ -54,20 +54,13 @@ public class enemyAI : MonoBehaviour, IDamage
     bool playerInRange;
     Vector3 playerDir;
     bool isMoving;
-    //AJ changes
     float angleToPlayer;
-    //
-
-
-    //Vector3 pushBack;
-    //Vector3 enemyMovement;    
+  
     // Start is called before the first frame update
     void Start()
     {
         HPOrg = HP;
-        //AJ changes
         updateEnemyHPBar();
-        //
     }
 
     // Update is called once per frame
@@ -83,14 +76,8 @@ public class enemyAI : MonoBehaviour, IDamage
                 // if the enemy is standing still, this sound won't play
                 StartCoroutine(EnemySteps());
             }
-            //enemyVelocity.y = 0.0f;
-           // agent.Move((enemyVelocity + pushBack) * Time.deltaTime);
         }
-        
-        //if (!gameManager.instance.isPaused)
-        //{
-        //    pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
-        //}
+       
     }
     void facePlayer()
     {
@@ -130,9 +117,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
             if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
             {
-                //change
                 if (!isShooting && angleToPlayer <= 15)
-                //
                 {
                     StartCoroutine(shoot());
 
@@ -151,9 +136,7 @@ public class enemyAI : MonoBehaviour, IDamage
         HP -= dmg;
         updateEnemyHPBar();
         StartCoroutine(flashDamage());
-        //change
         UI.gameObject.SetActive(true);
-        //
 
         if (HP <= 0)
         {
@@ -215,17 +198,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     }*/
 
-    //change
     public void updateEnemyHPBar()
     {
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
     }
-    //
-
-
-    //public void pushBackInput(Vector3 direction)
-    //{
-    //    pushBack = direction;
-
-    //}
 }

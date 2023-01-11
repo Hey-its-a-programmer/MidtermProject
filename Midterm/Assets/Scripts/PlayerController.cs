@@ -22,10 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
+
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
-    [SerializeField] int currentAmmo;
-    [SerializeField] int maxAmmo;
+
     
 
 
@@ -57,7 +57,8 @@ public class PlayerController : MonoBehaviour
     private bool isSprinting;
     private float speedOrig;
     private bool isMoving;
-
+    private int maxAmmo;
+    private int currentAmmo;
     private int timesJumped;
     private Vector3 playerVelocity;
     private Vector3 move;
@@ -65,12 +66,14 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
+    
 
    
 
    
     private void Start()
     {
+        maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -78,19 +81,11 @@ public class PlayerController : MonoBehaviour
         HPOrig = HP;
         coinsOriginal = coins;
         setPlayerPos();
-        //AJ
-        updatePlayerHPbar();
-        //
-      
-        
-        
-        
+
     }
 
     void Update()
     {
-        
-        
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -140,13 +135,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
-            
-        
+
         if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
             
             isShooting = true;
             currentAmmo--;//reduces ammo by -1
+            Debug.Log("Shooting");
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
             //Instantiate(cube, transform.position, transform.rotation);
@@ -155,7 +150,8 @@ public class PlayerController : MonoBehaviour
             {
                 
                 //Instantiate(cube, hit.point, transform.rotation);
-                if (hit.collider.GetComponent<IDamage>() != null)
+               
+                if (hit.collider.GetComponent<IDamage>() != null )
                 {
                     
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
@@ -178,9 +174,9 @@ public class PlayerController : MonoBehaviour
     {
         HP -= dmg;
         playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length)], playerHurtVolume);
-        //AJ
+
         updatePlayerHPbar();
-        //
+
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
@@ -210,9 +206,9 @@ public class PlayerController : MonoBehaviour
     public void resetPlayerHP()
     {
         HP = HPOrig;
-        //AJ
+
         updatePlayerHPbar();
-        //
+
     }
 
     public void resetPlayerCoins()
@@ -264,7 +260,8 @@ public class PlayerController : MonoBehaviour
         shootRate = gunStat.shootRate;
         shootDamage = gunStat.shootDamage;
         shootDist = gunStat.shootDist;
-
+        maxAmmo = gunStat.maxAmmo;
+        currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         gunList.Add(gunStat);
@@ -313,7 +310,8 @@ public class PlayerController : MonoBehaviour
         shootDamage = gunList[selectedGun].shootDamage;
         shootRate = gunList[selectedGun].shootRate;
         shootDist = gunList[selectedGun].shootDist;
-
+        maxAmmo = gunList[selectedGun].maxAmmo;
+        currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
@@ -323,10 +321,17 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
-    //AJ changes
+
     public void updatePlayerHPbar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
-    //
+
+    
+
+    public int CurrentAmmo
+    {
+        get { return currentAmmo; }
+        set { currentAmmo = value; }
+    }
 }
