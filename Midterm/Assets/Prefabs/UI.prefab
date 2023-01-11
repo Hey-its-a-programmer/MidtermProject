@@ -11261,6 +11261,7 @@ MonoBehaviour:
   enemyRemaining: {fileID: 8782264921790430390}
   playerMoney: {fileID: 826629123}
   waveNameText: {fileID: 5737513337053542033}
+  ammoText: {fileID: 2486639724747110895}
   gameManagerAud: {fileID: 7949343224914869358}
   masterVolume: 1
   winMusic: {fileID: 8300000, guid: b13e8438b1ab99d4990a327e6850652f, type: 3}
@@ -11279,6 +11280,8 @@ MonoBehaviour:
   hitEnemyAudio: {fileID: 8300000, guid: c08b8d5666750f14da21d33b9e3880ab, type: 3}
   hitEnemyVolume: 0.5
   healthRestoreAudio: {fileID: 8300000, guid: f8f283a0c35fa7e45861397731d27f42, type: 3}
+  ammoRestoreAudio: {fileID: 8300000, guid: cb2f4d68c856a69419a49167f866c512, type: 3}
+  moneyPickupAudio: {fileID: 8300000, guid: e097c715e73234c47baad9bc37557322, type: 3}
   isPaused: 0
   playerSpawnPos: {fileID: 1988051424023520237, guid: eaa6b9fd34b696140b1f9403c0ee1bc7, type: 3}
   turnCameraOn: 0

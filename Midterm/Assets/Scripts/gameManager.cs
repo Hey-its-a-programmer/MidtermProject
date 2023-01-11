@@ -55,6 +55,12 @@ public class gameManager : MonoBehaviour
     // sound for picking up health kit
     [SerializeField] public AudioClip healthRestoreAudio;
 
+    //sound for picking up ammo pack
+    [SerializeField] public AudioClip ammoRestoreAudio;
+
+    //sound for picking up money
+    [SerializeField] public AudioClip moneyPickupAudio;
+
 
     [Header("----- Other Functions -----")]
     public bool isPaused;

@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
    
     private void Start()
     {
+        controller.enabled = true;
         maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
@@ -86,7 +87,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
     void movement()
     {
+        
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -157,8 +158,12 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
+                else
+                {
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
+                }
 
-                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
+                
 
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
@@ -180,6 +185,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
+            controller.enabled = false;
             playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
             gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
             gameManager.instance.pause();
@@ -270,20 +276,34 @@ public class PlayerController : MonoBehaviour
     
     public void HealthPickup(MedkitStats medStat)
     {
-        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
-        HP += medStat.restoredHP;
-        updatePlayerHPbar();
-        if (HP > HPOrig)
+        if (HP < HPOrig)
         {
-            HP = HPOrig;
+            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
+            HP += medStat.restoredHP;
+            if (HP > HPOrig)
+            {
+                HP = HPOrig;
+            }
+            updatePlayerHPbar();
         }
     }
 
     public void MoneyPickup(MoneyStats monStat)
     {
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.moneyPickupAudio);
         coins += monStat.moneyGiven;
     }
 
+    public void AmmoPickup(AmmoStats ammoStat)
+    {
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.ammoRestoreAudio);
+        currentAmmo += ammoStat.restoredAmmo;
+
+        if (currentAmmo > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+        }
+    }
    public List<gunStats> GunList
     {
         get { return gunList; }
