@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
     [SerializeField] int currentAmmo;
     [SerializeField] int maxAmmo;
-    
+    [SerializeField] StatusEffect _data;
+
 
 
 
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
+    
+
 
     private bool isShooting;
     private bool isSprinting;
@@ -67,9 +70,9 @@ public class PlayerController : MonoBehaviour
     private int coinsOriginal;
     private int restoredHP;
 
-   
 
-   
+
+
     private void Start()
     {
         currentAmmo = maxAmmo;
@@ -82,16 +85,16 @@ public class PlayerController : MonoBehaviour
         //AJ
         updatePlayerHPbar();
         //
-      
-        
-        
-        
+
+
+
+
     }
 
     void Update()
     {
-        
-        
+
+
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -110,7 +113,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        
+
     }
 
     void movement()
@@ -141,11 +144,11 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
-            
-        
+
+
         if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
-            
+
             isShooting = true;
             currentAmmo--;//reduces ammo by -1
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
@@ -154,11 +157,16 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
-                
+
                 //Instantiate(cube, hit.point, transform.rotation);
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
-                    
+                    var effectable = hit.collider.GetComponent<IEffectable>();
+                    if (effectable != null)
+                    {
+                        effectable.ApplyEffect(_data);
+                    }
+
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
@@ -168,11 +176,11 @@ public class PlayerController : MonoBehaviour
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
             }
-            
+
             isShooting = false;
         }
 
-       
+
     }
 
     public void takeDamage(int dmg)
@@ -271,7 +279,7 @@ public class PlayerController : MonoBehaviour
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
     }
-    
+
     public void HealthPickup(MedkitStats medStat)
     {
         gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
@@ -281,8 +289,8 @@ public class PlayerController : MonoBehaviour
             HP = HPOrig;
         }
     }
- 
-   public List<gunStats> GunList
+
+    public List<gunStats> GunList
     {
         get { return gunList; }
         set { gunList = value; }

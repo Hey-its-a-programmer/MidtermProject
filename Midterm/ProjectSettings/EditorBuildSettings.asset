@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: dbb32e111232d34469f9af6e0f502df2
   - enabled: 1
-    path: Assets/Unity Store/Close_Combat_Level/MainGameScene.unity
+    path: Assets/Scenes/MainGameScene2.0/MainGameScene2.0.unity
     guid: 38eb0fe7e88c98244ac5b2dd93b04255
   m_configObjects: {}

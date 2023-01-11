@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8224cb7117965144fbda5893d40d68a9, type: 3}
+  m_Name: DOT_Effect
+  m_EditorClassIdentifier: 
+  Name: DOT_Effect
+  DamageOverTimeAmount: 5
+  TickSpeed: 1
+  MovementPentalty: 2
+  Lifetime: 10
+  EffectParticles: {fileID: 1962516439210982, guid: 3c657dedc43d33a4987fbf09e6363067, type: 3}
