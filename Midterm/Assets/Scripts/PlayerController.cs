@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
                 //Instantiate(cube, hit.point, transform.rotation);
-                if (hit.collider.GetComponent<IDamage>() != null)
+                if (hit.collider.GetComponent<IDamage>() != null )
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);

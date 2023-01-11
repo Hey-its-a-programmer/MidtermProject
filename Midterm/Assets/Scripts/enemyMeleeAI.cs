@@ -10,17 +10,17 @@ public class enemyMeleeAI : MonoBehaviour
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int coinValueMin;
     [SerializeField] int coinValueMax;
-    //[SerializeField] int sightAngle;
+    [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
 
     [Header("----- Enemy Melee Stats-----")]
     [SerializeField] float hitRate;
+    [SerializeField] float attackRange;
     [SerializeField] GameObject meleeWeapon;
 
     [Header("----- Enemy UI-----")]
@@ -41,14 +41,15 @@ public class enemyMeleeAI : MonoBehaviour
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
     [Range(0, 1)] [SerializeField] public float enemyStepVolume;
-    int HPOrg;
-    bool isAttacking;
-    bool playerInRange;
-    Vector3 playerDir;
-    bool isMoving;
 
-    float angleToPlayer;
-   
+
+    private int HPOrg;
+    private bool isAttacking;
+    private Vector3 playerDir;
+    private bool isMoving;
+
+
+    private float angleToPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,16 +61,15 @@ public class enemyMeleeAI : MonoBehaviour
     void Update()
     {
         anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-        if (playerInRange)
-        {
-            canSeePlayer();
-            agent.SetDestination(gameManager.instance.player.transform.position);
-            if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
-            {
-                StartCoroutine(EnemySteps());
-            }
 
+        canSeePlayer();
+        agent.SetDestination(gameManager.instance.player.transform.position);
+        if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
+        {
+            StartCoroutine(EnemySteps());
         }
+
+        
     }
     void facePlayer()
     {
@@ -78,41 +78,22 @@ public class enemyMeleeAI : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-        }
-    }
-
     void canSeePlayer()
     {
-        playerDir = (gameManager.instance.player.transform.position - headPos.position);
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
 
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(headPos.position, playerDir);
-
+        Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-
             if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
             {
-                //change
-                if (!isAttacking && angleToPlayer <= 15)
-                //
+                if (!isAttacking && angleToPlayer <= 15 /*&& distance <= attackRange*/)
                 {
+                    Debug.Log("Attacking");
                     StartCoroutine(attack());
 
                     if (agent.remainingDistance <= agent.stoppingDistance)
@@ -154,6 +135,7 @@ public class enemyMeleeAI : MonoBehaviour
     {
         isAttacking = true;
         anim.SetTrigger("Swing");
+        
         // Needs Melee sounds instead
         //enemyAud.PlayOneShot(gunShotClip, gunShotVolume);
 
@@ -165,7 +147,6 @@ public class enemyMeleeAI : MonoBehaviour
     IEnumerator EnemySteps()
     {
         isMoving = true;
-
         //plays footsteps of enemy
         //enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
