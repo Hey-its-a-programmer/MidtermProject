@@ -20,6 +20,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] int coinValueMax;
     //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform dropSpawnPos;
     //[SerializeField] int pushBackTime;
     //[SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
@@ -44,10 +45,10 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
-    [Range(0, 1)] [SerializeField] public float enemyStepVolume;
-    //Status Effect
-    private StatusEffect _data;
-    int HPOrg;
+[Header("-------Drops-------")]
+    [SerializeField] GameObject money;
+    [SerializeField] GameObject ammo;//Status Effect
+    private StatusEffect _data;    int HPOrg;
     private float _currentMoveSpeed;
     float moveSpeed;
     bool isShooting;
@@ -55,11 +56,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     Vector3 playerDir;
     bool isMoving;
     float angleToPlayer;
-    
-
-
-    //Vector3 pushBack;
-    //Vector3 enemyMovement;    
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +66,6 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         
         //AJ changes
         updateEnemyHPBar();
-        //
     }
 
     // Update is called once per frame
@@ -86,14 +82,8 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
                 // if the enemy is standing still, this sound won't play
                 StartCoroutine(EnemySteps());
             }
-            //enemyVelocity.y = 0.0f;
-           // agent.Move((enemyVelocity + pushBack) * Time.deltaTime);
         }
-        
-        //if (!gameManager.instance.isPaused)
-        //{
-        //    pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
-        //}
+       
     }
     void facePlayer()
     {
@@ -133,9 +123,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
             if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
             {
-                //change
                 if (!isShooting && angleToPlayer <= 15)
-                //
                 {
                     StartCoroutine(shoot());
 
@@ -154,16 +142,35 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         HP -= dmg;
         updateEnemyHPBar();
         StartCoroutine(flashDamage());
-        //change
         UI.gameObject.SetActive(true);
-        //
         
         if (HP <= 0)
         {
+            Destroy(gameObject);
+            Drop();
             gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
-            gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
-            Destroy(gameObject);
+        }
+    }
+
+    void Drop()
+    {
+        // 50% chance to drop money
+        if (Random.Range(0.0f, 100.0f) >= 50.0f)
+        {
+            Vector3 dropPos = dropSpawnPos.position;
+            GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+            cash.SetActive(true);
+            Destroy(cash, 5.0f);
+        }
+
+        // 80% chance to drop ammo
+        if (Random.Range(0.0f, 100.0f) <= 80.0f)
+        {
+            Vector3 dropPos = dropSpawnPos.position;
+            GameObject ammunition = Instantiate(ammo, dropPos + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            ammunition.SetActive(true);
+            Destroy(ammunition, 5.0f);
         }
     }
 
@@ -207,19 +214,10 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     }*/
 
-    //change
     public void updateEnemyHPBar()
     {
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
     }
-    //
-
-
-    //public void pushBackInput(Vector3 direction)
-    //{
-    //    pushBack = direction;
-
-    //}
 
     //----Status Effect Methods
     

@@ -150,6 +150,8 @@ MonoBehaviour:
   shootDist: 50
   gunModel: {fileID: 1747442010}
   hitEffect: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
+  currentAmmo: 10000
+  maxAmmo: 10000
   playerAud: {fileID: 338797492}
   gunShotClip: {fileID: 0}
   gunShotVolume: 0.427
@@ -260,7 +262,7 @@ AudioSource:
   m_GameObject: {fileID: 6314567623037541293}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8915254392975031259, guid: 0bb716aaa0075ee47a1c4d3651b7516b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

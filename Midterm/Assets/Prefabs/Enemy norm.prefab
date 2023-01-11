@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 5684327520420459659}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4271214973146331157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5011143496577202762}
+  m_Layer: 6
+  m_Name: Drops Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5011143496577202762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271214973146331157}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5684327520420459673}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &5684327520420554881
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +865,7 @@ Transform:
   - {fileID: 5684327520420459693}
   - {fileID: 5684327520420459679}
   - {fileID: 6238863323448986839}
+  - {fileID: 5011143496577202762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 184.187, z: 0}
@@ -857,6 +889,7 @@ MonoBehaviour:
   coinValueMin: 5
   coinValueMax: 25
   headPos: {fileID: 5684327520420459691}
+  dropSpawnPos: {fileID: 5011143496577202762}
   shootRate: 1
   bullet: {fileID: 1314157197975682883, guid: 9d743180cde45d241b1b7ebb68f284b2, type: 3}
   shootPos: {fileID: 4254271613273178818}
@@ -884,6 +917,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
   - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
   enemyStepVolume: 0
+  money: {fileID: 5569831550653876981, guid: 1b3b38d82c695614da1c494b3639fa95, type: 3}
+  ammo: {fileID: 1900789991929956317, guid: 0cb4ae77d4d8710458ceaa8dc0887f2d, type: 3}
 --- !u!95 &5684327520413260621
 Animator:
   serializedVersion: 4
@@ -962,7 +997,7 @@ AudioSource:
   m_GameObject: {fileID: 5684327520420555001}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8915254392975031259, guid: 0bb716aaa0075ee47a1c4d3651b7516b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
