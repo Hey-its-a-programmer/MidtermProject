@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
-    [SerializeField] int maxAmmo;
+
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
 
@@ -82,19 +82,11 @@ public class PlayerController : MonoBehaviour
         HPOrig = HP;
         coinsOriginal = coins;
         setPlayerPos();
-        //AJ
-        updatePlayerHPbar();
-        //
-      
-        
-        
-        
+
     }
 
     void Update()
     {
-        
-        
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -144,8 +136,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
-            
-        
+
         if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
             
@@ -160,7 +151,8 @@ public class PlayerController : MonoBehaviour
             {
                 
                 //Instantiate(cube, hit.point, transform.rotation);
-                if (hit.collider.GetComponent<IDamage>() != null)
+               
+                if (hit.collider.GetComponent<IDamage>() != null )
                 {
                     
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
@@ -183,9 +175,9 @@ public class PlayerController : MonoBehaviour
     {
         HP -= dmg;
         playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length)], playerHurtVolume);
-        //AJ
+
         updatePlayerHPbar();
-        //
+
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
@@ -215,9 +207,9 @@ public class PlayerController : MonoBehaviour
     public void resetPlayerHP()
     {
         HP = HPOrig;
-        //AJ
+
         updatePlayerHPbar();
-        //
+
     }
 
     public void resetPlayerCoins()
@@ -324,12 +316,12 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
-    //AJ changes
+
     public void updatePlayerHPbar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
-    //
+
     
 
     public int CurrentAmmo
