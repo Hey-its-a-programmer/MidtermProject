@@ -24,6 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shootDist;
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] int currentAmmo;
+    [SerializeField] int maxAmmo;
+    
+
+
+
 
     [Header("-------Player Audio-------")]
 
@@ -60,19 +66,32 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
     private int restoredHP;
+
+   
+
+   
     private void Start()
     {
+        currentAmmo = maxAmmo;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
         setPlayerPos();
+
         updatePlayerHPbar();
+
+      
+        
+        
+        
     }
 
     void Update()
     {
+        
+        
         controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
@@ -91,6 +110,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        
     }
 
     void movement()
@@ -121,19 +141,25 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shoot()
     {
-        if (!isShooting && Input.GetButton("Shoot"))
-        {
-            isShooting = true;
 
+            
+        
+        if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
+        {
+            
+            isShooting = true;
+            currentAmmo--;//reduces ammo by -1
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
             //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
+                
                 //Instantiate(cube, hit.point, transform.rotation);
                 if (hit.collider.GetComponent<IDamage>() != null )
                 {
+                    
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
@@ -143,15 +169,20 @@ public class PlayerController : MonoBehaviour
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
             }
+            
             isShooting = false;
         }
+
+       
     }
 
     public void takeDamage(int dmg)
     {
         HP -= dmg;
         playerAud.PlayOneShot(playerHurtAudio[Random.Range(0, playerHurtAudio.Length)], playerHurtVolume);
+
         updatePlayerHPbar();
+
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
@@ -181,7 +212,9 @@ public class PlayerController : MonoBehaviour
     public void resetPlayerHP()
     {
         HP = HPOrig;
+
         updatePlayerHPbar();
+
     }
 
     public void resetPlayerCoins()
@@ -244,7 +277,6 @@ public class PlayerController : MonoBehaviour
     {
         gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
         HP += medStat.restoredHP;
-        updatePlayerHPbar();
         if (HP > HPOrig)
         {
             HP = HPOrig;
@@ -287,8 +319,10 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
+
     public void updatePlayerHPbar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
+
 }
