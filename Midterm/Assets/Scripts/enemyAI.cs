@@ -20,6 +20,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int coinValueMax;
     //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform moneySpawnPos;
     //[SerializeField] int pushBackTime;
     //[SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
@@ -44,7 +45,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
-    [Range(0, 1)] [SerializeField] public float enemyStepVolume;   
+    [Range(0, 1)] [SerializeField] public float enemyStepVolume;
+
+    [Header("-------Drops-------")]
+    [SerializeField] GameObject money;
     int HPOrg;
     bool isShooting;
     bool playerInRange;
@@ -153,10 +157,21 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            Destroy(gameObject);
+            DropMoney();
             gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
-            gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
-            Destroy(gameObject);
+        }
+    }
+
+    void DropMoney()
+    {
+        if (Random.Range(0.0f, 100.0f) == 50.0f)
+        {
+            Vector3 dropPos = moneySpawnPos.position;
+            GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), moneySpawnPos.rotation);
+            cash.SetActive(true);
+            Destroy(cash, 5.0f);
         }
     }
 

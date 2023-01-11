@@ -150,6 +150,8 @@ MonoBehaviour:
   shootDist: 50
   gunModel: {fileID: 1747442010}
   hitEffect: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
+  currentAmmo: 10000
+  maxAmmo: 10000
   playerAud: {fileID: 338797492}
   gunShotClip: {fileID: 0}
   gunShotVolume: 0.427
