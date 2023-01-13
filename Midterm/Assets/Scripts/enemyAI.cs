@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class enemyAI : MonoBehaviour, IDamage
+public class enemyAI : MonoBehaviour, IDamage, IEffectable
 {
 
     [Header("-----Components-----")]
@@ -20,6 +20,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int coinValueMax;
     //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform dropSpawnPos;
+    //[SerializeField] int pushBackTime;
+    //[SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
@@ -42,8 +45,12 @@ public class enemyAI : MonoBehaviour, IDamage
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
-    [Range(0, 1)] [SerializeField] public float enemyStepVolume;   
-    int HPOrg;
+[Header("-------Drops-------")]
+    [SerializeField] GameObject money;
+    [SerializeField] GameObject ammo;//Status Effect
+    private StatusEffect _data;    int HPOrg;
+    private float _currentMoveSpeed;
+    float moveSpeed;
     bool isShooting;
     bool playerInRange;
     Vector3 playerDir;
@@ -54,12 +61,17 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         HPOrg = HP;
+        moveSpeed = agent.speed;
+        //_currentMoveSpeed = moveSpeed;
+        
+        //AJ changes
         updateEnemyHPBar();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_data != null) HandleEffect();
         anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
         if (playerInRange)
         {
@@ -131,13 +143,34 @@ public class enemyAI : MonoBehaviour, IDamage
         updateEnemyHPBar();
         StartCoroutine(flashDamage());
         UI.gameObject.SetActive(true);
-
+        
         if (HP <= 0)
         {
+            Destroy(gameObject);
+            Drop();
             gameManager.instance.EnemiesInWaveCount--;
             gameManager.instance.updateTotalEnemyCount(-1);
-            gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
-            Destroy(gameObject);
+        }
+    }
+
+    void Drop()
+    {
+        // 50% chance to drop money
+        if (Random.Range(0.0f, 100.0f) >= 50.0f)
+        {
+            Vector3 dropPos = dropSpawnPos.position;
+            GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+            cash.SetActive(true);
+            Destroy(cash, 5.0f);
+        }
+
+        // 80% chance to drop ammo
+        if (Random.Range(0.0f, 100.0f) <= 80.0f)
+        {
+            Vector3 dropPos = dropSpawnPos.position;
+            GameObject ammunition = Instantiate(ammo, dropPos + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            ammunition.SetActive(true);
+            Destroy(ammunition, 5.0f);
         }
     }
 
@@ -184,5 +217,56 @@ public class enemyAI : MonoBehaviour, IDamage
     public void updateEnemyHPBar()
     {
         enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
+    }
+
+    //----Status Effect Methods
+    
+    private GameObject _effectParticles;
+
+    private float CurrentEffectTime = 0f;
+    private float nextTickTime = 0f;
+
+    public void ApplyEffect(StatusEffect _data)
+    {
+        RemoveEffect();
+        this._data = _data;
+        agent.speed = moveSpeed / _data.MovementPentalty;
+        _effectParticles = Instantiate(_data.EffectParticles, transform);
+    }
+    public void RemoveEffect()
+    {
+        _data = null;
+        CurrentEffectTime = 0;
+        nextTickTime = 0;
+        agent.speed = moveSpeed;
+        if (_effectParticles != null)
+        {
+            Destroy(_effectParticles);
+        }
+    }
+    public void HandleEffect()
+    {
+        CurrentEffectTime += Time.deltaTime;
+
+        if (CurrentEffectTime >= +_data.Lifetime)
+        {
+            RemoveEffect();
+        }
+        if (_data == null)
+        {
+            return;
+        }
+        if (_data.DamageOverTimeAmount != 0 && CurrentEffectTime > nextTickTime )
+        {
+            nextTickTime += _data.TickSpeed;
+            HP -= _data.DamageOverTimeAmount;
+            if (HP <= 0)
+            {
+                gameManager.instance.EnemiesInWaveCount--;
+                gameManager.instance.updateTotalEnemyCount(-1);
+                gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
+                Destroy(gameObject);
+            }
+        }
     }
 }

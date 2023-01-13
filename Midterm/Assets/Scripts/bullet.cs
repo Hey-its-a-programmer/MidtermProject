@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
+    
+
+
     [SerializeField] Rigidbody rb;
 
 
