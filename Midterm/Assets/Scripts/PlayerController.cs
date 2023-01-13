@@ -142,12 +142,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Shooting");
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
-            //Instantiate(cube, transform.position, transform.rotation);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
                 
-                //Instantiate(cube, hit.point, transform.rotation);
                
                 if (hit.collider.GetComponent<IDamage>() != null )
                 {

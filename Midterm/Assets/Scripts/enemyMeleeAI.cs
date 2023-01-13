@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class enemyMeleeAI : MonoBehaviour
+public class enemyMeleeAI : MonoBehaviour, IDamage
 {
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
@@ -91,7 +91,7 @@ public class enemyMeleeAI : MonoBehaviour
             {
                 agent.SetDestination(gameManager.instance.player.transform.position);
                 facePlayer();
-                if (!isAttacking && angleToPlayer <= attackAngle && distance <= agent.stoppingDistance)
+                if (!isAttacking && angleToPlayer <= attackAngle && distance <= agent.stoppingDistance + 1)
                 {
                     StartCoroutine(attack());
                 }
@@ -119,7 +119,7 @@ public class enemyMeleeAI : MonoBehaviour
     IEnumerator flashDamage()
     {
         // plays grunt noise to signal that the enemy took damage
-        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
+        //enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         model.material.color = Color.white;
@@ -151,7 +151,7 @@ public class enemyMeleeAI : MonoBehaviour
     {
         isMoving = true;
         //plays footsteps of enemy
-        enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
+        //enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
         yield return new WaitForSeconds(0.5f);
 
