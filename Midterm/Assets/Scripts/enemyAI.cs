@@ -45,6 +45,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
+    [Range(0, 1)] [SerializeField] public float enemyStepVolume;
 [Header("-------Drops-------")]
     [SerializeField] GameObject money;
     [SerializeField] GameObject ammo;//Status Effect

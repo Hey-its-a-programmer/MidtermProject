@@ -449,13 +449,15 @@ MonoBehaviour:
   model: {fileID: 6775913925332163474}
   agent: {fileID: 6775913925345761081}
   anim: {fileID: 6775913925336245572}
-  HP: 10
+  HP: 2
   playerFaceSpeed: 8
   coinValueMin: 1
   coinValueMax: 1
   sightAngle: 3
   headPos: {fileID: 6775913925345856154}
-  hitRate: 1
+  deathFadeOutTime: 5
+  deathAnimationTime: 5
+  hitDelay: 1
   attackAngle: 90
   meleeWeapon: {fileID: 8570726855775773001}
   enemyAud: {fileID: 0}

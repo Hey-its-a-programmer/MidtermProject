@@ -1124,17 +1124,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: HumanMeleeWarrior
       objectReference: {fileID: 0}
+    - target: {fileID: 6775913925345761081, guid: e204d0c1eac4432499a80593347fd041, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775913925345761082, guid: e204d0c1eac4432499a80593347fd041, type: 3}
+      propertyPath: HP
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.99
+      value: -3.9899998
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.016
+      value: 0.016000032
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1146,15 +1154,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6775913925345856216, guid: e204d0c1eac4432499a80593347fd041, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1438,7 +1446,7 @@ PrefabInstance:
       objectReference: {fileID: 1681789990}
     - target: {fileID: 9129693823454621900, guid: d67616658778cb84a969bc27d8f29e34, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9129693823454621900, guid: d67616658778cb84a969bc27d8f29e34, type: 3}
       propertyPath: m_LocalPosition.x
