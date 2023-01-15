@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     [Header("-----Components-----")]
@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     [Range(0, 15)] [SerializeField] int jumpHeight;
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
+    [SerializeField] float crouchHeight;
+    [SerializeField] float crouchTime;
     [SerializeField] int pushBackTime;
     public int coins;
+
     [Header("-----Gun Stats-----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] float shootRate;
@@ -26,10 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
 
-    
 
-
-
+    [SerializeField] StatusEffect _data;
 
     [Header("-------Player Audio-------")]
 
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
-
+  
     private bool isShooting;
     private bool isSprinting;
     private float speedOrig;
@@ -66,16 +67,15 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
-    private int restoredHP;
 
     
-
-
-
+    private bool isCrouching;
+    private float originalPlayerHeight;
+  
     private void Start()
     {
-        
-        maxAmmo = gunList[0].maxAmmo;
+        controller.enabled = true;
+        originalPlayerHeight = controller.height;        maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
         
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
@@ -89,11 +89,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        controller.enabled = true;
         if (!gameManager.instance.isPaused)
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
+            playerSprint();
+            playerCrouch();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
@@ -108,13 +109,12 @@ public class PlayerController : MonoBehaviour
 
         }
 
-      
-        
 
     }
 
     void movement()
     {
+        
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -126,7 +126,6 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * Time.deltaTime * playerSpeed);
 
 
-
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && timesJumped < jumpMax)
         {
@@ -134,7 +133,6 @@ public class PlayerController : MonoBehaviour
             timesJumped++;
             playerAud.PlayOneShot(playerJumpAudio[Random.Range(0, playerJumpAudio.Length)], playerJumpVolume);
         }
-
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move((playerVelocity + pushBack) * Time.deltaTime);
     }
@@ -144,36 +142,43 @@ public class PlayerController : MonoBehaviour
 
         if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
         {
-            
+
             isShooting = true;
             currentAmmo--;//reduces ammo by -1
             Debug.Log("Shooting");
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
-            //Instantiate(cube, transform.position, transform.rotation);
+
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
-                
-                //Instantiate(cube, hit.point, transform.rotation);
+
+
                
                 if (hit.collider.GetComponent<IDamage>() != null )
                 {
-                    
+                    var effectable = hit.collider.GetComponent<IEffectable>();
+                    if (effectable != null)
+                    {
+                        effectable.ApplyEffect(_data);
+                    }
+
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
-
-                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
+                else
+                {
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
+                }
 
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
             }
-            
+
             isShooting = false;
         }
 
-       
+
     }
    
    
@@ -188,6 +193,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(playerDamageFlash());
         if (HP <= 0)
         {
+            controller.enabled = false;
             playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
             gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
             gameManager.instance.pause();
@@ -275,17 +281,48 @@ public class PlayerController : MonoBehaviour
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
     }
-    
+
     public void HealthPickup(MedkitStats medStat)
-    {
-        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
-        HP += medStat.restoredHP;
-        if (HP > HPOrig)
+    { 
+        if (HP < HPOrig)
         {
-            HP = HPOrig;
+            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
+            HP += medStat.restoredHP;
+            if (HP > HPOrig)
+            {
+                HP = HPOrig;
+            }
+            updatePlayerHPbar();
+        }
+        else
+        {
+            gameObject.GetComponent<SphereCollider>().isTrigger = false;
         }
     }
- 
+
+    public void MoneyPickup(MoneyStats monStat)
+    {
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.moneyPickupAudio);
+        coins += monStat.moneyGiven;
+    }
+
+    public void AmmoPickup(AmmoStats ammoStat)
+    {
+        if (currentAmmo < maxAmmo)
+        {
+            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.ammoRestoreAudio);
+            currentAmmo += ammoStat.restoredAmmo;
+
+            if (currentAmmo > maxAmmo)
+            {
+                currentAmmo = maxAmmo;
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<BoxCollider>().isTrigger = false;
+        }
+    }
    public List<gunStats> GunList
     {
         get { return gunList; }
@@ -323,17 +360,28 @@ public class PlayerController : MonoBehaviour
         pushBack = direction;
     }
 
-
     public void updatePlayerHPbar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
-
-    
-
     public int CurrentAmmo
     {
         get { return currentAmmo; }
         set { currentAmmo = value; }
+    }
+
+    void playerCrouch()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && !isCrouching && controller.isGrounded)
+        {
+            isCrouching = true;
+            controller.height = Mathf.Lerp(controller.height, crouchHeight, crouchTime);
+        }
+
+        else if(!Input.GetKey(KeyCode.LeftControl) && isCrouching && controller.isGrounded)
+        {
+            controller.height = Mathf.Lerp(controller.height, originalPlayerHeight, crouchTime);
+            isCrouching = false;
+        }
     }
 }

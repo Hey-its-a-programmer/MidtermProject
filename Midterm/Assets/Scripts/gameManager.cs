@@ -55,6 +55,12 @@ public class gameManager : MonoBehaviour
     // sound for picking up health kit
     [SerializeField] public AudioClip healthRestoreAudio;
 
+    //sound for picking up ammo pack
+    [SerializeField] public AudioClip ammoRestoreAudio;
+
+    //sound for picking up money
+    [SerializeField] public AudioClip moneyPickupAudio;
+
 
     [Header("----- Other Functions -----")]
     public bool isPaused;
@@ -86,12 +92,10 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ammoText.text = playerScript.CurrentAmmo.ToString("F0");
+        //ammoText.text = playerScript.CurrentAmmo.ToString("F0");
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
         playerMoney.text = playerScript.coins.ToString("F0");
-        //AJ changes
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
-        //
         UpdateVolume();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {

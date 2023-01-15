@@ -61,8 +61,5 @@ MonoBehaviour:
     - {fileID: 5684327520420555001, guid: 13685189c5461bf4fbb5eec8e9513e1b, type: 3}
   enemySpawnPoints:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   turnOnTimer: 1
   waveTime: 10
