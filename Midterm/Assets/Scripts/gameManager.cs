@@ -94,12 +94,10 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ammoText.text = playerScript.CurrentAmmo.ToString("F0");
+        //ammoText.text = playerScript.CurrentAmmo.ToString("F0");
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
         playerMoney.text = playerScript.coins.ToString("F0");
-        //AJ changes
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
-        //
         UpdateVolume();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
