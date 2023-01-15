@@ -67,15 +67,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
     private int restoredHP;
+
     
 
-   
 
-   
+
     private void Start()
     {
+        
         maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
+        
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
@@ -105,7 +107,10 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+      
         
+
     }
 
     void movement()
@@ -170,6 +175,8 @@ public class PlayerController : MonoBehaviour
 
        
     }
+   
+   
 
     public void takeDamage(int dmg)
     {

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class gunPickup : MonoBehaviour
 {
+
     [SerializeField] gunStats gun;
+   
     public void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
@@ -14,4 +16,5 @@ public class gunPickup : MonoBehaviour
         }
     }
 
+   
 }
