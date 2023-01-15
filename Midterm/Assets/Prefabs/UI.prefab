@@ -11554,6 +11554,8 @@ MonoBehaviour:
   healthRestoreAudio: {fileID: 8300000, guid: f8f283a0c35fa7e45861397731d27f42, type: 3}
   ammoRestoreAudio: {fileID: 8300000, guid: cb2f4d68c856a69419a49167f866c512, type: 3}
   moneyPickupAudio: {fileID: 8300000, guid: e097c715e73234c47baad9bc37557322, type: 3}
+  doorSpawnPos: {fileID: 7767817793447912425, guid: e17ecf75489bf4049b4d10b5f6e40fbe, type: 3}
+  door: {fileID: 6757940499958004175, guid: 19adf4541e17a5745bf2b7842639d0d9, type: 3}
   isPaused: 0
   playerSpawnPos: {fileID: 1988051424023520237, guid: eaa6b9fd34b696140b1f9403c0ee1bc7, type: 3}
   turnCameraOn: 0
@@ -11929,14 +11931,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7310143483555758195, guid: 35c41e1e43f48c64eb175f280286c130, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 7310143483555758195, guid: 35c41e1e43f48c64eb175f280286c130, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c41e1e43f48c64eb175f280286c130, type: 3}
 --- !u!224 &8782264921696025262 stripped
@@ -11962,10 +11956,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9192062975716121860}
     m_Modifications:
-    - target: {fileID: 8887039683569185206, guid: f82fdb4cc3804b84ba38a841b101cbe4, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3d803699c07149546a685982ccc3da11, type: 3}
     - target: {fileID: 8887039683569185207, guid: f82fdb4cc3804b84ba38a841b101cbe4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
