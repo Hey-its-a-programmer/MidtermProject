@@ -156,7 +156,7 @@ public class enemyAI : MonoBehaviour, IDamage
             Vector3 dropPos = dropSpawnPos.position;
             GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
             cash.SetActive(true);
-            Destroy(cash, 5.0f);
+            Destroy(cash, 10.0f);
         }
 
         // 80% chance to drop ammo
@@ -165,7 +165,7 @@ public class enemyAI : MonoBehaviour, IDamage
             Vector3 dropPos = dropSpawnPos.position;
             GameObject ammunition = Instantiate(ammo, dropPos + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
             ammunition.SetActive(true);
-            Destroy(ammunition, 5.0f);
+            Destroy(ammunition, 10.0f);
         }
     }
 
