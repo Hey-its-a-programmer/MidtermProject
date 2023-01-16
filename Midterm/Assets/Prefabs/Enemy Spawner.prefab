@@ -48,17 +48,11 @@ MonoBehaviour:
   - waveName: 1
     numberOfEnemies: 3
     spawnRateInterval: 0
-    typeOfEnemies:
-    - {fileID: 5684327520420555001, guid: 5ba5bda24f3af214ba197cb9cdaf0e85, type: 3}
-    - {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-    - {fileID: 5684327520420555001, guid: 13685189c5461bf4fbb5eec8e9513e1b, type: 3}
+    typeOfEnemies: []
   - waveName: 2
     numberOfEnemies: 3
     spawnRateInterval: 0
-    typeOfEnemies:
-    - {fileID: 5684327520420555001, guid: 5ba5bda24f3af214ba197cb9cdaf0e85, type: 3}
-    - {fileID: 5684327520420555001, guid: 1b4015ab36a3bd74f867a1a8fcfbafe3, type: 3}
-    - {fileID: 5684327520420555001, guid: 13685189c5461bf4fbb5eec8e9513e1b, type: 3}
+    typeOfEnemies: []
   enemySpawnPoints:
   - {fileID: 0}
   turnOnTimer: 1
