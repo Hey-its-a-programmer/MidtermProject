@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
+
     
     private bool isCrouching;
     private float originalPlayerHeight;
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         originalPlayerHeight = controller.height;        maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
+        
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
@@ -106,6 +108,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
 
     }
 
@@ -181,6 +184,8 @@ public class PlayerController : MonoBehaviour
 
 
     }
+   
+   
 
     public void takeDamage(int dmg)
     {

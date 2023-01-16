@@ -47,17 +47,17 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     //sound for when enemy shoots
     [SerializeField] AudioClip gunShotClip;
+
     [Range(0, 1)] public float gunShotVolume;
 
     // sounds for when enemy is damaged
     [SerializeField] AudioClip[] enemyHurtAudio;
+
     [Range(0, 1)] public float enemyHurtVolume;
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
     [Range(0, 1)] public float enemyStepVolume;
-
-
 
     //Status Effect
     private StatusEffect _data;
@@ -68,7 +68,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     Vector3 playerDir;
     bool isMoving;
     float angleToPlayer;
-
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +80,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     // Update is called once per frame
     void Update()
     {
+
         if (isAlive)
         {
             if (_data != null)
@@ -104,6 +105,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
 
+
     void canSeePlayer()
     {
         playerDir = gameManager.instance.player.transform.position - headPos.position;
@@ -112,13 +114,16 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
+
             if (hit.collider.CompareTag("Player"))
             {
+
                 agent.SetDestination(gameManager.instance.player.transform.position);
                 facePlayer();
                 if (!isShooting && angleToPlayer <= shootAngle)
                 {
                     StartCoroutine(shoot());
+
                 }
             }
         }
@@ -150,9 +155,9 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         // 50% chance to drop money
         if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
         {
-  
+            Vector3 dropPos = dropSpawnPos.position;
             GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
-
+            cash.SetActive(true);
             Destroy(cash, moneyDespawnTimer);
         }
 
@@ -198,7 +203,6 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
         isMoving = false;
     }
-
     //----Status Effect Methods
     
     private GameObject _effectParticles;
@@ -246,6 +250,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             {
                 gameManager.instance.EnemiesInWaveCount--;
                 gameManager.instance.updateTotalEnemyCount(-1);
+
                 Drop();
                 StartCoroutine(DeathAnimation());
             }
