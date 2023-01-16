@@ -62,7 +62,6 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     private bool isAlive = true;
     private MeshRenderer weaponRenderer;
     private float moveSpeed;
-    private AnimationEvent animationEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,8 +75,11 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
 
         if (isAlive)
         {
+            if (_data != null)
+            {
+                HandleEffect();
+            }
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-
             canSeePlayer();
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
             {
@@ -121,21 +123,12 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
         if (isAlive)
         {
             HP -= dmg;
-            //updateEnemyHPBar();
             StartCoroutine(flashDamage());
-            //UI.gameObject.SetActive(true);
         }
 
         if (HP <= 0)
         {
-            isAlive = false;
-            agent.speed = 0;
-            agent.enabled = false;
-            gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
-            gameManager.instance.EnemiesInWaveCount--;
-            gameManager.instance.updateTotalEnemyCount(-1);
-            Drop();
-            StartCoroutine(DeathAnimation());
+            Death();
         }
     }
 
@@ -243,12 +236,21 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
             HP -= _data.DamageOverTimeAmount;
             if (HP <= 0)
             {
-                gameManager.instance.EnemiesInWaveCount--;
-                gameManager.instance.updateTotalEnemyCount(-1);
-                Drop();
-                StartCoroutine(DeathAnimation());
+                Death();
             }
         }
+    }
+
+    void Death()
+    {
+        agent.speed = 0;
+        agent.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        isAlive = false;
+        StartCoroutine(DeathAnimation());
+        Drop();
+        gameManager.instance.EnemiesInWaveCount--;
+        gameManager.instance.updateTotalEnemyCount(-1);
     }
 
     /*

@@ -88,8 +88,6 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
                 HandleEffect();
             }
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-
-
             canSeePlayer();
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
             {
@@ -114,16 +112,13 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-
             if (hit.collider.CompareTag("Player"))
             {
-
                 agent.SetDestination(gameManager.instance.player.transform.position);
                 facePlayer();
                 if (!isShooting && angleToPlayer <= shootAngle)
                 {
                     StartCoroutine(shoot());
-
                 }
             }
         }
@@ -139,14 +134,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
         if (HP <= 0 && isAlive)
         {
-            agent.speed = 0;
-            agent.enabled = false;
-            gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
-            isAlive = false;
-            StartCoroutine(DeathAnimation());
-            Drop();
-            gameManager.instance.EnemiesInWaveCount--;
-            gameManager.instance.updateTotalEnemyCount(-1);
+            Death();
         }
     }
 
@@ -155,7 +143,6 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         // 50% chance to drop money
         if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
         {
-            Vector3 dropPos = dropSpawnPos.position;
             GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
             cash.SetActive(true);
             Destroy(cash, moneyDespawnTimer);
@@ -248,13 +235,20 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             HP -= _data.DamageOverTimeAmount;
             if (HP <= 0)
             {
-                gameManager.instance.EnemiesInWaveCount--;
-                gameManager.instance.updateTotalEnemyCount(-1);
-
-                Drop();
-                StartCoroutine(DeathAnimation());
+                Death();
             }
         }
+    }
+    void Death()
+    {
+        agent.speed = 0;
+        agent.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        isAlive = false;
+        StartCoroutine(DeathAnimation());
+        Drop();
+        gameManager.instance.EnemiesInWaveCount--;
+        gameManager.instance.updateTotalEnemyCount(-1);
     }
 
     /*
