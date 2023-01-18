@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 976e26df68d2c2d458d0d9634e2032e1, type: 2}
---- !u!114 &62515713 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 62515713, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-  m_PrefabInstance: {fileID: 2058716424621151048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &223587038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,26 +1461,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 744618204, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: _data
-      value: 
-      objectReference: {fileID: 11400000, guid: 61b9cc7564425ab4ea04c3b663f10767, type: 2}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: maxAmmo
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: currentAmmo
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: lifeCounter
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6314567623037541291, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -4323,10 +4292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 62515711, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: m_Name
-      value: lives
-      objectReference: {fileID: 0}
     - target: {fileID: 9192062975716121856, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: m_Name
       value: UI
@@ -4419,10 +4384,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 401459996}
-    - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: PlayerLives
-      value: 
-      objectReference: {fileID: 62515713}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: playerScript
       value: 
