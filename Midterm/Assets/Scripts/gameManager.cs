@@ -10,6 +10,8 @@ public class gameManager : MonoBehaviour
     [Header("----- Player Stuff -----")]
     public GameObject player;
     public PlayerController playerScript;
+    
+
     //public enemyAI enemyScript;
 
     [Header("----- UI Stuff -----")]
@@ -24,7 +26,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerMoney;
     public TextMeshProUGUI waveNameText;
     [SerializeField] TextMeshProUGUI ammoText;
-  
+
 
 
 
@@ -71,7 +73,7 @@ public class gameManager : MonoBehaviour
     private int totalEnemyCount;
     private int enemiesInWaveCount;
     private float betweenWaveTimer;
-   
+
 
 
 
@@ -92,6 +94,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         ammoText.text = playerScript.CurrentAmmo.ToString("F0");
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
         playerMoney.text = playerScript.coins.ToString("F0");
@@ -119,16 +122,17 @@ public class gameManager : MonoBehaviour
                 unPause();
             }
         }
-        
+
 
     }
+   
 
     public void pause()
     {
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-       
+
     }
 
     public void unPause()
@@ -170,8 +174,8 @@ public class gameManager : MonoBehaviour
     }
     public int TotalEnemyCount
     {
-        get {return totalEnemyCount;}
-        set {totalEnemyCount = value;}
+        get { return totalEnemyCount; }
+        set { totalEnemyCount = value; }
     }
 
     public void updateEnemyCount(int amount)
@@ -191,8 +195,8 @@ public class gameManager : MonoBehaviour
     {
         AudioListener.volume = masterVolume;
     }
-   
-  
-   
+
+
+
 }
 

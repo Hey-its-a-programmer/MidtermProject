@@ -7,6 +7,8 @@ TagManager:
   - Player Spawn Pos
   - Enemy
   - Door
+  - Room One
+  - Room One Spawn
   layers:
   - Default
   - TransparentFX

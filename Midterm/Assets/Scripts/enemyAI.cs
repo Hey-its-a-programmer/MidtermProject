@@ -202,7 +202,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         isMoving = true;
 
         //plays footsteps of enemy
-        enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
+        /*enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);*/
 
         yield return new WaitForSeconds(0.5f);
 
