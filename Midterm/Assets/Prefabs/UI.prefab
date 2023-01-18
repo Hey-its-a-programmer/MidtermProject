@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 62515714}
   - component: {fileID: 62515713}
   m_Layer: 0
-  m_Name: Money (1)
+  m_Name: lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12650,6 +12650,7 @@ MonoBehaviour:
   waveTimerText: {fileID: 2029623319}
   enemyRemaining: {fileID: 8782264921790430390}
   playerMoney: {fileID: 826629123}
+  PlayerLives: {fileID: 1495083064}
   waveNameText: {fileID: 5737513337053542033}
   ammoText: {fileID: 2486639724747110895}
   playerHUD: {fileID: 535629660374654016}
