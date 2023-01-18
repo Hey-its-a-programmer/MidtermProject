@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class enemyMeleeAI : MonoBehaviour, IDamage
+public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
 {
     [Header("-----Components-----")]
-    [SerializeField] MeshRenderer model;
+    [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [Header("-----Enemy Stats-----")]
@@ -17,16 +17,20 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     [SerializeField] int coinValueMax;
     [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform dropSpawnPos;
 
     [Header("----- Enemy Melee Stats-----")]
     [SerializeField] float hitDelay;
     [SerializeField] float attackAngle;
     [SerializeField] GameObject meleeWeapon;
 
-    [Header("----- Enemy UI-----")]
-    //UI Needs To Be Fixed For HP Bars To Work
-    //[SerializeField] Image enemyHPBar;
-    //[SerializeField] GameObject UI;
+    [Header("-------Drops-------")]
+    [SerializeField] GameObject money;
+    [Range(0, 100)] [SerializeField] float moneyDropChance;
+    [SerializeField] float moneyDespawnTimer;
+    [SerializeField] GameObject ammo;
+    [Range(0, 100)] [SerializeField] float ammoDropChance;
+    [SerializeField] float ammoDespawnTimer;
 
     [Header("-------Enemy Animation-------")]
     [SerializeField] float deathFadeOutTime;
@@ -47,7 +51,9 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     [SerializeField] AudioClip[] enemyStepAudio;
     [Range(0, 1)] [SerializeField] public float enemyStepVolume;
 
-    private int HPOrg;
+
+    //Status Effect
+    private StatusEffect _data;
     private bool isAttacking;
     private Vector3 playerDir;
     private bool isMoving;
@@ -55,22 +61,25 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     private float angleToPlayer;
     private bool isAlive = true;
     private MeshRenderer weaponRenderer;
+    private float moveSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        HPOrg = HP;
         weaponRenderer = meleeWeapon.GetComponent<MeshRenderer>();
-        //updateEnemyHPBar();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (isAlive)
         {
+            if (_data != null)
+            {
+                HandleEffect();
+            }
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-
             canSeePlayer();
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
             {
@@ -93,7 +102,6 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         distance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position);
-        Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
@@ -112,42 +120,46 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     public void takeDamage(int dmg)
     {
 
-        HP -= dmg;
-        //updateEnemyHPBar();
-        StartCoroutine(flashDamage());
-        //UI.gameObject.SetActive(true);
+        if (isAlive)
+        {
+            HP -= dmg;
+            StartCoroutine(flashDamage());
+        }
 
         if (HP <= 0)
         {
-            isAlive = false;
-            agent.speed = 0;
-            gameManager.instance.EnemiesInWaveCount--;
-            gameManager.instance.updateTotalEnemyCount(-1);
-            gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
-            StartCoroutine(DeathAnimation());
+            Death();
+        }
+    }
+
+    void Drop()
+    {
+        // 50% chance to drop money
+        if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
+        {
+
+            GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+
+            Destroy(cash, moneyDespawnTimer);
+        }
+
+        // 80% chance to drop ammo
+        if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
+        {
+            GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            Destroy(ammunition, ammoDespawnTimer);
         }
     }
 
     IEnumerator flashDamage()
     {
         // plays grunt noise to signal that the enemy took damage
-        //enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
+        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         model.material.color = Color.white;
     }
 
-    /*
-    public void updateEnemyHPBar()
-    {
-        enemyHPBar.fillAmount = (float)HP / (float)HPOrg;
-    }
-    */
-
-    /*
-     * attackEntry and attackExit are set to be used with animation frames
-     * The functions should be named the same on the functions tab of read-only animations i.e. Unity Asset Store Animations
-     */
     void attackEntry()
     {
         meleeWeapon.GetComponent<BoxCollider>().isTrigger = true;
@@ -164,9 +176,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     {
         isAttacking = true;
         anim.SetTrigger("Swing");
-        attackEntry();
-        yield return new WaitForSeconds(hitDelay);
-        attackExit();
+        yield return null;
         isAttacking = false;
     }
 
@@ -174,11 +184,73 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     {
         isMoving = true;
         //plays footsteps of enemy
-        //enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
+        enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
         yield return new WaitForSeconds(0.5f);
 
         isMoving = false;
+    }
+
+    //----Status Effect Methods
+
+    private GameObject _effectParticles;
+
+    private float CurrentEffectTime = 0f;
+    private float nextTickTime = 0f;
+
+    public void ApplyEffect(StatusEffect _data)
+    {
+        RemoveEffect();
+        this._data = _data;
+        agent.speed = moveSpeed / _data.MovementPentalty;
+        _effectParticles = Instantiate(_data.EffectParticles, transform);
+    }
+
+    public void RemoveEffect()
+    {
+        _data = null;
+        CurrentEffectTime = 0;
+        nextTickTime = 0;
+        agent.speed = moveSpeed;
+        if (_effectParticles != null)
+        {
+            Destroy(_effectParticles);
+        }
+    }
+
+    public void HandleEffect()
+    {
+        CurrentEffectTime += Time.deltaTime;
+
+        if (CurrentEffectTime >= +_data.Lifetime)
+        {
+            RemoveEffect();
+        }
+        if (_data == null)
+        {
+            return;
+        }
+        if (_data.DamageOverTimeAmount != 0 && CurrentEffectTime > nextTickTime)
+        {
+            nextTickTime += _data.TickSpeed;
+            HP -= _data.DamageOverTimeAmount;
+            if (HP <= 0)
+            {
+                Death();
+            }
+        }
+    }
+
+    void Death()
+    {
+        agent.speed = 0;
+        agent.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        isAlive = false;
+        StartCoroutine(DeathAnimation());
+        Drop();
+        gameManager.instance.EnemiesInWaveCount--;
+        gameManager.instance.updateTotalEnemyCount(-1);
     }
 
     /*
@@ -188,13 +260,13 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
     {
         anim.SetTrigger("Death");
         yield return new WaitForSeconds(deathAnimationTime);
-        yield return StartCoroutine(DeathFadeOut());
+        StartCoroutine(DeathFadeOut());
     }
 
     IEnumerator DeathFadeOut()
     {
-        setToFade();
-        for (float t = 0.0f; t < 1.0f; t+= Time.deltaTime/deathFadeOutTime)
+        SetToFade();
+        for (float t = 0.0f; t < deathFadeOutTime; t+= Time.deltaTime)
         {
             model.material.color = new Color(model.material.color.r, model.material.color.g, model.material.color.b, Mathf.Lerp(model.material.color.a, 0, t));
             weaponRenderer.material.color = new Color(weaponRenderer.material.color.r, weaponRenderer.material.color.g, weaponRenderer.material.color.b, Mathf.Lerp(weaponRenderer.material.color.a, 0, t));
@@ -204,7 +276,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
         Destroy(gameObject);
     }
 
-    void setToFade()
+    void SetToFade()
     {
         weaponRenderer.material.SetOverrideTag("RenderType", "Transparent");
         weaponRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);

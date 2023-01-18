@@ -439,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 2076257112, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: c8021134641064149a5dbd1dd4f2d791, type: 3}
+      objectReference: {fileID: 8300000, guid: 3d803699c07149546a685982ccc3da11, type: 3}
     - target: {fileID: 7544070412963438443, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_Name
       value: BackButton
@@ -452,13 +452,29 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7544070413175280688, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544070413326598281, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7544070413427417149, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_Name
       value: BackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070413466459441, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070413466459441, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070413466459441, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.465
       objectReference: {fileID: 0}
     - target: {fileID: 7544070413514004256, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_Name
@@ -466,7 +482,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544070413514004256, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070413981549167, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070413981549167, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070413981549167, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.465
       objectReference: {fileID: 0}
     - target: {fileID: 7544070414242860156, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_Name
@@ -520,6 +548,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GRAPHICSButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7544070414343789928, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070414343789928, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544070414440394490, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_Name
       value: OptionsMenu
@@ -528,6 +564,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VOLUMEButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7544070414526589657, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070414526589657, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544070414561246227, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_Name
       value: GraphicsMenu
@@ -535,6 +579,10 @@ PrefabInstance:
     - target: {fileID: 7544070414824541810, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544070414824541810, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7544070414824541810, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_AnchorMin.x

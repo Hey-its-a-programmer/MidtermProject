@@ -152,20 +152,24 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
-
-
-               
-                if (hit.collider.GetComponent<IDamage>() != null )
+                if (hit.collider.GetComponent<IDamage>() != null)
                 {
+
+
+                    hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
+                }
+
+                else if (hit.collider.GetComponent<IEffectable>() != null)
+                {
+
                     var effectable = hit.collider.GetComponent<IEffectable>();
                     if (effectable != null)
                     {
                         effectable.ApplyEffect(_data);
                     }
-
-                    hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
-                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
+
                 else
                 {
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);

@@ -18,15 +18,25 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int coinValueMin;
     [SerializeField] int coinValueMax;
-    //[SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
     [SerializeField] Transform dropSpawnPos;
-    //[SerializeField] int pushBackTime;
-    //[SerializeField] Vector3 enemyVelocity;
     [Header("----- Enemy Gun Stats-----")]
     [SerializeField] float shootRate;
+    [SerializeField] float shootAngle;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
+
+    [Header("-------Drops-------")]
+    [SerializeField] GameObject money;
+    [Range(0, 100)] [SerializeField] float moneyDropChance;
+    [SerializeField] float moneyDespawnTimer;
+    [SerializeField] GameObject ammo;
+    [Range(0, 100)] [SerializeField] float ammoDropChance;
+    [SerializeField] float ammoDespawnTimer;
+
+    [Header("-------Enemy Animation-------")]
+    [SerializeField] float deathFadeOutTime;
+    [SerializeField] float deathAnimationTime;
 
     [Header("----- Enemy UI-----")]
     [SerializeField] Image enemyHPbar;
@@ -37,23 +47,24 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     //sound for when enemy shoots
     [SerializeField] AudioClip gunShotClip;
-    [Range(0, 1)] [SerializeField] public float gunShotVolume;
+
+    [Range(0, 1)] public float gunShotVolume;
 
     // sounds for when enemy is damaged
     [SerializeField] AudioClip[] enemyHurtAudio;
-    [Range(0, 1)] [SerializeField] public float enemyHurtVolume;
+
+    [Range(0, 1)] public float enemyHurtVolume;
 
     //sounds for when enemy is walking
     [SerializeField] AudioClip[] enemyStepAudio;
-    [Range(0, 1)] [SerializeField] public float enemyStepVolume;
-[Header("-------Drops-------")]
-    [SerializeField] GameObject money;
-    [SerializeField] GameObject ammo;//Status Effect
-    private StatusEffect _data;    int HPOrg;
+    [Range(0, 1)] public float enemyStepVolume;
+
+    //Status Effect
+    private StatusEffect _data;
     private float _currentMoveSpeed;
     float moveSpeed;
     bool isShooting;
-    bool playerInRange;
+    private bool isAlive = true;
     Vector3 playerDir;
     bool isMoving;
     float angleToPlayer;
@@ -61,30 +72,29 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     // Start is called before the first frame update
     void Start()
     {
-        HPOrg = HP;
         moveSpeed = agent.speed;
         //_currentMoveSpeed = moveSpeed;
         
-        //AJ changes
-        updateEnemyHPBar();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_data != null) HandleEffect();
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-        if (playerInRange)
+
+        if (isAlive)
         {
+            if (_data != null)
+            {
+                HandleEffect();
+            }
+            anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
             canSeePlayer();
-            agent.SetDestination(gameManager.instance.player.transform.position);
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
             {
                 // if the enemy is standing still, this sound won't play
                 StartCoroutine(EnemySteps());
             }
         }
-       
     }
     void facePlayer()
     {
@@ -93,45 +103,22 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-        }
-    }
 
     void canSeePlayer()
     {
-        playerDir = (gameManager.instance.player.transform.position - headPos.position);
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
 
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(headPos.position, playerDir);
-
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-
-            if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
+            if (hit.collider.CompareTag("Player"))
             {
-                if (!isShooting && angleToPlayer <= 15)
+                agent.SetDestination(gameManager.instance.player.transform.position);
+                facePlayer();
+                if (!isShooting && angleToPlayer <= shootAngle)
                 {
                     StartCoroutine(shoot());
-
-                    if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
-                        facePlayer();
-                    }
                 }
             }
         }
@@ -139,39 +126,33 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     public void takeDamage(int dmg)
     {
-
-        HP -= dmg;
-        updateEnemyHPBar();
-        StartCoroutine(flashDamage());
-        UI.gameObject.SetActive(true);
-        
-        if (HP <= 0)
+        if (isAlive)
         {
-            Destroy(gameObject);
-            Drop();
-            gameManager.instance.EnemiesInWaveCount--;
-            gameManager.instance.updateTotalEnemyCount(-1);
+            HP -= dmg;
+            StartCoroutine(flashDamage());
+        }
+
+        if (HP <= 0 && isAlive)
+        {
+            Death();
         }
     }
 
     void Drop()
     {
         // 50% chance to drop money
-        if (Random.Range(0.0f, 100.0f) >= 50.0f)
+        if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
         {
-            Vector3 dropPos = dropSpawnPos.position;
-            GameObject cash = Instantiate(money, dropPos + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+            GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
             cash.SetActive(true);
-            Destroy(cash, 10.0f);
+            Destroy(cash, moneyDespawnTimer);
         }
 
         // 80% chance to drop ammo
-        if (Random.Range(0.0f, 100.0f) <= 80.0f)
+        if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
         {
-            Vector3 dropPos = dropSpawnPos.position;
-            GameObject ammunition = Instantiate(ammo, dropPos + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
-            ammunition.SetActive(true);
-            Destroy(ammunition, 10.0f);
+            GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            Destroy(ammunition, ammoDespawnTimer);
         }
     }
 
@@ -189,7 +170,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         isShooting = true;
 
         Instantiate(bullet, shootPos.position, transform.rotation);
-
+        anim.SetTrigger("Shoot");
         // same gunshot noise as player for now
         enemyAud.PlayOneShot(gunShotClip, gunShotVolume);
 
@@ -209,17 +190,6 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
         isMoving = false;
     }
-    /*public void enemyHP()
-    {
-        enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
-
-    }*/
-
-    public void updateEnemyHPBar()
-    {
-        enemyHPbar.fillAmount = (float)HP / (float)HPOrg;
-    }
-
     //----Status Effect Methods
     
     private GameObject _effectParticles;
@@ -234,6 +204,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         agent.speed = moveSpeed / _data.MovementPentalty;
         _effectParticles = Instantiate(_data.EffectParticles, transform);
     }
+
     public void RemoveEffect()
     {
         _data = null;
@@ -245,6 +216,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             Destroy(_effectParticles);
         }
     }
+
     public void HandleEffect()
     {
         CurrentEffectTime += Time.deltaTime;
@@ -263,11 +235,68 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             HP -= _data.DamageOverTimeAmount;
             if (HP <= 0)
             {
-                gameManager.instance.EnemiesInWaveCount--;
-                gameManager.instance.updateTotalEnemyCount(-1);
-                gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
-                Destroy(gameObject);
+                Death();
             }
         }
+    }
+    void Death()
+    {
+        agent.speed = 0;
+        agent.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        isAlive = false;
+        StartCoroutine(DeathAnimation());
+        Drop();
+        gameManager.instance.EnemiesInWaveCount--;
+        gameManager.instance.updateTotalEnemyCount(-1);
+    }
+
+    /*
+    * The corutines and setToFade all deal with death animations and fading out
+    */
+    IEnumerator DeathAnimation()
+    {
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(deathAnimationTime);
+        StartCoroutine(DeathFadeOut());
+    }
+
+    //Make weaponRenderer a thing (most likely a GameObject) if we are going to use another model for the gun
+    IEnumerator DeathFadeOut()
+    {
+        SetToFade();
+        for (float t = 0.0f; t < deathFadeOutTime; t += Time.deltaTime)
+        {
+            model.material.color = new Color(model.material.color.r, model.material.color.g, model.material.color.b, Mathf.Lerp(model.material.color.a, 0, t));
+            /*
+            weaponRenderer.material.color = new Color(weaponRenderer.material.color.r, weaponRenderer.material.color.g, weaponRenderer.material.color.b, Mathf.Lerp(weaponRenderer.material.color.a, 0, t));
+            */
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    void SetToFade()
+    {
+        /*
+        weaponRenderer.material.SetOverrideTag("RenderType", "Transparent");
+        weaponRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        weaponRenderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        weaponRenderer.material.SetInt("_ZWrite", 0);
+        weaponRenderer.material.DisableKeyword("_ALPHATEST_ON");
+        weaponRenderer.material.EnableKeyword("_ALPHABLEND_ON");
+        weaponRenderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        weaponRenderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        */
+
+        model.material.SetOverrideTag("RenderType", "Transparent");
+        model.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        model.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        model.material.SetInt("_ZWrite", 0);
+        model.material.DisableKeyword("_ALPHATEST_ON");
+        model.material.EnableKeyword("_ALPHABLEND_ON");
+        model.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        model.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 }
