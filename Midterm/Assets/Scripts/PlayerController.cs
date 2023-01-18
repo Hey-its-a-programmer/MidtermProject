@@ -72,10 +72,12 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching;
     private float originalPlayerHeight;
   
+
     private void Start()
     {
         controller.enabled = true;
-        originalPlayerHeight = controller.height;        maxAmmo = gunList[0].maxAmmo;
+        originalPlayerHeight = controller.height;        
+        maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
         
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
@@ -89,6 +91,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        playerSprint();
         if (!gameManager.instance.isPaused)
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
@@ -114,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     void movement()
     {
-        
+
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -168,12 +171,14 @@ public class PlayerController : MonoBehaviour
                     {
                         effectable.ApplyEffect(_data);
                     }
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
 
                 else
                 {
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
                 }
+
 
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 yield return new WaitForSeconds(shootRate);
@@ -220,6 +225,8 @@ public class PlayerController : MonoBehaviour
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
+    
+
 
     public void resetPlayerHP()
     {
@@ -242,7 +249,7 @@ public class PlayerController : MonoBehaviour
 
             if (!isSprinting)
             {
-                playerSpeed = playerSpeed + sprintSpeed;
+                playerSpeed += sprintSpeed;
 
                 isSprinting = true;
             }
@@ -287,7 +294,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void HealthPickup(MedkitStats medStat)
-    { 
+    {
         if (HP < HPOrig)
         {
             gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
@@ -298,10 +305,7 @@ public class PlayerController : MonoBehaviour
             }
             updatePlayerHPbar();
         }
-        else
-        {
-            gameObject.GetComponent<SphereCollider>().isTrigger = false;
-        }
+
     }
 
     public void MoneyPickup(MoneyStats monStat)
@@ -322,12 +326,13 @@ public class PlayerController : MonoBehaviour
                 currentAmmo = maxAmmo;
             }
         }
+
         else
         {
             gameObject.GetComponent<BoxCollider>().isTrigger = false;
         }
     }
-   public List<gunStats> GunList
+    public List<gunStats> GunList
     {
         get { return gunList; }
         set { gunList = value; }
@@ -368,6 +373,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
+
     public int CurrentAmmo
     {
         get { return currentAmmo; }
@@ -387,5 +393,11 @@ public class PlayerController : MonoBehaviour
             controller.height = Mathf.Lerp(controller.height, originalPlayerHeight, crouchTime);
             isCrouching = false;
         }
+    }
+
+    public int PlayerHealth
+    {
+        get { return HP; }
+        set { HP = value; }
     }
 }

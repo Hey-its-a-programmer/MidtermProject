@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class shopUI : MonoBehaviour
 {
-    //Made Into Singlton
+    //Made Into Singleton
     //Couldn't get reference of object in Shop UI without it.
     //Probably should be in Game Manager
     [SerializeField] AudioSource shopAud;
@@ -13,10 +13,10 @@ public class shopUI : MonoBehaviour
     [SerializeField] private GameObject shopInterface;
     [SerializeField] TextMeshProUGUI shopGunName;
     [SerializeField] TextMeshProUGUI shopGunPrice;
-    [SerializeField] private GameObject pressE;
+    [SerializeField] private GameObject pressAccept;
     private bool triggerActive = false;
     [SerializeField] GameObject gunShopModel;
-    [SerializeField] gunStats[] gunSelection;
+    [SerializeField] List<gunStats> gunSelection = new ();
     private int shopIterator;
 
     //shop theme
@@ -29,14 +29,26 @@ public class shopUI : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             triggerActive = true;
-            pressE.SetActive(true);
+            pressAccept.SetActive(true);
         }
         
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (gameManager.instance.activeMenu != null)
+            {
+                turnOffShopUI();
+            }
+            triggerActive = false;
+            pressAccept.SetActive(false);
+        }
     }
 
     private void Update()
     {
-        if (triggerActive && Input.GetKey(KeyCode.E))
+        if (triggerActive && Input.GetButton("Accept"))
         {
             turnOnShopUI();
             instance = this;
@@ -44,12 +56,8 @@ public class shopUI : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel") && gameManager.instance.activeMenu == shopInterface)
         {
-            gameManager.instance.gameManagerAud.loop = false;
-            gameManager.instance.activeMenu.SetActive(false);
-            Cursor.visible = false;
-            gameManager.instance.turnCameraOn = true;
-            pressE.SetActive(true);
-            shopAud.Stop();
+            turnOffShopUI();
+            instance = null;
         }
     }
 
@@ -60,18 +68,7 @@ public class shopUI : MonoBehaviour
 
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (gameManager.instance.activeMenu != null)
-            {
-                turnOffShopUI();
-            }
-            triggerActive = false;
-            pressE.SetActive(false);
-        }
-    }
+
 
     public void setGunModel(int iterator)
     {
@@ -82,10 +79,11 @@ public class shopUI : MonoBehaviour
     private void turnOnShopUI()
     {
         shopActions();
-        pressE.SetActive(false);
+        pressAccept.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         gameManager.instance.turnCameraOn = false;
+        gameManager.instance.playerHUD.SetActive(false);
         setGunModel(shopIterator);
         setGunText();
         shopAud.clip = shopMusic;
@@ -96,15 +94,19 @@ public class shopUI : MonoBehaviour
     private void turnOffShopUI()
     {
         gameManager.instance.activeMenu.SetActive(false);
+        gameManager.instance.playerHUD.SetActive(true);
         gameManager.instance.activeMenu = null;
+        pressAccept.SetActive(true);
         Cursor.visible = false;
         gameManager.instance.turnCameraOn = true;
+        gameManager.instance.gameManagerAud.loop = false;
+        shopAud.Stop();
     }
 
 
     public void next()
     {
-        if (shopIterator < gunSelection.Length - 1)
+        if (shopIterator < gunSelection.Count - 1)
         {
             shopIterator++;
             setGunModel(shopIterator);
@@ -131,7 +133,6 @@ public class shopUI : MonoBehaviour
             gameManager.instance.playerScript.coins -= gunSelection[shopIterator].gunPrice;
             gameManager.instance.playerScript.gunPickup(gunSelection[shopIterator]);
         }
-
     }
 
     private void setGunText()
