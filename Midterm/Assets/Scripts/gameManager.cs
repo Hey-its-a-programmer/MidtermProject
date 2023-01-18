@@ -19,12 +19,14 @@ public class gameManager : MonoBehaviour
     public GameObject activeMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
+    public GameObject GameOverMenu;
     public GameObject playerFlashDamage;
     //Player HUD
     public Image playerHPBar;
     [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
     [SerializeField] TextMeshProUGUI playerMoney;
+    [SerializeField] TextMeshProUGUI PlayerLives;
     public TextMeshProUGUI waveNameText;
     [SerializeField] TextMeshProUGUI ammoText;
     public GameObject playerHUD;
@@ -98,6 +100,9 @@ public class gameManager : MonoBehaviour
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
         playerMoney.text = playerScript.coins.ToString("F0");
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
+        PlayerLives.text = playerScript.lifeCounter.ToString("F0");
+
+
         UpdateVolume();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
