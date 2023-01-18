@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float crouchHeight;
     [SerializeField] float crouchTime;
     [SerializeField] int pushBackTime;
+    public int lifeCounter = 3;
+
     public int coins;
 
     [Header("-----Gun Stats-----")]
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
-  
+
     private bool isShooting;
     private bool isSprinting;
     private float speedOrig;
@@ -68,18 +70,18 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
 
-    
+
     private bool isCrouching;
     private float originalPlayerHeight;
-  
+
 
     private void Start()
     {
         controller.enabled = true;
-        originalPlayerHeight = controller.height;        
+        originalPlayerHeight = controller.height;
         maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
-        
+
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
@@ -189,8 +191,8 @@ public class PlayerController : MonoBehaviour
 
 
     }
-   
-   
+
+
 
     public void takeDamage(int dmg)
     {
@@ -200,14 +202,29 @@ public class PlayerController : MonoBehaviour
         updatePlayerHPbar();
 
         StartCoroutine(playerDamageFlash());
+
         if (HP <= 0)
         {
-            controller.enabled = false;
-            playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
-            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
-            gameManager.instance.pause();
-            gameManager.instance.loseMenu.SetActive(true);
-            gameManager.instance.activeMenu = gameManager.instance.loseMenu;
+            lifeCounter--;
+            if (lifeCounter <= 0)
+            {
+                controller.enabled = false;
+                playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
+                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
+                gameManager.instance.pause();
+                gameManager.instance.GameOverMenu.SetActive(true);
+                gameManager.instance.activeMenu = gameManager.instance.GameOverMenu;
+            }
+            else
+            {
+                controller.enabled = false;
+                playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
+                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
+                gameManager.instance.pause();
+                gameManager.instance.loseMenu.SetActive(true);
+                gameManager.instance.activeMenu = gameManager.instance.loseMenu;
+
+            }
         }
     }
 
@@ -225,7 +242,7 @@ public class PlayerController : MonoBehaviour
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
-    
+
 
 
     public void resetPlayerHP()
@@ -388,7 +405,7 @@ public class PlayerController : MonoBehaviour
             controller.height = Mathf.Lerp(controller.height, crouchHeight, crouchTime);
         }
 
-        else if(!Input.GetKey(KeyCode.LeftControl) && isCrouching && controller.isGrounded)
+        else if (!Input.GetKey(KeyCode.LeftControl) && isCrouching && controller.isGrounded)
         {
             controller.height = Mathf.Lerp(controller.height, originalPlayerHeight, crouchTime);
             isCrouching = false;
