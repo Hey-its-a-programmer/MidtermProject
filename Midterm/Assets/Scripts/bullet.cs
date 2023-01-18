@@ -20,7 +20,7 @@ public class bullet : MonoBehaviour
     void Start()
     {
         //AJ changes
-        rb.velocity = (gameManager.instance.player.transform.position - transform.position) * speed;
+        rb.velocity = transform.forward * speed;
         //
         Destroy(gameObject, timer);
     }

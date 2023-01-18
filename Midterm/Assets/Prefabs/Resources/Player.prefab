@@ -251,6 +251,7 @@ MonoBehaviour:
   crouchHeight: 0
   crouchTime: 0
   pushBackTime: 3
+  lifeCounter: 3
   coins: 0
   gunList: []
   shootRate: 0
