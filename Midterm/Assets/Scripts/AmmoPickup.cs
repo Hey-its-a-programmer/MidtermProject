@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoPickup : MonoBehaviour
 {
-    [SerializeField] AmmoStats ammo;
+   /* [SerializeField] AmmoStats ammo;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -14,4 +14,5 @@ public class AmmoPickup : MonoBehaviour
             Destroy(gameObject);
         }
     }
+   */
 }
