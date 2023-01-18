@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class enemyMeleeAI : MonoBehaviour
+public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
 {
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
@@ -17,16 +17,24 @@ public class enemyMeleeAI : MonoBehaviour
     [SerializeField] int coinValueMax;
     [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform dropSpawnPos;
 
     [Header("----- Enemy Melee Stats-----")]
-    [SerializeField] float hitRate;
+    [SerializeField] float hitDelay;
     [SerializeField] float attackAngle;
     [SerializeField] GameObject meleeWeapon;
 
-    [Header("----- Enemy UI-----")]
-    //UI Needs To Be Fixed For HP Bars To Work
-    //[SerializeField] Image enemyHPBar;
-    //[SerializeField] GameObject UI;
+    [Header("-------Drops-------")]
+    [SerializeField] GameObject money;
+    [Range(0, 100)] [SerializeField] float moneyDropChance;
+    [SerializeField] float moneyDespawnTimer;
+    [SerializeField] GameObject ammo;
+    [Range(0, 100)] [SerializeField] float ammoDropChance;
+    [SerializeField] float ammoDespawnTimer;
+
+    [Header("-------Enemy Animation-------")]
+    [SerializeField] float deathFadeOutTime;
+    [SerializeField] float deathAnimationTime;
 
     [Header("-------Enemy Audio-------")]
     [SerializeField] AudioSource enemyAud;
@@ -43,32 +51,42 @@ public class enemyMeleeAI : MonoBehaviour
     [SerializeField] AudioClip[] enemyStepAudio;
     [Range(0, 1)] [SerializeField] public float enemyStepVolume;
 
-    private int HPOrg;
+
+    //Status Effect
+    private StatusEffect _data;
     private bool isAttacking;
     private Vector3 playerDir;
     private bool isMoving;
     private float distance;
-
     private float angleToPlayer;
+    private bool isAlive = true;
+    private MeshRenderer weaponRenderer;
+    private float moveSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        HPOrg = HP;
-        //updateEnemyHPBar();
+        weaponRenderer = meleeWeapon.GetComponent<MeshRenderer>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
-        canSeePlayer();
-        if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
+        if (isAlive)
         {
-            StartCoroutine(EnemySteps());
+            if (_data != null)
+            {
+                HandleEffect();
+            }
+            anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+            canSeePlayer();
+            if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
+            {
+                StartCoroutine(EnemySteps());
+            }
         }
 
-        
     }
     void facePlayer()
     {
@@ -84,26 +102,16 @@ public class enemyMeleeAI : MonoBehaviour
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         distance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position);
-        //Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (hit.collider.CompareTag("Player") /*&& angleToPlayer <= sightAngle*/)
+            if (hit.collider.CompareTag("Player"))
             {
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                //transform.LookAt(gameManager.instance.player.transform.position);
                 facePlayer();
-                if (!isAttacking && angleToPlayer <= attackAngle && distance <= agent.stoppingDistance)
+                if (!isAttacking && angleToPlayer <= attackAngle && distance <= agent.stoppingDistance + 1)
                 {
-                    //Debug.Log("Attacking");
                     StartCoroutine(attack());
-                    /*
-                    if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
-                        facePlayer();
-                    }
-                    */
                 }
             }
         }
@@ -112,17 +120,34 @@ public class enemyMeleeAI : MonoBehaviour
     public void takeDamage(int dmg)
     {
 
-        HP -= dmg;
-        //updateEnemyHPBar();
-        StartCoroutine(flashDamage());
-        //UI.gameObject.SetActive(true);
+        if (isAlive)
+        {
+            HP -= dmg;
+            StartCoroutine(flashDamage());
+        }
 
         if (HP <= 0)
         {
-            gameManager.instance.EnemiesInWaveCount--;
-            gameManager.instance.updateTotalEnemyCount(-1);
-            gameManager.instance.playerScript.coins += Random.Range(coinValueMin, coinValueMax);
-            Destroy(gameObject);
+            Death();
+        }
+    }
+
+    void Drop()
+    {
+        // 50% chance to drop money
+        if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
+        {
+
+            GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+
+            Destroy(cash, moneyDespawnTimer);
+        }
+
+        // 80% chance to drop ammo
+        if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
+        {
+            GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            Destroy(ammunition, ammoDespawnTimer);
         }
     }
 
@@ -134,7 +159,7 @@ public class enemyMeleeAI : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         model.material.color = Color.white;
     }
-    
+
     void attackEntry()
     {
         meleeWeapon.GetComponent<BoxCollider>().isTrigger = true;
@@ -151,9 +176,7 @@ public class enemyMeleeAI : MonoBehaviour
     {
         isAttacking = true;
         anim.SetTrigger("Swing");
-        attackEntry();
-        yield return new WaitForSeconds(hitRate);
-        attackExit();
+        yield return null;
         isAttacking = false;
     }
 
@@ -168,10 +191,110 @@ public class enemyMeleeAI : MonoBehaviour
         isMoving = false;
     }
 
-    /*
-    public void updateEnemyHPBar()
+    //----Status Effect Methods
+
+    private GameObject _effectParticles;
+
+    private float CurrentEffectTime = 0f;
+    private float nextTickTime = 0f;
+
+    public void ApplyEffect(StatusEffect _data)
     {
-        enemyHPBar.fillAmount = (float)HP / (float)HPOrg;
+        RemoveEffect();
+        this._data = _data;
+        agent.speed = moveSpeed / _data.MovementPentalty;
+        _effectParticles = Instantiate(_data.EffectParticles, transform);
     }
-    */
+
+    public void RemoveEffect()
+    {
+        _data = null;
+        CurrentEffectTime = 0;
+        nextTickTime = 0;
+        agent.speed = moveSpeed;
+        if (_effectParticles != null)
+        {
+            Destroy(_effectParticles);
+        }
+    }
+
+    public void HandleEffect()
+    {
+        CurrentEffectTime += Time.deltaTime;
+
+        if (CurrentEffectTime >= +_data.Lifetime)
+        {
+            RemoveEffect();
+        }
+        if (_data == null)
+        {
+            return;
+        }
+        if (_data.DamageOverTimeAmount != 0 && CurrentEffectTime > nextTickTime)
+        {
+            nextTickTime += _data.TickSpeed;
+            HP -= _data.DamageOverTimeAmount;
+            if (HP <= 0)
+            {
+                Death();
+            }
+        }
+    }
+
+    void Death()
+    {
+        agent.speed = 0;
+        agent.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        isAlive = false;
+        StartCoroutine(DeathAnimation());
+        Drop();
+        gameManager.instance.EnemiesInWaveCount--;
+        gameManager.instance.updateTotalEnemyCount(-1);
+    }
+
+    /*
+     * The corutines and setToFade all deal with death animations and fading out
+     */
+    IEnumerator DeathAnimation()
+    {
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(deathAnimationTime);
+        StartCoroutine(DeathFadeOut());
+    }
+
+    IEnumerator DeathFadeOut()
+    {
+        SetToFade();
+        for (float t = 0.0f; t < deathFadeOutTime; t+= Time.deltaTime)
+        {
+            model.material.color = new Color(model.material.color.r, model.material.color.g, model.material.color.b, Mathf.Lerp(model.material.color.a, 0, t));
+            weaponRenderer.material.color = new Color(weaponRenderer.material.color.r, weaponRenderer.material.color.g, weaponRenderer.material.color.b, Mathf.Lerp(weaponRenderer.material.color.a, 0, t));
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    void SetToFade()
+    {
+        weaponRenderer.material.SetOverrideTag("RenderType", "Transparent");
+        weaponRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        weaponRenderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        weaponRenderer.material.SetInt("_ZWrite", 0);
+        weaponRenderer.material.DisableKeyword("_ALPHATEST_ON");
+        weaponRenderer.material.EnableKeyword("_ALPHABLEND_ON");
+        weaponRenderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        weaponRenderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+
+        model.material.SetOverrideTag("RenderType", "Transparent");
+        model.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        model.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        model.material.SetInt("_ZWrite", 0);
+        model.material.DisableKeyword("_ALPHATEST_ON");
+        model.material.EnableKeyword("_ALPHABLEND_ON");
+        model.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        model.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+    }
+
 }

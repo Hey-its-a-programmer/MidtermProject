@@ -7,8 +7,7 @@ TagManager:
   - Player Spawn Pos
   - Enemy
   - Door
-  - Room One
-  - Room One Spawn
+  - Door Spawn Pos
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - Enemy Bullet
   - Interactable
   - Weapon
-  - 
+  - Ignore Collision
   - 
   - 
   - 

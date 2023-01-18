@@ -65,6 +65,8 @@ public class gameManager : MonoBehaviour
 
 
     [Header("----- Other Functions -----")]
+    [SerializeField] Transform doorSpawnPos;
+    [SerializeField] GameObject door;
     public bool isPaused;
     float timeScaleOrig;
     public GameObject playerSpawnPos;
@@ -98,9 +100,7 @@ public class gameManager : MonoBehaviour
         ammoText.text = playerScript.CurrentAmmo.ToString("F0");
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
         playerMoney.text = playerScript.coins.ToString("F0");
-        //AJ changes
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
-        //
         UpdateVolume();
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
@@ -150,12 +150,15 @@ public class gameManager : MonoBehaviour
         TotalEnemyCount += amount;
         if (TotalEnemyCount <= 0)
         {
+            Vector3 doorSpawn = doorSpawnPos.position;
+            GameObject spawnedDoor = Instantiate(door, doorSpawn + new Vector3(0.0f, 1.5f, 0.0f), Quaternion.identity);
+            spawnedDoor.SetActive(true);
             //plays fanfare for winning
-            gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
+            //gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
 
-            winMenu.SetActive(true);
-            pause();
-            activeMenu = winMenu;
+            //winMenu.SetActive(true);
+            //pause();
+            //activeMenu = winMenu;
         }
     }
 
