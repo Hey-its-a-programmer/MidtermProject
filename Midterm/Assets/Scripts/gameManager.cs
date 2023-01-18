@@ -18,18 +18,14 @@ public class gameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject playerFlashDamage;
+    //Player HUD
     public Image playerHPBar;
     [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
     [SerializeField] TextMeshProUGUI playerMoney;
     public TextMeshProUGUI waveNameText;
     [SerializeField] TextMeshProUGUI ammoText;
-  
-
-
-
-
-
+    public GameObject playerHUD;
     [Header("-------Game Audio-------")]
     [SerializeField] public AudioSource gameManagerAud;
     [Range(0, 1)] [SerializeField] public float masterVolume;
@@ -144,17 +140,21 @@ public class gameManager : MonoBehaviour
     {
 
         TotalEnemyCount += amount;
-        if (TotalEnemyCount <= 0)
-        {
-            Vector3 doorSpawn = doorSpawnPos.position;
-            GameObject spawnedDoor = Instantiate(door, doorSpawn + new Vector3(0.0f, 1.5f, 0.0f), Quaternion.identity);
-            spawnedDoor.SetActive(true);
-            //plays fanfare for winning
-            //gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
 
+        if (totalEnemyCount <= 0)
+        {
             //winMenu.SetActive(true);
             //pause();
             //activeMenu = winMenu;
+
+            //plays fanfare for winning
+            //gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
+
+
+            Vector3 doorSpawn = doorSpawnPos.position;
+            GameObject spawnedDoor = Instantiate(door, doorSpawn + new Vector3(0.0f, 1.5f, 0.0f), Quaternion.identity);
+            spawnedDoor.SetActive(true);
+         
         }
     }
 
@@ -182,12 +182,6 @@ public class gameManager : MonoBehaviour
 
         enemiesInWaveCount += amount;
         enemyRemaining.text = enemiesInWaveCount.ToString("F0");
-        if (enemiesInWaveCount <= 0)
-        {
-            winMenu.SetActive(true);
-            pause();
-            activeMenu = winMenu;
-        }
     }
 
     void UpdateVolume()

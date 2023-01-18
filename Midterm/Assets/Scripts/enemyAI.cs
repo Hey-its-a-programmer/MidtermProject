@@ -152,6 +152,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
         {
             GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+            ammunition.SetActive(true);
             Destroy(ammunition, ammoDespawnTimer);
         }
     }
@@ -244,6 +245,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         agent.speed = 0;
         agent.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         isAlive = false;
         StartCoroutine(DeathAnimation());
         Drop();

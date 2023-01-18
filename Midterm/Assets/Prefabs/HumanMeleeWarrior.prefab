@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4072911019675824182}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Drops Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ MonoBehaviour:
   coinValueMax: 1
   sightAngle: 3
   headPos: {fileID: 6775913925345856154}
-  dropSpawnPos: {fileID: 0}
+  dropSpawnPos: {fileID: 4072911019675824182}
   hitDelay: 1
   attackAngle: 90
   meleeWeapon: {fileID: 8570726855775773001}

@@ -75,7 +75,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller.enabled = true;
-        originalPlayerHeight = controller.height;        maxAmmo = gunList[0].maxAmmo;
+        originalPlayerHeight = controller.height;        
+        maxAmmo = gunList[0].maxAmmo;
         currentAmmo = maxAmmo;
         
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour
                     {
                         effectable.ApplyEffect(_data);
                     }
+                    gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
 
                 else
@@ -298,10 +300,7 @@ public class PlayerController : MonoBehaviour
             }
             updatePlayerHPbar();
         }
-        else
-        {
-            gameObject.GetComponent<SphereCollider>().isTrigger = false;
-        }
+
     }
 
     public void MoneyPickup(MoneyStats monStat)
@@ -322,6 +321,7 @@ public class PlayerController : MonoBehaviour
                 currentAmmo = maxAmmo;
             }
         }
+
         else
         {
             gameObject.GetComponent<BoxCollider>().isTrigger = false;
@@ -387,5 +387,11 @@ public class PlayerController : MonoBehaviour
             controller.height = Mathf.Lerp(controller.height, originalPlayerHeight, crouchTime);
             isCrouching = false;
         }
+    }
+
+    public int PlayerHealth
+    {
+        get { return HP; }
+        set { HP = value; }
     }
 }

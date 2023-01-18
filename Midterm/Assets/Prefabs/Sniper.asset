@@ -19,3 +19,6 @@ MonoBehaviour:
   gunPrice: 85
   gunModel: {fileID: 919132149155446097, guid: 60d91f925d8c1e442bb6596dfb94ffff, type: 3}
   gunshot: {fileID: 8300000, guid: 0d11b236ffba9b447ab244a6d16ca0ae, type: 3}
+  maxAmmo: 0
+  shootingAnimation: {fileID: 0}
+  idelAnimation: {fileID: 0}

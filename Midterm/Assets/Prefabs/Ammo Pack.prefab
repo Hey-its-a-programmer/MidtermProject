@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1900789991929956307}
   - component: {fileID: 1900789991929956306}
   - component: {fileID: -2433823634261460751}
-  - component: {fileID: 614909704061699771}
+  - component: {fileID: -2008952912373764890}
   m_Layer: 0
   m_Name: Ammo Pack
   m_TagString: Untagged
@@ -142,7 +142,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &614909704061699771
+--- !u!65 &-2008952912373764890
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

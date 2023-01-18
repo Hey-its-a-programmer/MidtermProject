@@ -495,11 +495,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3669634965721067501, guid: 067935bdf4574f94ea79b37eb89ff2e1, type: 3}
   m_PrefabInstance: {fileID: 2558173201958834344}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &1255762633492414283 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3669634965721067491, guid: 067935bdf4574f94ea79b37eb89ff2e1, type: 3}
-  m_PrefabInstance: {fileID: 2558173201958834344}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4318083592131067130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -525,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2225426937294193294, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 688.81
+      value: 823.3
       objectReference: {fileID: 0}
     - target: {fileID: 2225426937294193294, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -549,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3973448419213270174, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -272.5
+      value: -135.9
       objectReference: {fileID: 0}
     - target: {fileID: 3973448419213270174, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -580,6 +575,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252357142449, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: m_Name
+      value: Open Shop Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836452252357142449, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -601,11 +600,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252491077320, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1212
+      value: 1089
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252491077320, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 435.7
+      value: 439
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252511109286, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_LocalScale.x
@@ -625,11 +624,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252511109286, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1210
+      value: -1094.7
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252511109286, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 435.6
+      value: 438
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836452252511269544, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: m_text
+      value: Purchase Gun
       objectReference: {fileID: 0}
     - target: {fileID: 5836452252726320612, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_LocalScale.x
@@ -670,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 5836452253287903106, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1255762633492414283}
+      objectReference: {fileID: 0}
     - target: {fileID: 5836452253287903109, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -698,6 +701,18 @@ PrefabInstance:
     - target: {fileID: 5836452253501411148, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 447.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836452253501411149, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: m_Name
+      value: Purchase Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836452253998888172, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: m_Name
+      value: Open Shop Image
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836452254131794514, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: m_Name
+      value: Open Shop Text
       objectReference: {fileID: 0}
     - target: {fileID: 5836452254171531434, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: m_RootOrder
@@ -756,6 +771,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5836452254171531438, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+      propertyPath: pressAccept
+      value: 
+      objectReference: {fileID: 7715743960260189003}
+    - target: {fileID: 5836452254171531438, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
       propertyPath: shopGunPrice
       value: 
       objectReference: {fileID: 5302832298706369088}
@@ -802,6 +821,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7715743960260189003 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5836452252357142449, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}
+  m_PrefabInstance: {fileID: 4318083592131067130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7715743961801176144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5836452254171531434, guid: 9d6f224ff53827541ae7ad6a5437b4d2, type: 3}

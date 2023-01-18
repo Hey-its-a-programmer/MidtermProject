@@ -246,6 +246,8 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
         agent.speed = 0;
         agent.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        
         isAlive = false;
         StartCoroutine(DeathAnimation());
         Drop();
