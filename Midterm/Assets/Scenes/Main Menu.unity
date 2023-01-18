@@ -517,14 +517,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 875794532, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: Team
-      objectReference: {fileID: 0}
-    - target: {fileID: 881089856, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: BackButton
-      objectReference: {fileID: 0}
     - target: {fileID: 881089858, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -533,96 +525,9 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
-    - target: {fileID: 1502721764, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: Credits
-      objectReference: {fileID: 0}
-    - target: {fileID: 1600494096, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: Assests
-      objectReference: {fileID: 0}
-    - target: {fileID: 1627765510, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: Authors
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738288605, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: AuthorsBody
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738288607, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_text
-      value: 'Maksim Bugrimov
-
-        Arcsine Technologies
-
-        RRFreelance
-        / Pixelburner
-
-        AndreiNi
-
-        GeeKay3D
-
-        Kevin Iglesias
-
-        Ishikawa1116
-
-        Mister
-        Necturus
-
-        Perfect Games
-
-        Dmitrii Kutsenko
-
-        bestgamekits
-
-        Polygon
-        Blacksmith
-
-        Travis Game Assets'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1799821160, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: CreditMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 1799821160, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2013103163, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_Name
-      value: AssestsBody
-      objectReference: {fileID: 0}
-    - target: {fileID: 2013103165, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
-      propertyPath: m_text
-      value: 'Adventure Character
-
-        Ammo
-
-        Blooddecals and effects
-
-        Close
-        Combat level
-
-        First Aid Set
-
-        Melee Warrior Anims
-
-        Low
-        Poly Guns
-
-        Medieval Gold
-
-        Money Pack
-
-        RPG FPS Game
-        Assets
-
-        Sprite Muzzle Flashes
-
-        ToonSoldiers
-
-        Hit
-        Impact Effects'
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7544070412966842588, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_fontAsset
@@ -666,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7544070413326598281, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7544070413466459441, guid: b8c2aa9de72743245b4dcb82f5a73309, type: 3}
       propertyPath: m_AnchorMax.x
