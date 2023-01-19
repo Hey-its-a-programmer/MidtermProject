@@ -74,12 +74,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller.enabled = true;
-        originalPlayerHeight = controller.height;        
-        maxAmmo = gunList[0].maxAmmo;
-        currentAmmo = maxAmmo;
-        
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        originalPlayerHeight = controller.height;
+
+        gunPickup(gunList[0]);
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
