@@ -504,9 +504,28 @@ MonoBehaviour:
   meleeAttackVolume: 0
   enemyHurtAudio:
   - {fileID: 8300000, guid: 00b702252ab18a440a243eb61376dc13, type: 3}
+  - {fileID: 8300000, guid: de5a1ceb9544c154c8258af1401a0d02, type: 3}
+  - {fileID: 8300000, guid: 993810e2e8a6de549b03ab218bdc4125, type: 3}
+  - {fileID: 8300000, guid: b0485e94a31b1d048aff18c3fd5c9350, type: 3}
+  - {fileID: 8300000, guid: 412838263fb50344282217cf519e67f8, type: 3}
+  - {fileID: 8300000, guid: 61e7b371e02e23d4aac3dc3846b96e3b, type: 3}
   enemyHurtVolume: 0
   enemyStepAudio:
   - {fileID: 8300000, guid: c0998453d2278f34c9cace9337a67534, type: 3}
+  - {fileID: 8300000, guid: a825af4b7253b954f99efccc40c244d3, type: 3}
+  - {fileID: 8300000, guid: d8d510993c5d050439edde880d396139, type: 3}
+  - {fileID: 8300000, guid: c16458fe416f3a64d9889fa3ef84ee06, type: 3}
+  - {fileID: 8300000, guid: 0d3a7f3d83fba1547a03d8948def7fd5, type: 3}
+  - {fileID: 8300000, guid: de04efd47fc4af948bf52a8a48be69ea, type: 3}
+  - {fileID: 8300000, guid: 74da2ec383718224aaffb0b45f5c4b38, type: 3}
+  - {fileID: 8300000, guid: d078c158df9c0004b8588dbf80e60aea, type: 3}
+  - {fileID: 8300000, guid: f6d56abe5f0724b4f815d9685311ee7b, type: 3}
+  - {fileID: 8300000, guid: 3ebbfa5c426bebf4c91fa66f9b05fec2, type: 3}
+  - {fileID: 8300000, guid: ac83665df75fc2946b6cc04ab00b795f, type: 3}
+  - {fileID: 8300000, guid: 00b8ed9499eb15a43ae67e4ff87ba718, type: 3}
+  - {fileID: 8300000, guid: e306fa8a749b12f498cc3f03caedb202, type: 3}
+  - {fileID: 8300000, guid: 21e42e6ca08f79d45a58bf387e39a5fe, type: 3}
+  - {fileID: 8300000, guid: cdef3a8c29b82a14096fda7e4e50f6c0, type: 3}
   enemyStepVolume: 0
 --- !u!95 &6775913925336245572
 Animator:

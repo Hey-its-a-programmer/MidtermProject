@@ -8,6 +8,7 @@ public class NextLevel : MonoBehaviour
 {
 
     private int nextScene;
+    
     // Start is called before the first frame update
     private void Start()
     {
