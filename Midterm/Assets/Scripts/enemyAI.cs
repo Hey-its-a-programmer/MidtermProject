@@ -126,11 +126,9 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     public void takeDamage(int dmg)
     {
-
         if (isAlive)
         {
             HP -= dmg;
-            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
             StartCoroutine(flashDamage());
         }
 
@@ -140,7 +138,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         }
     }
 
-    /*void Drop()
+    void Drop()
     {
         // 50% chance to drop money
         if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
@@ -157,7 +155,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             ammunition.SetActive(true);
             Destroy(ammunition, ammoDespawnTimer);
         }
-    }*/
+    }
 
     IEnumerator flashDamage()
     {
@@ -250,7 +248,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         isAlive = false;
         StartCoroutine(DeathAnimation());
-       /* Drop();*/
+        Drop();
         gameManager.instance.EnemiesInWaveCount--;
         gameManager.instance.updateTotalEnemyCount(-1);
     }
