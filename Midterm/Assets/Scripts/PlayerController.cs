@@ -145,12 +145,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator shoot()
     {
 
-        if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
+        if (!isShooting && Input.GetButton("Shoot"))
         {
 
             isShooting = true;
-            currentAmmo--;//reduces ammo by -1
-            Debug.Log("Shooting");
+
+            
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
 
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
 
-
+                    Debug.Log("Shooting");
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
