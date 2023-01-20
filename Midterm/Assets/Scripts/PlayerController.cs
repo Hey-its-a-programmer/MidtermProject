@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
 
-                else if (hit.collider.GetComponent<IEffectable>() != null)
+                if (hit.collider.GetComponent<IEffectable>() != null)
                 {
 
                     var effectable = hit.collider.GetComponent<IEffectable>();
