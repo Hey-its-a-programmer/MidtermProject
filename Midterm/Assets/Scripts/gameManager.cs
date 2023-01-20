@@ -25,10 +25,8 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
-    [SerializeField] TextMeshProUGUI playerMoney;
     [SerializeField] TextMeshProUGUI PlayerLives;
     public TextMeshProUGUI waveNameText;
-    [SerializeField] TextMeshProUGUI ammoText;
     public GameObject playerHUD;
 
     [Header("-------Game Audio-------")]
@@ -96,9 +94,9 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         
-        ammoText.text = playerScript.CurrentAmmo.ToString("F0");
+
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
-        playerMoney.text = playerScript.coins.ToString("F0");
+
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
         PlayerLives.text = playerScript.lifeCounter.ToString("F0");
 
@@ -162,7 +160,7 @@ public class gameManager : MonoBehaviour
 
 
             Vector3 doorSpawn = doorSpawnPos.position;
-            GameObject spawnedDoor = Instantiate(door, doorSpawn + new Vector3(0.0f, 1.5f, 0.0f), Quaternion.identity);
+            GameObject spawnedDoor = Instantiate(door, new Vector3(doorSpawn.x, doorSpawn.y, doorSpawn.z) , Quaternion.identity);
             spawnedDoor.SetActive(true);
 
          

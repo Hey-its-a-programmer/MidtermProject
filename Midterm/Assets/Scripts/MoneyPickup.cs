@@ -10,7 +10,6 @@ public class MoneyPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.MoneyPickup(money);
             Destroy(gameObject);
         }
     }
