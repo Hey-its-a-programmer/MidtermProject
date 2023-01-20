@@ -10,7 +10,6 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.AmmoPickup(ammo);
             Destroy(gameObject);
         }
     }

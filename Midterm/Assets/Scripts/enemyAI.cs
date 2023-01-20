@@ -26,6 +26,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
 
+    /*
     [Header("-------Drops-------")]
     [SerializeField] GameObject money;
     [Range(0, 100)] [SerializeField] float moneyDropChance;
@@ -33,6 +34,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] GameObject ammo;
     [Range(0, 100)] [SerializeField] float ammoDropChance;
     [SerializeField] float ammoDespawnTimer;
+    */
 
     [Header("-------Enemy Animation-------")]
     [SerializeField] float deathFadeOutTime;
@@ -138,6 +140,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         }
     }
 
+    /*
     void Drop()
     {
         // 50% chance to drop money
@@ -156,7 +159,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             Destroy(ammunition, ammoDespawnTimer);
         }
     }
-
+    */
     IEnumerator flashDamage()
     {
         // plays grunt noise to signal that the enemy took damage
@@ -248,7 +251,6 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         isAlive = false;
         StartCoroutine(DeathAnimation());
-        Drop();
         gameManager.instance.EnemiesInWaveCount--;
         gameManager.instance.updateTotalEnemyCount(-1);
     }

@@ -92,6 +92,7 @@ public class enemySpawner : MonoBehaviour
 
     private void waveTimer()
     {
+        turnOnTimer = true;
         if (turnOnTimer)
         {
             gameManager.instance.BetweenWaveTimer = waveTime;

@@ -15,11 +15,9 @@ public class PlayerController : MonoBehaviour
     [Range(0, 15)] [SerializeField] int jumpHeight;
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
-    [SerializeField] float crouchHeight;
-    [SerializeField] float crouchTime;
+
     [SerializeField] int pushBackTime;
     public int lifeCounter = 3;
-
     public int coins;
 
     [Header("-----Gun Stats-----")]
@@ -55,7 +53,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
-
     private bool isShooting;
     private bool isSprinting;
     private float speedOrig;
@@ -78,11 +75,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller.enabled = true;
-        originalPlayerHeight = controller.height;
-        maxAmmo = gunList[0].maxAmmo;
-        currentAmmo = maxAmmo;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
         HPOrig = HP;
@@ -93,13 +85,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        playerSprint();
+
         if (!gameManager.instance.isPaused)
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
-            playerSprint();
-            playerCrouch();
+			playerSprint();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
@@ -145,12 +136,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator shoot()
     {
 
-        if (!isShooting && Input.GetButton("Shoot") && currentAmmo > 0)
+
+        if (!isShooting && Input.GetButton("Shoot"))
         {
 
             isShooting = true;
-            currentAmmo--;//reduces ammo by -1
-            Debug.Log("Shooting");
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
 
@@ -205,6 +195,7 @@ public class PlayerController : MonoBehaviour
 
         if (HP <= 0)
         {
+
             lifeCounter--;
             if (lifeCounter <= 0)
             {
@@ -325,30 +316,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void MoneyPickup(MoneyStats monStat)
-    {
-        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.moneyPickupAudio);
-        coins += monStat.moneyGiven;
-    }
 
-    public void AmmoPickup(AmmoStats ammoStat)
-    {
-        if (currentAmmo < maxAmmo)
-        {
-            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.ammoRestoreAudio);
-            currentAmmo += ammoStat.restoredAmmo;
 
-            if (currentAmmo > maxAmmo)
-            {
-                currentAmmo = maxAmmo;
-            }
-        }
-
-        else
-        {
-            gameObject.GetComponent<BoxCollider>().isTrigger = false;
-        }
-    }
     public List<gunStats> GunList
     {
         get { return gunList; }
@@ -397,20 +366,6 @@ public class PlayerController : MonoBehaviour
         set { currentAmmo = value; }
     }
 
-    void playerCrouch()
-    {
-        if (Input.GetKey(KeyCode.LeftControl) && !isCrouching && controller.isGrounded)
-        {
-            isCrouching = true;
-            controller.height = Mathf.Lerp(controller.height, crouchHeight, crouchTime);
-        }
-
-        else if (!Input.GetKey(KeyCode.LeftControl) && isCrouching && controller.isGrounded)
-        {
-            controller.height = Mathf.Lerp(controller.height, originalPlayerHeight, crouchTime);
-            isCrouching = false;
-        }
-    }
 
     public int PlayerHealth
     {
