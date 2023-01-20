@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     [Range(0, 15)] [SerializeField] int jumpHeight;
     [Range(15, 35)] [SerializeField] int gravityValue;
     [Range(0, 3)] [SerializeField] int jumpMax;
+
     [SerializeField] int pushBackTime;
+    public int lifeCounter = 3;
     public int coins;
 
     [Header("-----Gun Stats-----")]
@@ -51,7 +53,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] playerDeathAudio;
     [Range(0, 1)] [SerializeField] public float playerDeathVolume;
 
-  
     private bool isShooting;
     private bool isSprinting;
     private float speedOrig;
@@ -66,17 +67,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
 
-    
+
     private bool isCrouching;
     private float originalPlayerHeight;
-  
+
 
     private void Start()
     {
         controller.enabled = true;
-        originalPlayerHeight = controller.height;
-
-        gunPickup(gunList[0]);
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
@@ -86,10 +85,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         if (!gameManager.instance.isPaused)
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
+			playerSprint();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
@@ -135,11 +136,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator shoot()
     {
 
+
         if (!isShooting && Input.GetButton("Shoot"))
         {
 
             isShooting = true;
-            Debug.Log("Shooting");
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
 
@@ -180,8 +181,8 @@ public class PlayerController : MonoBehaviour
 
 
     }
-   
-   
+
+
 
     public void takeDamage(int dmg)
     {
@@ -191,14 +192,30 @@ public class PlayerController : MonoBehaviour
         updatePlayerHPbar();
 
         StartCoroutine(playerDamageFlash());
+
         if (HP <= 0)
         {
-            controller.enabled = false;
-            playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
-            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
-            gameManager.instance.pause();
-            gameManager.instance.loseMenu.SetActive(true);
-            gameManager.instance.activeMenu = gameManager.instance.loseMenu;
+
+            lifeCounter--;
+            if (lifeCounter <= 0)
+            {
+                controller.enabled = false;
+                playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
+                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
+                gameManager.instance.pause();
+                gameManager.instance.GameOverMenu.SetActive(true);
+                gameManager.instance.activeMenu = gameManager.instance.GameOverMenu;
+            }
+            else
+            {
+                controller.enabled = false;
+                playerAud.PlayOneShot(playerDeathAudio[Random.Range(0, playerDeathAudio.Length)], playerDeathVolume);
+                gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.loseMusic, gameManager.instance.loseMusicVolume);
+                gameManager.instance.pause();
+                gameManager.instance.loseMenu.SetActive(true);
+                gameManager.instance.activeMenu = gameManager.instance.loseMenu;
+
+            }
         }
     }
 
@@ -216,7 +233,7 @@ public class PlayerController : MonoBehaviour
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
-    
+
 
 
     public void resetPlayerHP()
@@ -298,6 +315,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
 
 
     public List<gunStats> GunList

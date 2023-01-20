@@ -300,6 +300,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393483437}
   m_Mesh: {fileID: 4300132, guid: a8c09d1515a919248bbe44db50b73a92, type: 3}
+--- !u!1 &401459996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6314567623037541293, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+  m_PrefabInstance: {fileID: 1221367493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &401460003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
+  m_PrefabInstance: {fileID: 1221367493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401459996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0424f08038e58664e8d498f6b4a55822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &465756650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,22 +1461,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 744618204, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: _data
-      value: 
-      objectReference: {fileID: 11400000, guid: 61b9cc7564425ab4ea04c3b663f10767, type: 2}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: maxAmmo
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314567623037541288, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
-      propertyPath: currentAmmo
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 6314567623037541291, guid: 0a81daadd933d6e489b57794924b2606, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -4381,12 +4381,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: roomSpawn
+      propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 401459996}
     - target: {fileID: 9192062976239082860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
-      propertyPath: roomSpawnONE
+      propertyPath: playerScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 401460003}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
