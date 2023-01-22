@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
+    public int specialcount;
 
 
     private bool isCrouching;
@@ -75,7 +76,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller.enabled = true;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        ResetPickup(_data);
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
@@ -90,7 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
-			playerSprint();
+            playerSprint();
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
@@ -299,6 +302,27 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
+    }
+
+    public void effectPickup(StatusEffect effect)
+    {
+        effect.Name = "DOT";
+        effect.DamageOverTimeAmount = 2;
+        effect.TickSpeed = 1f;
+        effect.MovementPentalty = 2;
+        effect.Lifetime = 5;
+        specialcount = 1;
+    }
+    public void ResetPickup(StatusEffect effect)
+    {
+
+        effect.Name = "DOT";
+        effect.DamageOverTimeAmount = 0;
+        effect.TickSpeed = 0f;
+        effect.MovementPentalty = 1;
+        effect.Lifetime = 0;
+        specialcount = 0;
+
     }
 
     public void HealthPickup(MedkitStats medStat)

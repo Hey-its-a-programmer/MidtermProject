@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameScene2.0/Prison Cells.unity
     guid: 22cd0cfc5a1b79341973756203ee4e9b
+  - enabled: 1
+    path: Assets/Scenes/MainGameScene.unity
+    guid: 680a71103e6b5434a80d23a33b090441
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4b0a7cd0d2679814291d206efd8c02ba, type: 2}

@@ -26,8 +26,12 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
 
-    /*
     [Header("-------Drops-------")]
+    [SerializeField] GameObject _effect;
+    [Range(0, 100)] [SerializeField] float effectDropChance;
+    [SerializeField] float effectDespawnTimer;
+
+    /*
     [SerializeField] GameObject money;
     [Range(0, 100)] [SerializeField] float moneyDropChance;
     [SerializeField] float moneyDespawnTimer;
@@ -62,6 +66,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [Range(0, 1)] public float enemyStepVolume;
 
     //Status Effect
+    [SerializeField] StatusEffect effect;
     private StatusEffect _data;
     private float _currentMoveSpeed;
     float moveSpeed;
@@ -70,25 +75,25 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     Vector3 playerDir;
     bool isMoving;
     float angleToPlayer;
-  
+
     // Start is called before the first frame update
     void Start()
     {
         moveSpeed = agent.speed;
         //_currentMoveSpeed = moveSpeed;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if (_data != null)
+        {
+            HandleEffect();
+        }
         if (isAlive)
         {
-            if (_data != null)
-            {
-                HandleEffect();
-            }
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
             canSeePlayer();
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
@@ -140,26 +145,32 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         }
     }
 
-    /*
+
     void Drop()
     {
-        // 50% chance to drop money
-        if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
+        if (Random.Range(0.0f, 10.0f) <= effectDropChance)
         {
-            GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
-            cash.SetActive(true);
-            Destroy(cash, moneyDespawnTimer);
+            GameObject drop = Instantiate(_effect, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+            drop.SetActive(true);
+            Destroy(drop, effectDespawnTimer);
         }
+        /* // 50% chance to drop money
+         if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
+         {
+             GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+             cash.SetActive(true);
+             Destroy(cash, moneyDespawnTimer);
+         }
 
-        // 80% chance to drop ammo
-        if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
-        {
-            GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
-            ammunition.SetActive(true);
-            Destroy(ammunition, ammoDespawnTimer);
-        }
+         // 80% chance to drop ammo
+         if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
+         {
+             GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+             ammunition.SetActive(true);
+             Destroy(ammunition, ammoDespawnTimer);
+         }*/
     }
-    */
+
     IEnumerator flashDamage()
     {
         // plays grunt noise to signal that the enemy took damage
@@ -195,11 +206,13 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         isMoving = false;
     }
     //----Status Effect Methods
-    
+
     private GameObject _effectParticles;
 
     private float CurrentEffectTime = 0f;
     private float nextTickTime = 0f;
+    
+    
 
     public void ApplyEffect(StatusEffect _data)
     {
@@ -228,12 +241,13 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         if (CurrentEffectTime >= +_data.Lifetime)
         {
             RemoveEffect();
+            gameManager.instance.playerScript.ResetPickup(effect);
         }
         if (_data == null)
         {
             return;
         }
-        if (_data.DamageOverTimeAmount != 0 && CurrentEffectTime > nextTickTime )
+        if (_data.DamageOverTimeAmount != 0 && CurrentEffectTime > nextTickTime)
         {
             nextTickTime += _data.TickSpeed;
             HP -= _data.DamageOverTimeAmount;
@@ -250,6 +264,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         isAlive = false;
+        Drop();
         StartCoroutine(DeathAnimation());
         gameManager.instance.EnemiesInWaveCount--;
         gameManager.instance.updateTotalEnemyCount(-1);
