@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller.enabled = true;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         speedOrig = playerSpeed;
         HPOrig = HP;
