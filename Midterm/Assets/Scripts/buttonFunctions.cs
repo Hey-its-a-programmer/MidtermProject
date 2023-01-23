@@ -8,6 +8,12 @@ public class buttonFunctions : MonoBehaviour
     //GAME RES
     public int resWidth;
     public int resHeight;
+    public string options;
+    public string back1;
+    public string back2;
+    public string back3;
+    public string graphics;
+    public string volume;
 
     public void setWidth(int newWidth)
     {
@@ -24,6 +30,11 @@ public class buttonFunctions : MonoBehaviour
         Screen.SetResolution(resWidth, resHeight, false);
     }
     //MENUS
+    public void optionsmenubutton()
+    {
+        options = "jgvjhgv";
+        SceneManager.LoadScene(options);
+    }
     public void playGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

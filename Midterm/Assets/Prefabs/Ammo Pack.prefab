@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900789991929956305}
   - component: {fileID: 4906918632896684527}
-  - component: {fileID: 1900789991929956310}
+  - component: {fileID: -6397540104714997765}
   - component: {fileID: 1900789991929956304}
   - component: {fileID: 1900789991929956307}
   - component: {fileID: 1900789991929956306}
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c7d7333f585684c9f1b18a3f041408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1900789991929956310
+--- !u!114 &-6397540104714997765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,10 +59,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1900789991929956317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5715e56f53b56fc4186d5bff66786db7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e6adcf7383343244b02f3aadbdcd513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: {fileID: 11400000, guid: 08ea1b61ac8df2e4ea20e15744449621, type: 2}
+  effect: {fileID: 11400000, guid: 61b9cc7564425ab4ea04c3b663f10767, type: 2}
 --- !u!33 &1900789991929956304
 MeshFilter:
   m_ObjectHideFlags: 0

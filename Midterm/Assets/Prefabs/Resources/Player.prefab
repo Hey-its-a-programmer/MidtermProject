@@ -248,18 +248,19 @@ MonoBehaviour:
   jumpHeight: 8
   gravityValue: 25
   jumpMax: 1
-  crouchHeight: 0
-  crouchTime: 0
   pushBackTime: 3
   lifeCounter: 3
   coins: 0
-  gunList: []
-  shootRate: 0
-  shootDamage: 0
-  shootDist: 0
+  gunList:
+  - {fileID: 11400000, guid: 12eda9e56c7ce4c48b2487abf3a3de18, type: 2}
+  shootRate: 0.6
+  shootDamage: 2
+  shootDist: 50
   gunModel: {fileID: 919132148898890522}
   hitEffect: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
-  _data: {fileID: 0}
+  _Bleed: {fileID: 11400000, guid: ca42297b153fb1f44a5399f33126780b, type: 2}
+  _Poison: {fileID: 11400000, guid: 274ec43895ce1a345a0b06ed69858e6c, type: 2}
+  _Burn: {fileID: 11400000, guid: 61b9cc7564425ab4ea04c3b663f10767, type: 2}
   playerAud: {fileID: 338797492}
   gunShotClip: {fileID: 0}
   gunShotVolume: 0.427
@@ -293,6 +294,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bbcaa96cc338d0d4f963bc9f2dd08ff7, type: 3}
   - {fileID: 8300000, guid: d4ff369052683c34f9bfc20992c0151b, type: 3}
   playerDeathVolume: 0.442
+  specialcount: 
 --- !u!143 &6314567623037541289
 CharacterController:
   m_ObjectHideFlags: 0

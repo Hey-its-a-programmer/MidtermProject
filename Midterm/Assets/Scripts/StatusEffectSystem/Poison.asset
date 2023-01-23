@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d21f6ece3b46479f0c328f8c6007e0, type: 3}
-  m_Name: Gold(ForMenu)
+  m_Script: {fileID: 11500000, guid: 8224cb7117965144fbda5893d40d68a9, type: 3}
+  m_Name: Poison
   m_EditorClassIdentifier: 
-  colorMode: 3
-  topLeft: {r: 1, g: 0, b: 0, a: 1}
-  topRight: {r: 1, g: 0, b: 0, a: 1}
-  bottomLeft: {r: 1, g: 0.51941746, b: 0, a: 1}
-  bottomRight: {r: 1, g: 0.51941746, b: 0, a: 1}
+  Name: Poison
+  DamageOverTimeAmount: 0
+  TickSpeed: 0
+  MovementPentalty: 1
+  Lifetime: 0
+  EffectParticles: {fileID: 1962516439210982, guid: 3c657dedc43d33a4987fbf09e6363067, type: 3}

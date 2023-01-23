@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("-----Components-----")]
     [SerializeField] CharacterController controller;
-    [SerializeField] Animator gunAnimation;
+
     [Header("-----Player Stats-----")]
     [SerializeField] int HP;
 
@@ -30,7 +30,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
 
 
-    [SerializeField] StatusEffect _data;
+    [SerializeField] StatusEffect _Bleed;
+    [SerializeField] StatusEffect _Poison;
+    [SerializeField] StatusEffect _Burn;
+
 
     [Header("-------Player Audio-------")]
 
@@ -66,6 +69,7 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
+    public string specialcount;
 
 
     private bool isCrouching;
@@ -77,12 +81,15 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        
+
+        ResetPickup(_Bleed);
+        ResetPickup(_Poison);
+        ResetPickup(_Burn);
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
         setPlayerPos();
-        gunAnimation = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -92,7 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             pushBack = Vector3.Lerp(new Vector3(pushBack.x, 0, pushBack.z), Vector3.zero, Time.deltaTime * pushBackTime);
             movement();
-			playerSprint();
+
 
             if (!isMoving && move.magnitude > 0.3f && controller.isGrounded)
             {
@@ -161,7 +168,7 @@ public class PlayerController : MonoBehaviour
                     var effectable = hit.collider.GetComponent<IEffectable>();
                     if (effectable != null)
                     {
-                        effectable.ApplyEffect(_data);
+                        effectable.ApplyEffect(_Burn);
                     }
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
@@ -300,6 +307,47 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         gunList.Add(gunStat);
         selectedGun = gunList.Count - 1;
+    }
+
+    public void effectPickup(StatusEffect effect)
+    {
+        
+       
+        if (effect.Name == "Bleed")
+        {
+            
+            effect.DamageOverTimeAmount = 2;
+            effect.TickSpeed = 1f;
+            effect.MovementPentalty = 2;
+            effect.Lifetime = 5;
+            specialcount = _Bleed.Name;
+        }
+        if(effect.Name == "Burn")
+        {
+            effect.DamageOverTimeAmount = 2;
+            effect.TickSpeed = 1f;
+            effect.MovementPentalty = 2;
+            effect.Lifetime = 5;
+            specialcount = _Burn.Name;
+        }
+        if (effect.Name == "Poison")
+        {
+            effect.DamageOverTimeAmount = 2;
+            effect.TickSpeed = 1f;
+            effect.MovementPentalty = 2;
+            effect.Lifetime = 5;
+            specialcount = _Poison.Name;
+        }
+    }
+    public void ResetPickup(StatusEffect effect)
+    {
+
+        effect.DamageOverTimeAmount = 0;
+        effect.TickSpeed = 0f;
+        effect.MovementPentalty = 1;
+        effect.Lifetime = 0;
+        specialcount = "None";
+
     }
 
     public void HealthPickup(MedkitStats medStat)
