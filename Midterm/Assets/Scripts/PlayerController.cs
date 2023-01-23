@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour
         {
 
             isShooting = true;
+            playerAud.Stop();
             playerAud.PlayOneShot(gunList[selectedGun].gunshot, gunShotVolume);
 
 
@@ -175,7 +176,7 @@ public class PlayerController : MonoBehaviour
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
                 */
-                else
+                else if (hit.collider != null)
                 {
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
                 }
