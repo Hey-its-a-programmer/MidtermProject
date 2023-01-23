@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("-----Components-----")]
     [SerializeField] CharacterController controller;
-
+    [SerializeField] Animator gunAnimation;
     [Header("-----Player Stats-----")]
     [SerializeField] int HP;
 
@@ -77,12 +77,12 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
         setPlayerPos();
-
+        gunAnimation = GetComponent<Animator>();
     }
 
     void Update()
