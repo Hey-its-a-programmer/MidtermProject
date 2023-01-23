@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         controller.enabled = true;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
@@ -150,14 +151,12 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
 
-
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
 
                 if (hit.collider.GetComponent<IEffectable>() != null)
                 {
-
                     var effectable = hit.collider.GetComponent<IEffectable>();
                     if (effectable != null)
                     {
@@ -288,6 +287,7 @@ public class PlayerController : MonoBehaviour
 
         isMoving = false;
     }
+
     public void gunPickup(gunStats gunStat)
     {
         shootRate = gunStat.shootRate;
