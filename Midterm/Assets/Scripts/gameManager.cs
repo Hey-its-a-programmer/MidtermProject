@@ -27,7 +27,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
     [SerializeField] TextMeshProUGUI PlayerLives;
-    [SerializeField] TextMeshProUGUI SpesialbulletText;
+    [SerializeField] TextMeshProUGUI SpecialbulletText;
     public TextMeshProUGUI waveNameText;
     public GameObject playerHUD;
 
@@ -98,7 +98,7 @@ public class gameManager : MonoBehaviour
         
 
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
-        SpesialbulletText.text = playerScript.specialcount;
+        SpecialbulletText.text = playerScript.specialcount;
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
         PlayerLives.text = playerScript.lifeCounter.ToString("F0");
 
