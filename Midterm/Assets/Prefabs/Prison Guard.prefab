@@ -2937,9 +2937,9 @@ GameObject:
   - component: {fileID: 3093541718897267833}
   - component: {fileID: 3913543621096089961}
   - component: {fileID: 7958820495922272226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Prison Guard
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
