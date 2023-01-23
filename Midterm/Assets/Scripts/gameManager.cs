@@ -97,7 +97,7 @@ public class gameManager : MonoBehaviour
         
 
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
-        SpesialbulletText.text = playerScript.specialcount.ToString("F0");
+        SpesialbulletText.text = playerScript.specialcount;
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
         PlayerLives.text = playerScript.lifeCounter.ToString("F0");
 

@@ -30,7 +30,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
 
 
-    [SerializeField] StatusEffect _data;
+    [SerializeField] StatusEffect _Bleed;
+    [SerializeField] StatusEffect _Poison;
+    [SerializeField] StatusEffect _Burn;
+
 
     [Header("-------Player Audio-------")]
 
@@ -66,7 +69,7 @@ public class PlayerController : MonoBehaviour
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
-    public int specialcount;
+    public string specialcount;
 
 
     private bool isCrouching;
@@ -78,7 +81,9 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        ResetPickup(_data);
+        ResetPickup(_Bleed);
+        ResetPickup(_Poison);
+        ResetPickup(_Burn);
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
@@ -164,7 +169,7 @@ public class PlayerController : MonoBehaviour
                     var effectable = hit.collider.GetComponent<IEffectable>();
                     if (effectable != null)
                     {
-                        effectable.ApplyEffect(_data);
+                        effectable.ApplyEffect(_Burn);
                     }
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
@@ -306,22 +311,42 @@ public class PlayerController : MonoBehaviour
 
     public void effectPickup(StatusEffect effect)
     {
-        effect.Name = "DOT";
-        effect.DamageOverTimeAmount = 2;
-        effect.TickSpeed = 1f;
-        effect.MovementPentalty = 2;
-        effect.Lifetime = 5;
-        specialcount = 1;
+        
+       
+        if (effect.Name == "Bleed")
+        {
+            
+            effect.DamageOverTimeAmount = 2;
+            effect.TickSpeed = 1f;
+            effect.MovementPentalty = 2;
+            effect.Lifetime = 5;
+            specialcount = _Bleed.Name;
+        }
+        if(effect.Name == "Burn")
+        {
+            effect.DamageOverTimeAmount = 2;
+            effect.TickSpeed = 1f;
+            effect.MovementPentalty = 2;
+            effect.Lifetime = 5;
+            specialcount = _Burn.Name;
+        }
+        if (effect.Name == "Poison")
+        {
+            effect.DamageOverTimeAmount = 2;
+            effect.TickSpeed = 1f;
+            effect.MovementPentalty = 2;
+            effect.Lifetime = 5;
+            specialcount = _Poison.Name;
+        }
     }
     public void ResetPickup(StatusEffect effect)
     {
 
-        effect.Name = "DOT";
         effect.DamageOverTimeAmount = 0;
         effect.TickSpeed = 0f;
         effect.MovementPentalty = 1;
         effect.Lifetime = 0;
-        specialcount = 0;
+        specialcount = "None";
 
     }
 

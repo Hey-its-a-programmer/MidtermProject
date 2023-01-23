@@ -148,7 +148,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     void Drop()
     {
-        if (Random.Range(0.0f, 10.0f) <= effectDropChance)
+        if (Random.Range(0.0f, 100.0f) <= effectDropChance)
         {
             GameObject drop = Instantiate(_effect, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
             drop.SetActive(true);
@@ -211,15 +211,16 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     private float CurrentEffectTime = 0f;
     private float nextTickTime = 0f;
-    
-    
+
+
 
     public void ApplyEffect(StatusEffect _data)
     {
         RemoveEffect();
         this._data = _data;
         agent.speed = moveSpeed / _data.MovementPentalty;
-        _effectParticles = Instantiate(_data.EffectParticles, transform);
+        
+        
     }
 
     public void RemoveEffect()
@@ -253,10 +254,13 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             HP -= _data.DamageOverTimeAmount;
             if (HP <= 0)
             {
+                CurrentEffectTime = _data.Lifetime;
                 Death();
             }
         }
     }
+
+
     void Death()
     {
         agent.speed = 0;
