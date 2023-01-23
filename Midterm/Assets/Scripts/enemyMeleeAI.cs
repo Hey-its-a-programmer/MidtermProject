@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
 {
     [Header("-----Components-----")]
-    [SerializeField] Renderer model;
+    //Used for one or more model renderers
+    [SerializeField] Renderer[] modelParts;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [Header("-----Enemy Stats-----")]
@@ -23,6 +24,8 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] float hitDelay;
     [SerializeField] float attackAngle;
     [SerializeField] GameObject meleeWeapon;
+    //Only Use for things not part of the main model renderer
+    [SerializeField] GameObject[] meleeWeaponParts;
     /*
     [Header("-------Drops-------")]
     [SerializeField] GameObject money;
@@ -61,12 +64,12 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     private float distance;
     private float angleToPlayer;
     private bool isAlive = true;
-    private MeshRenderer weaponRenderer;
+    private Transform test;
     private float moveSpeed;
+    Renderer[] weaponRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        weaponRenderer = meleeWeapon.GetComponent<MeshRenderer>();
 
     }
 
@@ -156,9 +159,17 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     {
         // plays grunt noise to signal that the enemy took damage
         enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
-        model.material.color = Color.red;
+        for (int i = 0; i < modelParts.Length; i++)
+        {
+            modelParts[i].material.color = Color.red;
+        }
+
         yield return new WaitForSeconds(0.2f);
-        model.material.color = Color.white;
+
+        for (int i = 0; i < modelParts.Length; i++)
+        {
+            modelParts[i].material.color = Color.white;
+        }
     }
 
     void attackEntry()
@@ -244,6 +255,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
 
     void Death()
     {
+        attackExit();
         agent.speed = 0;
         agent.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
@@ -269,33 +281,56 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
         SetToFade();
         for (float t = 0.0f; t < deathFadeOutTime; t+= Time.deltaTime)
         {
-            model.material.color = new Color(model.material.color.r, model.material.color.g, model.material.color.b, Mathf.Lerp(model.material.color.a, 0, t));
-            weaponRenderer.material.color = new Color(weaponRenderer.material.color.r, weaponRenderer.material.color.g, weaponRenderer.material.color.b, Mathf.Lerp(weaponRenderer.material.color.a, 0, t));
+            for (int i = 0; i < modelParts.Length; i++)
+            {
+                modelParts[i].material.color = new Color(modelParts[i].material.color.r, modelParts[i].material.color.g, modelParts[i].material.color.b, Mathf.Lerp(modelParts[i].material.color.a, 0, t));
+            }
+
+            for (int i = 0; i < meleeWeaponParts.Length; i++)
+            {
+                meleeWeaponParts[i].GetComponent<MeshRenderer>().material.color = new Color(meleeWeaponParts[i].GetComponent<MeshRenderer>().material.color.r, meleeWeaponParts[i].GetComponent<MeshRenderer>().material.color.g, meleeWeaponParts[i].GetComponent<MeshRenderer>().material.color.b, Mathf.Lerp(meleeWeaponParts[i].GetComponent<MeshRenderer>().material.color.a, 0, t));
+            }
+            
+            meleeWeapon.GetComponent<MeshRenderer>().material.color = new Color(meleeWeapon.GetComponent<MeshRenderer>().material.color.r, meleeWeapon.GetComponent<MeshRenderer>().material.color.g, meleeWeapon.GetComponent<MeshRenderer>().material.color.b, Mathf.Lerp(meleeWeapon.GetComponent<MeshRenderer>().material.color.a, 0, t));
             yield return null;
         }
-
-        Destroy(gameObject);
     }
 
     void SetToFade()
     {
-        weaponRenderer.material.SetOverrideTag("RenderType", "Transparent");
-        weaponRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        weaponRenderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        weaponRenderer.material.SetInt("_ZWrite", 0);
-        weaponRenderer.material.DisableKeyword("_ALPHATEST_ON");
-        weaponRenderer.material.EnableKeyword("_ALPHABLEND_ON");
-        weaponRenderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        weaponRenderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        for (int i = 0; i < meleeWeaponParts.Length; i++)
+        {
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.SetOverrideTag("RenderType", "Transparent");
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.SetInt("_ZWrite", 0);
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.DisableKeyword("_ALPHATEST_ON");
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.EnableKeyword("_ALPHABLEND_ON");
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            meleeWeaponParts[i].GetComponent<MeshRenderer>().material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        }
 
-        model.material.SetOverrideTag("RenderType", "Transparent");
-        model.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        model.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        model.material.SetInt("_ZWrite", 0);
-        model.material.DisableKeyword("_ALPHATEST_ON");
-        model.material.EnableKeyword("_ALPHABLEND_ON");
-        model.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        model.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        meleeWeapon.GetComponent<MeshRenderer>().material.SetOverrideTag("RenderType", "Transparent");
+        meleeWeapon.GetComponent<MeshRenderer>().material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        meleeWeapon.GetComponent<MeshRenderer>().material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        meleeWeapon.GetComponent<MeshRenderer>().material.SetInt("_ZWrite", 0);
+        meleeWeapon.GetComponent<MeshRenderer>().material.DisableKeyword("_ALPHATEST_ON");
+        meleeWeapon.GetComponent<MeshRenderer>().material.EnableKeyword("_ALPHABLEND_ON");
+        meleeWeapon.GetComponent<MeshRenderer>().material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        meleeWeapon.GetComponent<MeshRenderer>().material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+
+        for (int i = 0; i < modelParts.Length; i++)
+        {
+            modelParts[i].material.SetOverrideTag("RenderType", "Transparent");
+            modelParts[i].material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            modelParts[i].material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            modelParts[i].material.SetInt("_ZWrite", 0);
+            modelParts[i].material.DisableKeyword("_ALPHATEST_ON");
+            modelParts[i].material.EnableKeyword("_ALPHABLEND_ON");
+            modelParts[i].material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            modelParts[i].material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        }
+
     }
 
 }

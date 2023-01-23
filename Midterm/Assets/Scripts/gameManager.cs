@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -152,19 +153,21 @@ public class gameManager : MonoBehaviour
 
         if (totalEnemyCount <= 0)
         {
-            //winMenu.SetActive(true);
-            //pause();
-            //activeMenu = winMenu;
+            if (SceneManager.GetActiveScene().name == "Courtyard")
+            {
+                winMenu.SetActive(true);
+                pause();
+                activeMenu = winMenu;
 
-            //plays fanfare for winning
-            //gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
-
-
-            Vector3 doorSpawn = doorSpawnPos.position;
-            GameObject spawnedDoor = Instantiate(door, new Vector3(doorSpawn.x, doorSpawn.y, doorSpawn.z) , Quaternion.identity);
-            spawnedDoor.SetActive(true);
-
-         
+                //plays fanfare for winning
+                gameManagerAud.PlayOneShot(winMusic, winMusicVolume);
+            }
+            else
+            {
+                Vector3 doorSpawn = doorSpawnPos.position;
+                GameObject spawnedDoor = Instantiate(door, new Vector3(doorSpawn.x, doorSpawn.y, doorSpawn.z), Quaternion.identity);
+                spawnedDoor.SetActive(true);
+            }
         }
     }
 

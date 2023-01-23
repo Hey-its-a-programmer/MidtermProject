@@ -158,14 +158,12 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
 
-
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
 
                 if (hit.collider.GetComponent<IEffectable>() != null)
                 {
-
                     var effectable = hit.collider.GetComponent<IEffectable>();
                     if (effectable != null)
                     {
@@ -296,6 +294,7 @@ public class PlayerController : MonoBehaviour
 
         isMoving = false;
     }
+
     public void gunPickup(gunStats gunStat)
     {
         shootRate = gunStat.shootRate;

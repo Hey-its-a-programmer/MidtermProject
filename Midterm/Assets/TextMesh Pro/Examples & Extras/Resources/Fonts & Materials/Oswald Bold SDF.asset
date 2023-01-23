@@ -1411,7 +1411,11 @@ MonoBehaviour:
   - m_X: 384
     m_Y: 0
     m_Width: 639
-    m_Height: 1023
+    m_Height: 647
+  - m_X: 59
+    m_Y: 277
+    m_Width: 964
+    m_Height: 746
   - m_X: 243
     m_Y: 879
     m_Width: 780

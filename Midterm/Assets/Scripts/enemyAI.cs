@@ -9,15 +9,13 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 {
 
     [Header("-----Components-----")]
-    [SerializeField] Renderer model;
+    [SerializeField] Renderer[] modelParts;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
 
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
-    [SerializeField] int coinValueMin;
-    [SerializeField] int coinValueMax;
     [SerializeField] Transform headPos;
     [SerializeField] Transform dropSpawnPos;
     [Header("----- Enemy Gun Stats-----")]
@@ -25,6 +23,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] float shootAngle;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
+    [SerializeField] Renderer gunRenderer;
 
     [Header("-------Drops-------")]
     [SerializeField] GameObject _effect;
@@ -44,9 +43,11 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] float deathFadeOutTime;
     [SerializeField] float deathAnimationTime;
 
+    /*
     [Header("----- Enemy UI-----")]
     [SerializeField] Image enemyHPbar;
     [SerializeField] GameObject UI;
+    */
 
     [Header("-------Enemy Audio-------")]
     [SerializeField] AudioSource enemyAud;
@@ -175,17 +176,25 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     {
         // plays grunt noise to signal that the enemy took damage
         enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
-        model.material.color = Color.red;
+        enemyAud.PlayOneShot(enemyHurtAudio[Random.Range(0, enemyHurtAudio.Length - 1)], enemyHurtVolume);
+        for (int i = 0; i < modelParts.Length; i++)
+        {
+            modelParts[i].material.color = Color.red;
+        }
         yield return new WaitForSeconds(0.2f);
-        model.material.color = Color.white;
+        for (int i = 0; i < modelParts.Length; i++)
+        {
+            modelParts[i].material.color = Color.white;
+        }
     }
 
     IEnumerator shoot()
     {
         isShooting = true;
-
-        Instantiate(bullet, shootPos.position, transform.rotation);
         anim.SetTrigger("Shoot");
+        Instantiate(bullet, shootPos.position, transform.rotation);
+
+        Debug.Log("Shooting");
         // same gunshot noise as player for now
         enemyAud.PlayOneShot(gunShotClip, gunShotVolume);
 
@@ -284,16 +293,16 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         StartCoroutine(DeathFadeOut());
     }
 
-    //Make weaponRenderer a thing (most likely a GameObject) if we are going to use another model for the gun
     IEnumerator DeathFadeOut()
     {
         SetToFade();
         for (float t = 0.0f; t < deathFadeOutTime; t += Time.deltaTime)
         {
-            model.material.color = new Color(model.material.color.r, model.material.color.g, model.material.color.b, Mathf.Lerp(model.material.color.a, 0, t));
-            /*
-            weaponRenderer.material.color = new Color(weaponRenderer.material.color.r, weaponRenderer.material.color.g, weaponRenderer.material.color.b, Mathf.Lerp(weaponRenderer.material.color.a, 0, t));
-            */
+            for (int i = 0; i < modelParts.Length; i++)
+            {
+                modelParts[i].material.color = new Color(modelParts[i].material.color.r, modelParts[i].material.color.g, modelParts[i].material.color.b, Mathf.Lerp(modelParts[i].material.color.a, 0, t));
+            }
+            gunRenderer.material.color = new Color(gunRenderer.material.color.r, gunRenderer.material.color.g, gunRenderer.material.color.b, Mathf.Lerp(gunRenderer.material.color.a, 0, t));
             yield return null;
         }
 
@@ -302,24 +311,27 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
 
     void SetToFade()
     {
-        /*
-        weaponRenderer.material.SetOverrideTag("RenderType", "Transparent");
-        weaponRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        weaponRenderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        weaponRenderer.material.SetInt("_ZWrite", 0);
-        weaponRenderer.material.DisableKeyword("_ALPHATEST_ON");
-        weaponRenderer.material.EnableKeyword("_ALPHABLEND_ON");
-        weaponRenderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        weaponRenderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-        */
+        
+        gunRenderer.material.SetOverrideTag("RenderType", "Transparent");
+        gunRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        gunRenderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        gunRenderer.material.SetInt("_ZWrite", 0);
+        gunRenderer.material.DisableKeyword("_ALPHATEST_ON");
+        gunRenderer.material.EnableKeyword("_ALPHABLEND_ON");
+        gunRenderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        gunRenderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        
 
-        model.material.SetOverrideTag("RenderType", "Transparent");
-        model.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        model.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        model.material.SetInt("_ZWrite", 0);
-        model.material.DisableKeyword("_ALPHATEST_ON");
-        model.material.EnableKeyword("_ALPHABLEND_ON");
-        model.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        model.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        for (int i = 0; i < modelParts.Length; i++)
+        {
+            modelParts[i].material.SetOverrideTag("RenderType", "Transparent");
+            modelParts[i].material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            modelParts[i].material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            modelParts[i].material.SetInt("_ZWrite", 0);
+            modelParts[i].material.DisableKeyword("_ALPHATEST_ON");
+            modelParts[i].material.EnableKeyword("_ALPHABLEND_ON");
+            modelParts[i].material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            modelParts[i].material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        }
     }
 }
