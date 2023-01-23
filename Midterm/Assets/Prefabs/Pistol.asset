@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Pistol
   shootRate: 0.5
-  shootDamage: 3
+  shootDamage: 2
   shootDist: 10
   gunPrice: 0
   gunModel: {fileID: 919132149155446097, guid: 726e329e1719c8f42949342e6a5b42e3, type: 3}

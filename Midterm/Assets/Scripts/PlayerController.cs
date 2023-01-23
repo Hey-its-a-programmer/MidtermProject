@@ -29,10 +29,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
 
-
+    /*
     [SerializeField] StatusEffect _Bleed;
     [SerializeField] StatusEffect _Poison;
     [SerializeField] StatusEffect _Burn;
+    */
 
 
     [Header("-------Player Audio-------")]
@@ -81,10 +82,11 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-
+        /*
         ResetPickup(_Bleed);
         ResetPickup(_Poison);
         ResetPickup(_Burn);
+        */
         speedOrig = playerSpeed;
         HPOrig = HP;
         coinsOriginal = coins;
@@ -162,7 +164,7 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shootDamage);
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
-
+                /*
                 if (hit.collider.GetComponent<IEffectable>() != null)
                 {
                     var effectable = hit.collider.GetComponent<IEffectable>();
@@ -172,7 +174,7 @@ public class PlayerController : MonoBehaviour
                     }
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitEnemyAudio, gameManager.instance.hitEnemyVolume);
                 }
-
+                */
                 else
                 {
                     gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.hitWallAudio[Random.Range(0, gameManager.instance.hitWallAudio.Length)], gameManager.instance.hitWallVolume);
@@ -309,6 +311,7 @@ public class PlayerController : MonoBehaviour
         selectedGun = gunList.Count - 1;
     }
 
+    /*
     public void effectPickup(StatusEffect effect)
     {
         
@@ -349,7 +352,7 @@ public class PlayerController : MonoBehaviour
         specialcount = "None";
 
     }
-
+    */
     public void HealthPickup(MedkitStats medStat)
     {
         if (HP < HPOrig)

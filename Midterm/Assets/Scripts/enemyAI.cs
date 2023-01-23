@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class enemyAI : MonoBehaviour, IDamage, IEffectable
+public class enemyAI : MonoBehaviour, IDamage
 {
 
     [Header("-----Components-----")]
@@ -17,7 +17,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] Transform headPos;
-    [SerializeField] Transform dropSpawnPos;
+    //[SerializeField] Transform dropSpawnPos;
     [Header("----- Enemy Gun Stats-----")]
     [SerializeField] float shootRate;
     [SerializeField] float shootAngle;
@@ -25,11 +25,12 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] Transform shootPos;
     [SerializeField] Renderer gunRenderer;
 
+    /*
     [Header("-------Drops-------")]
     [SerializeField] GameObject _effect;
     [Range(0, 100)] [SerializeField] float effectDropChance;
     [SerializeField] float effectDespawnTimer;
-
+    */
     /*
     [SerializeField] GameObject money;
     [Range(0, 100)] [SerializeField] float moneyDropChance;
@@ -67,10 +68,10 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     [Range(0, 1)] public float enemyStepVolume;
 
     //Status Effect
-    [SerializeField] StatusEffect effect;
-    private StatusEffect _data;
-    private float _currentMoveSpeed;
-    float moveSpeed;
+    //[SerializeField] StatusEffect effect;
+    //private StatusEffect _data;
+    //private float _currentMoveSpeed;
+    //float moveSpeed;
     bool isShooting;
     private bool isAlive = true;
     Vector3 playerDir;
@@ -80,21 +81,23 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = agent.speed;
-        //_currentMoveSpeed = moveSpeed;
+        //moveSpeed = agent.speed;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (_data != null)
         {
             HandleEffect();
         }
+        */
         if (isAlive)
         {
+
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
             canSeePlayer();
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
@@ -146,7 +149,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         }
     }
 
-
+    /*
     void Drop()
     {
         if (Random.Range(0.0f, 100.0f) <= effectDropChance)
@@ -155,7 +158,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             drop.SetActive(true);
             Destroy(drop, effectDespawnTimer);
         }
-        /* // 50% chance to drop money
+         // 50% chance to drop money
          if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
          {
              GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
@@ -169,9 +172,9 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
              GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
              ammunition.SetActive(true);
              Destroy(ammunition, ammoDespawnTimer);
-         }*/
+         }
     }
-
+        */
     IEnumerator flashDamage()
     {
         // plays grunt noise to signal that the enemy took damage
@@ -208,21 +211,21 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         isMoving = true;
 
         //plays footsteps of enemy
-        /*enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);*/
+        enemyAud.PlayOneShot(enemyStepAudio[Random.Range(0, enemyStepAudio.Length - 1)], enemyStepVolume);
 
         yield return new WaitForSeconds(0.5f);
 
         isMoving = false;
     }
     //----Status Effect Methods
-
+    /*
     private GameObject _effectParticles;
 
     private float CurrentEffectTime = 0f;
     private float nextTickTime = 0f;
 
 
-
+    
     public void ApplyEffect(StatusEffect _data)
     {
         RemoveEffect();
@@ -268,7 +271,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
             }
         }
     }
-
+    */
 
     void Death()
     {
@@ -277,7 +280,7 @@ public class enemyAI : MonoBehaviour, IDamage, IEffectable
         gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         isAlive = false;
-        Drop();
+        //Drop();
         StartCoroutine(DeathAnimation());
         gameManager.instance.EnemiesInWaveCount--;
         gameManager.instance.updateTotalEnemyCount(-1);

@@ -27,7 +27,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI waveTimerText;
     [SerializeField] TextMeshProUGUI enemyRemaining;
     [SerializeField] TextMeshProUGUI PlayerLives;
-    [SerializeField] TextMeshProUGUI SpecialbulletText;
+    //[SerializeField] TextMeshProUGUI SpecialbulletText;
     public TextMeshProUGUI waveNameText;
     public GameObject playerHUD;
 
@@ -57,10 +57,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] public AudioClip healthRestoreAudio;
 
     //sound for picking up ammo pack
-    [SerializeField] public AudioClip ammoRestoreAudio;
+    //[SerializeField] public AudioClip ammoRestoreAudio;
 
     //sound for picking up money
-    [SerializeField] public AudioClip moneyPickupAudio;
+    //[SerializeField] public AudioClip moneyPickupAudio;
 
 
     [Header("----- Other Functions -----")]
@@ -74,7 +74,7 @@ public class gameManager : MonoBehaviour
     private int totalEnemyCount;
     private int enemiesInWaveCount;
     private float betweenWaveTimer;
-    private int Spesialbullet;
+    //private int Specialbullet;
 
 
 
@@ -98,7 +98,7 @@ public class gameManager : MonoBehaviour
         
 
         waveTimerText.text = BetweenWaveTimer.ToString("F0");
-        SpecialbulletText.text = playerScript.specialcount;
+        //SpecialbulletText.text = playerScript.specialcount;
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
         PlayerLives.text = playerScript.lifeCounter.ToString("F0");
 

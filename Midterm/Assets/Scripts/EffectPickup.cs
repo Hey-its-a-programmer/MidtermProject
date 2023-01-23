@@ -12,7 +12,7 @@ public class EffectPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.effectPickup(effect);
+            //gameManager.instance.playerScript.effectPickup(effect);
             Destroy(gameObject);
         }
     }

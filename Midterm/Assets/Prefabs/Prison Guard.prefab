@@ -3005,10 +3005,9 @@ MonoBehaviour:
   - {fileID: 9066738842397247913}
   agent: {fileID: 3093541718897267833}
   anim: {fileID: 9066738842393048929}
-  HP: 1
+  HP: 20
   playerFaceSpeed: 6
   headPos: {fileID: 9066738842400462987}
-  dropSpawnPos: {fileID: 0}
   shootRate: 1
   shootAngle: 90
   bullet: {fileID: 1314157197975682883, guid: 9d743180cde45d241b1b7ebb68f284b2, type: 3}
