@@ -892,12 +892,6 @@ MonoBehaviour:
   shootAngle: 15
   bullet: {fileID: 1314157197975682883, guid: 9d743180cde45d241b1b7ebb68f284b2, type: 3}
   shootPos: {fileID: 4254271613273178818}
-  money: {fileID: 5569831550653876981, guid: 1b3b38d82c695614da1c494b3639fa95, type: 3}
-  moneyDropChance: 50
-  moneyDespawnTimer: 5
-  ammo: {fileID: 1900789991929956317, guid: 0cb4ae77d4d8710458ceaa8dc0887f2d, type: 3}
-  ammoDropChance: 80
-  ammoDespawnTimer: 5
   deathFadeOutTime: 2
   deathAnimationTime: 5
   enemyHPbar: {fileID: 0}
