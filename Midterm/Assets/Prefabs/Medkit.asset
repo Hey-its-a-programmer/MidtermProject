@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98aebc6dd578db489616a2d765f0bc4, type: 3}
   m_Name: Medkit
   m_EditorClassIdentifier: 
-  restoredHP: 100
+  restoredHP: 25
   medkitModel: {fileID: -927199367670048503, guid: 4e3859e7d4623f64ca345e315aebd6e6, type: 3}
