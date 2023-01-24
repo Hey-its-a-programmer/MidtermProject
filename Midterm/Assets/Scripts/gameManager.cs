@@ -74,6 +74,7 @@ public class gameManager : MonoBehaviour
     private int totalEnemyCount;
     private int enemiesInWaveCount;
     private float betweenWaveTimer;
+    private string waveName;
     //private int Specialbullet;
 
 
@@ -101,9 +102,13 @@ public class gameManager : MonoBehaviour
         //SpecialbulletText.text = playerScript.specialcount;
         enemyRemaining.text = EnemiesInWaveCount.ToString("F0");
         PlayerLives.text = playerScript.lifeCounter.ToString("F0");
-
+        waveNameText.text = WaveName;
 
         UpdateVolume();
+
+        if (enemiesInWaveCount <= 0 && betweenWaveTimer <= 0)
+        {
+        }
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -189,6 +194,12 @@ public class gameManager : MonoBehaviour
 
         get { return totalEnemyCount; }
         set { totalEnemyCount = value; }
+    }
+
+    public string WaveName
+    {
+        get { return waveName; }
+        set { waveName = value; }
     }
 
     public void updateEnemyCount(int amount)

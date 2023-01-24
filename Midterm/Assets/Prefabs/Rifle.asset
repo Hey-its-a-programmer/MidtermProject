@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Rifle
   shootRate: 0.8
-  shootDamage: 4
+  shootDamage: 10
   shootDist: 100
   gunPrice: 75
   gunModel: {fileID: 919132149155446097, guid: ffb3f5f9531da764c906b0baf3285c62, type: 3}

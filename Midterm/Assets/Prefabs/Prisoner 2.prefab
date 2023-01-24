@@ -1301,7 +1301,7 @@ MonoBehaviour:
   - {fileID: 3826125689953488834}
   agent: {fileID: 3815915975587768199}
   anim: {fileID: 3865646688928621152}
-  HP: 15
+  HP: 10
   playerFaceSpeed: 8
   headPos: {fileID: 3818799051096268178}
   hitDelay: 1
@@ -1351,7 +1351,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3815915975587768196}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
@@ -3824,7 +3824,7 @@ GameObject:
   - component: {fileID: 5621436712719112264}
   - component: {fileID: 5654968159011991336}
   - component: {fileID: 5647240366007556540}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: pipe_pr_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3907,7 +3907,7 @@ GameObject:
   - component: {fileID: 5628741971688748288}
   - component: {fileID: 5655119355768928068}
   - component: {fileID: 5647055251532454874}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: pipe_pr_5 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3990,7 +3990,7 @@ GameObject:
   - component: {fileID: 5628420221046322276}
   - component: {fileID: 5655176253925502194}
   - component: {fileID: 5647501720148057086}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: pipe_pr_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4073,7 +4073,7 @@ GameObject:
   - component: {fileID: 5621409230792544712}
   - component: {fileID: 5653497702586922052}
   - component: {fileID: 5647160447218782350}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: pipe_pr_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4159,7 +4159,7 @@ GameObject:
   - component: {fileID: 5686864185262572730}
   - component: {fileID: 8582243287739729202}
   - component: {fileID: 8582243287739729203}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: pipe_pr_4 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4274,4 +4274,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50df0ef2786196b41b364e5033ff4335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5

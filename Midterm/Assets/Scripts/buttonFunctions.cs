@@ -50,7 +50,7 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         gameManager.instance.unPause();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(1);
     }
 
     public void quit()

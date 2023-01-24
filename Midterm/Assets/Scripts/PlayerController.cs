@@ -82,6 +82,9 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[0].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[0].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        shootRate = gunList[0].shootRate;
+        shootDamage = gunList[0].shootDamage;
+        shootDist = gunList[0].shootDist;
         /*
         ResetPickup(_Bleed);
         ResetPickup(_Poison);

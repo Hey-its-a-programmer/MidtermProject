@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3247619350548571480}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Shoot Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ MonoBehaviour:
   - {fileID: 5819313068779662898}
   agent: {fileID: 576367682468475874}
   anim: {fileID: 5819313068775543034}
-  HP: 20
+  HP: 15
   playerFaceSpeed: 6
   headPos: {fileID: 5819313068784582416}
   shootRate: 1
@@ -668,7 +668,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5819313068784935584}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
@@ -3168,7 +3168,7 @@ GameObject:
   - component: {fileID: 6727412917467887312}
   - component: {fileID: 7706584695202593141}
   - component: {fileID: 5555118376274349503}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Pistol Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
