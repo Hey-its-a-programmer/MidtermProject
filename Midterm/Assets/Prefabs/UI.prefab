@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 62515714}
   - component: {fileID: 62515713}
   m_Layer: 0
-  m_Name: lives
+  m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ RectTransform:
   m_Children:
   - {fileID: 1495083063}
   m_Father: {fileID: 5805558169280381190}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1050,7 +1050,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1775.916, y: 1029.2166}
+  m_AnchoredPosition: {x: 1475, y: 1029.2166}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1363293000
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Timer:'
+  m_text: 'Time Until Next Wave:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1144,7 +1144,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -228.86902, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 1495083065}
   - component: {fileID: 1495083064}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Player Lives Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,7 +1297,7 @@ GameObject:
   - component: {fileID: 2029623320}
   - component: {fileID: 2029623319}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1320,7 +1320,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 130, y: -3}
+  m_AnchoredPosition: {x: 420, y: -3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2029623320
@@ -2339,10 +2339,8 @@ Transform:
   - {fileID: 5017771303118696805}
   - {fileID: 1363292998}
   - {fileID: 8782264921696025262}
-  - {fileID: 1170323008}
   - {fileID: 7230649332352661023}
   - {fileID: 9192062975621192348}
-  - {fileID: 889701329}
   - {fileID: 62515712}
   m_Father: {fileID: 9192062975716121860}
   m_RootOrder: 0
@@ -11509,7 +11507,7 @@ GameObject:
   - component: {fileID: 2516197636089007725}
   - component: {fileID: 5737513337053542033}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Wave Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12760,7 +12758,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5805558169280381190}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12817,7 +12815,6 @@ GameObject:
   - component: {fileID: 9192062975716121863}
   - component: {fileID: 9192062975716121862}
   - component: {fileID: 9192062975716121857}
-  - component: {fileID: 2058716424621151053}
   - component: {fileID: 3021960208681019976}
   m_Layer: 0
   m_Name: UI
@@ -12920,26 +12917,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!95 &2058716424621151053
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192062975716121856}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 64b145a48ee1be04aa8282ee62a4deaf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3021960208681019976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13020,7 +12997,6 @@ MonoBehaviour:
   waveTimerText: {fileID: 2029623319}
   enemyRemaining: {fileID: 8782264921790430390}
   PlayerLives: {fileID: 1495083064}
-  SpesialbulletText: {fileID: 314222246}
   waveNameText: {fileID: 5737513337053542033}
   playerHUD: {fileID: 535629660374654016}
   gameManagerAud: {fileID: 7949343224914869358}
@@ -13041,8 +13017,6 @@ MonoBehaviour:
   hitEnemyAudio: {fileID: 8300000, guid: c08b8d5666750f14da21d33b9e3880ab, type: 3}
   hitEnemyVolume: 0.5
   healthRestoreAudio: {fileID: 8300000, guid: f8f283a0c35fa7e45861397731d27f42, type: 3}
-  ammoRestoreAudio: {fileID: 8300000, guid: cb2f4d68c856a69419a49167f866c512, type: 3}
-  moneyPickupAudio: {fileID: 8300000, guid: e097c715e73234c47baad9bc37557322, type: 3}
   doorSpawnPos: {fileID: 0}
   door: {fileID: 6757940499958004175, guid: 19adf4541e17a5745bf2b7842639d0d9, type: 3}
   isPaused: 0
@@ -13233,7 +13207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8703886792164587149, guid: e5d87b2208327054dbdbc7a9a6cbe359, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8703886792164587149, guid: e5d87b2208327054dbdbc7a9a6cbe359, type: 3}
       propertyPath: m_AnchorMax.x

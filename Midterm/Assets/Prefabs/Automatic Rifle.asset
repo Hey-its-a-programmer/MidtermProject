@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Automatic Rifle
   shootRate: 0.2
-  shootDamage: 5
-  shootDist: 15
+  shootDamage: 10
+  shootDist: 20
   gunPrice: 50
   gunModel: {fileID: 8886612477424356411, guid: 84e3ffa58d93b3c4f9ad11a7c6e6dbb3, type: 3}
   gunshot: {fileID: 8300000, guid: 918be8c31a0fb204e9f4528862cc5d9a, type: 3}

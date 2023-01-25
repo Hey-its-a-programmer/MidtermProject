@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
+public class enemyMeleeAI : MonoBehaviour, IDamage
 {
     [Header("-----Components-----")]
     //Used for one or more model renderers
@@ -14,11 +14,8 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     [Header("-----Enemy Stats-----")]
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
-    [SerializeField] int coinValueMin;
-    [SerializeField] int coinValueMax;
-    [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
-    [SerializeField] Transform dropSpawnPos;
+    //[SerializeField] Transform dropSpawnPos;
 
     [Header("----- Enemy Melee Stats-----")]
     [SerializeField] float hitDelay;
@@ -28,6 +25,9 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     [SerializeField] GameObject[] meleeWeaponParts;
     /*
     [Header("-------Drops-------")]
+    [SerializeField] GameObject _effect;
+    [Range(0, 100)] [SerializeField] float effectDropChance;
+    [SerializeField] float effectDespawnTimer;
     [SerializeField] GameObject money;
     [Range(0, 100)] [SerializeField] float moneyDropChance;
     [SerializeField] float moneyDespawnTimer;
@@ -57,32 +57,33 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
 
 
     //Status Effect
-    private StatusEffect _data;
+    //[SerializeField] StatusEffect effect;
+    //private StatusEffect _data;
     private bool isAttacking;
     private Vector3 playerDir;
     private bool isMoving;
     private float distance;
     private float angleToPlayer;
     private bool isAlive = true;
-    private Transform test;
-    private float moveSpeed;
-    Renderer[] weaponRenderer;
+    //private float moveSpeed;
     // Start is called before the first frame update
     void Start()
     {
-
+        //moveSpeed = agent.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        /*
+        if (_data != null)
+        {
+            HandleEffect();
+        }
+        */
         if (isAlive)
         {
-            if (_data != null)
-            {
-                HandleEffect();
-            }
+
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
             canSeePlayer();
             if (!isMoving && agent.velocity.magnitude > 0.5f && agent.isStopped == false)
@@ -135,24 +136,36 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
             Death();
         }
     }
+
     /*
     void Drop()
     {
-        // 50% chance to drop money
-        if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
+
+        if (Random.Range(0.0f, 100.0f) <= effectDropChance)
         {
-
-            GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
-
-            Destroy(cash, moneyDespawnTimer);
+            GameObject drop = Instantiate(_effect, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+            drop.SetActive(true);
+            Destroy(drop, effectDespawnTimer);
         }
 
-        // 80% chance to drop ammo
-        if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
-        {
-            GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
-            Destroy(ammunition, ammoDespawnTimer);
-        }
+        
+           // 50% chance to drop money
+           if (Random.Range(0.0f, 100.0f) >= moneyDropChance)
+           {
+
+               GameObject cash = Instantiate(money, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), dropSpawnPos.rotation);
+
+               Destroy(cash, moneyDespawnTimer);
+           }
+
+           // 80% chance to drop ammo
+           if (Random.Range(0.0f, 100.0f) <= ammoDropChance)
+           {
+               GameObject ammunition = Instantiate(ammo, dropSpawnPos.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+               Destroy(ammunition, ammoDespawnTimer);
+           }
+       }
+       
     }
     */
     IEnumerator flashDamage()
@@ -204,12 +217,12 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
     }
 
     //----Status Effect Methods
-
+    /*
     private GameObject _effectParticles;
 
     private float CurrentEffectTime = 0f;
     private float nextTickTime = 0f;
-
+    
     public void ApplyEffect(StatusEffect _data)
     {
         RemoveEffect();
@@ -237,6 +250,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
         if (CurrentEffectTime >= +_data.Lifetime)
         {
             RemoveEffect();
+            gameManager.instance.playerScript.ResetPickup(effect);
         }
         if (_data == null)
         {
@@ -248,11 +262,12 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
             HP -= _data.DamageOverTimeAmount;
             if (HP <= 0)
             {
+                CurrentEffectTime = _data.Lifetime;
                 Death();
             }
         }
     }
-
+    */
     void Death()
     {
         attackExit();
@@ -261,6 +276,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
         gameObject.layer = LayerMask.NameToLayer("Ignore Collision");
         gameObject.GetComponent<CapsuleCollider>().enabled = false;       
         isAlive = false;
+        //Drop();
         StartCoroutine(DeathAnimation());
         gameManager.instance.EnemiesInWaveCount--;
         gameManager.instance.updateTotalEnemyCount(-1);
@@ -294,6 +310,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IEffectable
             meleeWeapon.GetComponent<MeshRenderer>().material.color = new Color(meleeWeapon.GetComponent<MeshRenderer>().material.color.r, meleeWeapon.GetComponent<MeshRenderer>().material.color.g, meleeWeapon.GetComponent<MeshRenderer>().material.color.b, Mathf.Lerp(meleeWeapon.GetComponent<MeshRenderer>().material.color.a, 0, t));
             yield return null;
         }
+        Destroy(gameObject);
     }
 
     void SetToFade()
