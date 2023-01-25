@@ -4497,6 +4497,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 314222248, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 889701329, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 295
@@ -4544,6 +4548,14 @@ PrefabInstance:
     - target: {fileID: 889701330, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637387422774844853, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999385337808835572, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9192062975716121856, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: m_Name
