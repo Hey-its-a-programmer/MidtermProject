@@ -13195,6 +13195,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5805558169280381190}
     m_Modifications:
+    - target: {fileID: 6365610351570848274, guid: e5d87b2208327054dbdbc7a9a6cbe359, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+    - target: {fileID: 6365610351570848274, guid: e5d87b2208327054dbdbc7a9a6cbe359, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
     - target: {fileID: 8703886792164587148, guid: e5d87b2208327054dbdbc7a9a6cbe359, type: 3}
       propertyPath: m_Name
       value: Player HP Background
