@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController controller;
 
     [Header("-----Player Stats-----")]
-    [SerializeField] int HP;
+    [SerializeField] public int HP;
 
     [Range(3, 8)] [SerializeField] float playerSpeed;
     [Range(1, 5)] [SerializeField] float sprintSpeed;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     private int timesJumped;
     private Vector3 playerVelocity;
     private Vector3 move;
-    private int HPOrig;
+    public int HPOrig;
     private int selectedGun;
     private Vector3 pushBack;
     private int coinsOriginal;
@@ -359,17 +359,13 @@ public class PlayerController : MonoBehaviour
     */
     public void HealthPickup(MedkitStats medStat)
     {
-        if (HP < HPOrig)
+        gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
+        HP += medStat.restoredHP;
+        if (HP > HPOrig)
         {
-            gameManager.instance.gameManagerAud.PlayOneShot(gameManager.instance.healthRestoreAudio);
-            HP += medStat.restoredHP;
-            if (HP > HPOrig)
-            {
-                HP = HPOrig;
-            }
-            updatePlayerHPbar();
+            HP = HPOrig;
         }
-
+        updatePlayerHPbar();
     }
 
 
