@@ -1419,48 +1419,33 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fill
+  m_text: 'Kevin Iglesias
 
-    Fill
+    rpgwhitelock
 
     RRFreelance / Pixelburner
 
     AndreiNi
 
-    Fill
-
-    Fill
+    VK
+    GameDev
 
     Ishikawa1116
 
-    Fill
+    GeeKay 3D
 
-    Fill
-
-    Dmitrii
-    Kutsenko
-
-    Fill
+    Dmitrii Kutsenko
 
     Polygon Blacksmith
 
-    Fill
+    Fun
+    Assets
 
-    Fill
+    Travis Game Assets
 
-    Fill
+    Quite Vibrant
 
-    Fill
-
-    Fill
-
-    Fill
-
-    Fill
-
-    Fill
-
-    Fill'
+    Studio New Punch'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -1544,7 +1529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1799821162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3048,7 +3033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7544070413326598280
 RectTransform:
   m_ObjectHideFlags: 0

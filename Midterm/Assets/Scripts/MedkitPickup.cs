@@ -8,7 +8,7 @@ public class MedkitPickup : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && gameManager.instance.playerScript.HP < gameManager.instance.playerScript.HPOrig)
         {
             gameManager.instance.playerScript.HealthPickup(medkit);
             Destroy(gameObject);
