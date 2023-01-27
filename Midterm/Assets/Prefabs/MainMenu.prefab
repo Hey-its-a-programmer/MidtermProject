@@ -514,9 +514,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "All Assets gathered from the Unity Assets Store.\nGame Created by \nThe
-    Devil Dogs\nFeaturing:\nAnthony Dooley,\nJyhnddi Alvarez,\nKassius McKenzie,\nAaronn
-    Solomon\nand Ray Ruiz."
+  m_text: "All Assets gathered from the Unity Assets Store.\nGeneral SFX gathered
+    from freesound.org.\nGame Created by \nThe Devil Dogs\nFeaturing:\nAnthony Dooley,\nJyhnddi
+    Alvarez,\nKassius McKenzie,\nAaronn Solomon\nand Ray Ruiz."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -1436,16 +1436,7 @@ MonoBehaviour:
 
     Mixall
 
-    willhuang
-
-    RRFreelance / Pixelburner
-
-    AndreiNi
-
-    Dmitrii
-    Kutsenko
-
-    Polygon Blacksmith'
+    willhuang'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
