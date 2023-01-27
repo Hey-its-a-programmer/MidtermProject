@@ -350,4 +350,9 @@ public class enemyMeleeAI : MonoBehaviour, IDamage
 
     }
 
+    public void PushAwayInput(Vector3 dir)
+    {
+        Vector3 pushAway;
+        pushAway = dir;
+    }
 }

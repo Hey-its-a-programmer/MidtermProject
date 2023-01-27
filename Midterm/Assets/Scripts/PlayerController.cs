@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 pushBack;
     private int coinsOriginal;
     public string specialcount;
+    private Vector3 pushDir;
 
 
     private bool isCrouching;
@@ -423,5 +424,10 @@ public class PlayerController : MonoBehaviour
     {
         get { return HP; }
         set { HP = value; }
+    }
+
+    public void PushAway(Vector3 direction)
+    {
+        pushDir = direction;
     }
 }
