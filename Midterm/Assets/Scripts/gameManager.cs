@@ -106,9 +106,6 @@ public class gameManager : MonoBehaviour
 
         UpdateVolume();
 
-        if (enemiesInWaveCount <= 0 && betweenWaveTimer <= 0)
-        {
-        }
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
