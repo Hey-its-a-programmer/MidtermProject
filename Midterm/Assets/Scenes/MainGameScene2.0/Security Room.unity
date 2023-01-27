@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1253,7 +1253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0.655, y: 0, z: -0.848}
 --- !u!4 &238005730 stripped
 Transform:
@@ -1354,6 +1354,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.231
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99632555
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.085647255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 9.826
+      objectReference: {fileID: 0}
     - target: {fileID: 4577212174476160551, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
       propertyPath: m_Name
       value: Medkit Small Version (1)
@@ -4070,7 +4094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9192062975716121860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 9192062975716121860, guid: fc07a005afe8cb94aa89adc943a10b7a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4663,6 +4687,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 36.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.33
+      objectReference: {fileID: 0}
     - target: {fileID: 4577212174476160551, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
       propertyPath: m_Name
       value: Medkit Small Version (4)
@@ -6684,6 +6720,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 32.608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675612287722071806, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.105
+      objectReference: {fileID: 0}
     - target: {fileID: 4577212174476160551, guid: e1f708a16d93cb4489e9a6e0c7817f60, type: 3}
       propertyPath: m_Name
       value: Medkit Small Version
