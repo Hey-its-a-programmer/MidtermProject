@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameScene2.0/Prison Cells.unity
     guid: 22cd0cfc5a1b79341973756203ee4e9b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainGameScene2.0/Security Room.unity
     guid: 4767b7e4ee06b934dbcc40906cb11762
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainGameScene2.0/Courtyard.unity
     guid: 6f5aafc0a8a36ef45b08cbc5ae1f2a5e
   m_configObjects:
